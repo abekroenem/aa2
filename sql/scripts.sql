@@ -25,4 +25,4 @@ create table registro_ponto (
     horas_excedidas int, -- quantidade de minutos excedidos
     valor_extra decimal(10,2) -- valor acumulado de horas extras no dia
     total_recebido decimal(10,2) --valor cheio recebido no dia com horas extras
-)
+);

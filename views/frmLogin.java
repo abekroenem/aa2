@@ -114,10 +114,10 @@ public class frmLogin extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnLogin)))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -161,12 +161,12 @@ public class frmLogin extends javax.swing.JFrame {
                     Dialogs.showWarning(USUARIO_NAO_CADASTRADO);
                 }
             } else {
-                Usuario obUser = this.m_UserC.SearchUser(txtUser.getText());
+                Usuario obUser = this.m_UserC.SearchUserByName(txtUser.getText());
                 if (obUser != null) {
                     if (!obUser.getPassword().equals(txtPassword.getText())) {
                         Dialogs.showWarning(SENHA_INCORRETA);
                     } else {
-                        new frmPrincipal(txtUser.getText()).setVisible(true);
+                        new frmPrincipal(obUser.getName()).setVisible(true);
                     }
                 } else {
                     Dialogs.showWarning(USUARIO_NAO_CADASTRADO);

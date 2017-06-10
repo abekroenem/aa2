@@ -65,4 +65,11 @@ public class Usuario {
         }
 
     }
+
+    public void ConfirmaSenha(String passwordConfirma) throws Exception {
+        if (!this.Password.equals(passwordConfirma)) {
+            throw new Exception("Senhas devem ser identicas!");
+        }
+
+    }
 }

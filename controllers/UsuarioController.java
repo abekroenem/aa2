@@ -23,20 +23,22 @@ public class UsuarioController {
 
     }
 
-    public void Add(String Name, String Password, boolean isAdmin) throws SQLException {
+    public void Add(String Name, String Password, String confirmaSenha, boolean isAdmin) throws Exception {
         Usuario obj = new Usuario();
         obj.setName(Name);
         obj.setPassword(Password);
         obj.setAdmin(isAdmin);
+        obj.ConfirmaSenha(confirmaSenha);
         usrDAO.addEntity(obj);
     }
 
-    public void Edit(int Id, String Name, String Password, boolean isAdmin) throws SQLException {
+    public void Edit(int Id, String Name, String Password, String confirmaSenha, boolean isAdmin) throws Exception {
         Usuario obj = new Usuario();
         obj.setId(Id);
         obj.setName(Name);
         obj.setPassword(Password);
         obj.setAdmin(isAdmin);
+        obj.ConfirmaSenha(confirmaSenha);
         usrDAO.updateEntity(obj);
     }
 
@@ -52,10 +54,12 @@ public class UsuarioController {
         return usrDAO.getAllEntitys();
     }
 
-    public Usuario SearchUser(String name) throws SQLException {
+    public Usuario getByID(int id) throws SQLException {
+        return (Usuario) usrDAO.getEntityById(id);
+    }
 
+    public Usuario SearchUserByName(String name) throws SQLException {
         return (Usuario) usrDAO.SearchEntity(name);
-
     }
 
     public boolean isEmpty() throws SQLException {

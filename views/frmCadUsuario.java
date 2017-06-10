@@ -21,6 +21,7 @@ public class frmCadUsuario extends javax.swing.JFrame {
     private boolean m_showGrid = true;
     private String USUARIO_DUPLICADO, USUARIO_EM_BRANCO, SENHAS_DIFERENTES, SENHA_EM_BRANCO, USUARIO_INSERIDO_SUCESS;
     private UsuarioController m_UserC;
+    private Usuario objUser = null;
 
     public void Traduz() {
         SENHAS_DIFERENTES = "As Senhas devem ser identicas!";
@@ -38,14 +39,12 @@ public class frmCadUsuario extends javax.swing.JFrame {
         if (!showGrid) {
             setSize(298, 225);
             btnNovo.setText("Salvar");
-        } else {
-            loadTable();
         }
     }
 
     private void defaultLayout(boolean dl) {
         btnCancelar.setEnabled(!dl);
-        btnNovo.setText("Novo");
+        btnNovo.setText((dl) ? "Novo" : "Salvar");
         txtUser.setText("");
         txtPass.setText("");
         txtConf.setText("");
@@ -54,36 +53,47 @@ public class frmCadUsuario extends javax.swing.JFrame {
         txtConf.setEnabled(!dl);
         chkAdmin.setEnabled(!dl);
         chkAdmin.setSelected(!dl);
+        if (dl) {
+            loadTable();
+        }
     }
 
     private void loadTable() {
-
-        try {
-            m_UserC = new UsuarioController();
-            List<Usuario> lstUsers = m_UserC.getAll();
-            DefaultTableModel tablemd = (DefaultTableModel) tbUsers.getModel();
-            tablemd.getDataVector().removeAllElements();
-            if (lstUsers.size() > 0) {
-                for (Usuario user : lstUsers) {
-                    tablemd.addRow(new Object[]{user.getId(), user.getName(), user.getAdmin()});
+        if (m_showGrid) {
+            try {
+                m_UserC = new UsuarioController();
+                List<Usuario> lstUsers = m_UserC.getAll();
+                DefaultTableModel tablemd = (DefaultTableModel) tbUsers.getModel();
+                tablemd.getDataVector().removeAllElements();
+                if (lstUsers.size() > 0) {
+                    for (Usuario user : lstUsers) {
+                        tablemd.addRow(new Object[]{user.getId(), user.getName(), user.getAdmin()});
+                    }
+                    tbUsers.clearSelection();
                 }
-                tbUsers.clearSelection();
+                tbUsers.updateUI();
+            } catch (Exception ex) {
+                Dialogs.showError(ex.getMessage());
             }
-            tbUsers.updateUI();
-        } catch (SQLException ex) {
-            Dialogs.showError(ex.getMessage());
         }
 
     }
 
-    private void InserirUsuario() throws SQLException {
+    private void InserirUsuario() throws Exception {
         m_UserC = new UsuarioController();
-        m_UserC.Add(txtUser.getText(), txtPass.getText(), chkAdmin.isSelected());
+        m_UserC.Add(txtUser.getText(), txtPass.getText(), txtConf.getText(), chkAdmin.isSelected());
         defaultLayout(true);
-        if (m_showGrid) {
-            loadTable();
-        }
         Dialogs.showInfo(USUARIO_INSERIDO_SUCESS);
+    }
+
+    private boolean UsuarioDuplicado() throws Exception {
+
+        m_UserC = new UsuarioController();
+        Usuario objUsr = m_UserC.SearchUserByName(txtUser.getText());
+        if (objUsr != null) {
+            Dialogs.showWarning(USUARIO_DUPLICADO);
+        }
+        return (objUsr == null);
     }
 
     @SuppressWarnings("unchecked")
@@ -252,17 +262,7 @@ public class frmCadUsuario extends javax.swing.JFrame {
         });
 
         chkAdmin.setText("Administrador");
-        chkAdmin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkAdminActionPerformed(evt);
-            }
-        });
 
-        txtConf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtConfActionPerformed(evt);
-            }
-        });
         txtConf.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtConfKeyTyped(evt);
@@ -302,6 +302,11 @@ public class frmCadUsuario extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbUsers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbUsersMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbUsers);
         if (tbUsers.getColumnModel().getColumnCount() > 0) {
             tbUsers.getColumnModel().getColumn(0).setMinWidth(50);
@@ -318,17 +323,12 @@ public class frmCadUsuario extends javax.swing.JFrame {
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jLabel6)
-                            .add(jLabel5)
-                            .add(jLabel4)))
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                        .add(28, 28, 28)
-                        .add(btnCancelar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 107, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 20, Short.MAX_VALUE)
+                    .add(jLabel6)
+                    .add(jLabel5)
+                    .add(jLabel4))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 31, Short.MAX_VALUE)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
@@ -339,12 +339,14 @@ public class frmCadUsuario extends javax.swing.JFrame {
                         .add(txtConf, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 143, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                            .add(chkAdmin)
-                            .add(layout.createSequentialGroup()
-                                .add(btnNovo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 102, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .add(9, 9, 9)))
+                        .add(chkAdmin)
                         .add(20, 20, 20))))
+            .add(layout.createSequentialGroup()
+                .add(26, 26, 26)
+                .add(btnCancelar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 107, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(36, 36, 36)
+                .add(btnNovo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 102, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(0, 0, Short.MAX_VALUE))
             .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                 .add(layout.createSequentialGroup()
                     .add(0, 155, Short.MAX_VALUE)
@@ -368,12 +370,12 @@ public class frmCadUsuario extends javax.swing.JFrame {
                     .add(jLabel4))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(chkAdmin)
-                .add(18, 18, 18)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(btnNovo)
                     .add(btnCancelar))
-                .add(18, 18, 18)
-                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
             .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                 .add(layout.createSequentialGroup()
                     .add(0, 149, Short.MAX_VALUE)
@@ -393,14 +395,6 @@ public class frmCadUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
-    private void chkAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkAdminActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_chkAdminActionPerformed
-
-    private void txtConfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtConfActionPerformed
-
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         if (!m_showGrid) {
@@ -414,35 +408,26 @@ public class frmCadUsuario extends javax.swing.JFrame {
         // TODO add your handling code here
         try {
             if (btnNovo.getText().equals("Salvar") || btnNovo.getText().equals("Save")) {
-                if (txtUser.getText().isEmpty()) {
-                    Dialogs.showWarning(USUARIO_EM_BRANCO);
-                    return;
-                } else if (txtPass.getText().isEmpty() || txtConf.getText().isEmpty()) {
-                    Dialogs.showWarning(SENHA_EM_BRANCO);
-                    return;
-                } else if (!(txtPass.getText().equals(txtConf.getText()))) {
-                    Dialogs.showWarning(SENHAS_DIFERENTES);
-                    return;
-                } else if (m_showGrid) {
-
-                    m_UserC = new UsuarioController();
-                    Usuario objUsr = m_UserC.SearchUser(txtUser.getText());
-                    if (objUsr != null) {
-                        Dialogs.showWarning(USUARIO_DUPLICADO);
-                    } else {
+                if (objUser == null) {
+                    if (m_showGrid) {
+                        if (!UsuarioDuplicado()) {
+                            InserirUsuario();
+                        }
+                    } else if (!m_showGrid) {
                         InserirUsuario();
+                        this.dispose();
+                        new frmPrincipal(txtUser.getText().toUpperCase()).setVisible(true);
                     }
-                } else if (!m_showGrid) {
-                    InserirUsuario();
-                    this.dispose();
-                    new frmPrincipal(txtUser.getText()).setVisible(true);
+                } else if (!UsuarioDuplicado()) {
+                    m_UserC.Edit(objUser.getId(), txtUser.getText(), txtConf.getText(), txtPass.getText(), chkAdmin.isSelected());
+                    Dialogs.showInfo("Usuario editado com sucesso!");
+                    defaultLayout(true);
                 }
             } else if (btnNovo.getText().equals("Novo") || btnNovo.getText().equals("New")) {
                 defaultLayout(false);
-                btnNovo.setText("Salvar");
                 txtUser.requestFocus();
             }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             Dialogs.showError(ex.getMessage());
         }
     }//GEN-LAST:event_btnNovoActionPerformed
@@ -468,6 +453,25 @@ public class frmCadUsuario extends javax.swing.JFrame {
             chkAdmin.requestFocus();
         }
     }//GEN-LAST:event_txtConfKeyTyped
+
+    private void tbUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsersMouseClicked
+        // TODO add your handling code here:
+        try {
+            objUser = m_UserC.getByID(((Integer) tbUsers.getModel().getValueAt(tbUsers.getSelectedRow(), 0)));
+            if (objUser != null) {
+                defaultLayout(false);
+                txtUser.setText(objUser.getName());
+                txtPass.setText(objUser.getPassword());
+                txtConf.setText(objUser.getPassword());
+                chkAdmin.setSelected(objUser.getAdmin());
+                txtUser.selectAll();
+                txtUser.requestFocus();
+            }
+        } catch (Exception e) {
+            Dialogs.showError(e.getMessage());
+        }
+
+    }//GEN-LAST:event_tbUsersMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;

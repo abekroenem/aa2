@@ -73,7 +73,7 @@ public class FuncionarioDAO extends GenericDAO {
     @Override
     public Object getEntityById(int id) throws SQLException {
         Funcionario obj = null;
-        String sql = "SELECT * FROM FUNCINOARIO WHSERE ID=?";
+        String sql = "SELECT * FROM FUNCINOARIO WHERE ID=?";
         super.Sql = super.Conn.prepareStatement(sql);
         Sql.setInt(1, id);
 

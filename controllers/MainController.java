@@ -10,6 +10,7 @@ public class MainController {
 
     public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
         UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+        UIManager.put("InternalFrame.useTaskBar", Boolean.FALSE);
         try {
             new frmLogin().setVisible(true);
         } catch (SQLException ex) {

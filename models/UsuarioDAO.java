@@ -83,7 +83,7 @@ public class UsuarioDAO extends GenericDAO {
     @Override
     public <T> List<T> getAllEntitys() throws SQLException {
         List<Usuario> listUser = new ArrayList();
-        String sql = "SELECT * FROM USERS";
+        String sql = "SELECT * FROM USUARIO";
         super.Sql = super.Conn.prepareStatement(sql);
         ResultSet rs = super.Sql.executeQuery();
 

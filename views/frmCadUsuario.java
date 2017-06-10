@@ -32,6 +32,7 @@ public class frmCadUsuario extends javax.swing.JFrame {
 
     public frmCadUsuario(boolean showGrid) {
         initComponents();
+        defaultLayout(true);
         m_showGrid = showGrid;
         Traduz();
         if (!showGrid) {
@@ -43,11 +44,15 @@ public class frmCadUsuario extends javax.swing.JFrame {
     }
 
     private void defaultLayout(boolean dl) {
-        btnCancelar.enable(!dl);
+        btnCancelar.setEnabled(!dl);
         btnNovo.setText("Novo");
         txtUser.setText("");
         txtPass.setText("");
         txtConf.setText("");
+        txtUser.setEnabled(!dl);
+        txtPass.setEnabled(!dl);
+        txtConf.setEnabled(!dl);
+        chkAdmin.setEnabled(!dl);
         chkAdmin.setSelected(!dl);
     }
 
@@ -110,7 +115,7 @@ public class frmCadUsuario extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tbUsers = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         jPasswordField4.addActionListener(new java.awt.event.ActionListener() {
@@ -426,13 +431,16 @@ public class frmCadUsuario extends javax.swing.JFrame {
                         Dialogs.showWarning(USUARIO_DUPLICADO);
                     } else {
                         InserirUsuario();
-                        this.dispose();
                     }
                 } else if (!m_showGrid) {
                     InserirUsuario();
                     this.dispose();
                     new frmPrincipal(txtUser.getText()).setVisible(true);
                 }
+            } else if (btnNovo.getText().equals("Novo") || btnNovo.getText().equals("New")) {
+                defaultLayout(false);
+                btnNovo.setText("Salvar");
+                txtUser.requestFocus();
             }
         } catch (SQLException ex) {
             Dialogs.showError(ex.getMessage());

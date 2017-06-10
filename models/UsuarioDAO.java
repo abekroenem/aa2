@@ -117,4 +117,12 @@ public class UsuarioDAO extends GenericDAO {
         return !super.Conn.prepareStatement(sql).executeQuery().next();
     }
 
+    public boolean DuplicatedEntity(int Id, String name) throws SQLException {
+        String sql = "SELECT * FROM USUARIO WHERE NOME  = ? AND ID <> ?";
+        super.Sql = super.Conn.prepareStatement(sql);
+        super.Sql.setString(1, name.toUpperCase());
+        super.Sql.setInt(2, Id);
+        return super.Sql.executeQuery().next();
+    }
+
 }

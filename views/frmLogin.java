@@ -66,11 +66,6 @@ public class frmLogin extends javax.swing.JFrame {
 
         jLabel2.setText("Senha:");
 
-        txtUser.addContainerListener(new java.awt.event.ContainerAdapter() {
-            public void componentAdded(java.awt.event.ContainerEvent evt) {
-                txtUserComponentAdded(evt);
-            }
-        });
         txtUser.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtUserKeyPressed(evt);
@@ -166,6 +161,7 @@ public class frmLogin extends javax.swing.JFrame {
                     if (!obUser.getPassword().equals(txtPassword.getText())) {
                         Dialogs.showWarning(SENHA_INCORRETA);
                     } else {
+                        this.dispose();
                         new frmPrincipal(obUser.getName()).setVisible(true);
                     }
                 } else {
@@ -183,11 +179,6 @@ public class frmLogin extends javax.swing.JFrame {
             txtPassword.requestFocus();
         }
     }//GEN-LAST:event_txtUserKeyPressed
-
-    private void txtUserComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_txtUserComponentAdded
-        // TODO add your handling code here:
-        txtUser.requestFocus();
-    }//GEN-LAST:event_txtUserComponentAdded
 
     private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
         // TODO add your handling code here:

@@ -5,7 +5,9 @@
  */
 package views;
 
+import Env.Constants;
 import java.sql.SQLException;
+import helpers.Config;
 
 /**
  *
@@ -16,6 +18,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     public frmPrincipal(String UserName) throws SQLException {
         initComponents();
         lblUser.setText("Usuario: " + UserName);
+        rbPTBR.setSelected((Config.getLang() == Constants.PT_BR));
     }
 
     /**
@@ -34,10 +37,10 @@ public class frmPrincipal extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        lblUser = new javax.swing.JLabel();
+        asdasdasd = new javax.swing.JLabel();
         asdasd = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
-        lblUser2 = new javax.swing.JLabel();
+        lblUser = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -123,14 +126,14 @@ public class frmPrincipal extends javax.swing.JFrame {
         jToolBar2.add(jButton4);
 
         desktopPane.add(jToolBar2);
-        jToolBar2.setBounds(0, 0, 1190, 90);
+        jToolBar2.setBounds(0, 0, 1230, 90);
 
-        lblUser.setBackground(new java.awt.Color(254, 254, 254));
-        lblUser.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
-        lblUser.setForeground(new java.awt.Color(254, 254, 254));
-        lblUser.setText("Sistema de Controle de Horas Extras");
-        desktopPane.add(lblUser);
-        lblUser.setBounds(10, 130, 280, 17);
+        asdasdasd.setBackground(new java.awt.Color(254, 254, 254));
+        asdasdasd.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
+        asdasdasd.setForeground(new java.awt.Color(254, 254, 254));
+        asdasdasd.setText("Sistema de Controle de Horas Extras");
+        desktopPane.add(asdasdasd);
+        asdasdasd.setBounds(10, 130, 280, 17);
 
         asdasd.setBackground(new java.awt.Color(254, 254, 254));
         asdasd.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
@@ -153,12 +156,12 @@ public class frmPrincipal extends javax.swing.JFrame {
         desktopPane.add(jButton5);
         jButton5.setBounds(-10, -100, 1210, 620);
 
-        lblUser2.setBackground(new java.awt.Color(254, 254, 254));
-        lblUser2.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
-        lblUser2.setForeground(new java.awt.Color(254, 254, 254));
-        lblUser2.setText("Usuario:<usuario>");
-        desktopPane.add(lblUser2);
-        lblUser2.setBounds(10, 170, 170, 20);
+        lblUser.setBackground(new java.awt.Color(254, 254, 254));
+        lblUser.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
+        lblUser.setForeground(new java.awt.Color(254, 254, 254));
+        lblUser.setText("Usuario:<usuario>");
+        desktopPane.add(lblUser);
+        lblUser.setBounds(10, 170, 170, 20);
 
         menuBar.setBackground(new java.awt.Color(100, 98, 98));
 
@@ -310,6 +313,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JLabel asdasd;
+    private javax.swing.JLabel asdasdasd;
     private javax.swing.JMenuItem contentMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JDesktopPane desktopPane;
@@ -329,7 +333,6 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JLabel lblUser;
-    private javax.swing.JLabel lblUser2;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JRadioButtonMenuItem rbENUS;
     private javax.swing.JRadioButtonMenuItem rbPTBR;

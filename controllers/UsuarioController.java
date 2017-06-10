@@ -62,6 +62,10 @@ public class UsuarioController {
         return (Usuario) usrDAO.SearchEntity(name);
     }
 
+    public boolean DuplicatedUser(int ID, String name) throws SQLException {
+        return usrDAO.DuplicatedEntity(ID, name);
+    }
+
     public boolean isEmpty() throws SQLException {
         return usrDAO.isEmptyEntity();
     }

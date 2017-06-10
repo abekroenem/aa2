@@ -21,7 +21,7 @@ public class frmCadUsuario extends javax.swing.JFrame {
     private boolean m_showGrid = true;
     private String USUARIO_DUPLICADO, USUARIO_EM_BRANCO, SENHAS_DIFERENTES, SENHA_EM_BRANCO, USUARIO_INSERIDO_SUCESS;
     private UsuarioController m_UserC;
-    private Usuario objUser = null;
+    private Usuario m_objUser = null;
 
     public void Traduz() {
         SENHAS_DIFERENTES = "As Senhas devem ser identicas!";
@@ -37,8 +37,8 @@ public class frmCadUsuario extends javax.swing.JFrame {
         m_showGrid = showGrid;
         Traduz();
         if (!showGrid) {
-            setSize(298, 225);
-            btnNovo.setText("Salvar");
+            defaultLayout(false);
+            setSize(292, 200);
         }
     }
 
@@ -87,13 +87,19 @@ public class frmCadUsuario extends javax.swing.JFrame {
     }
 
     private boolean UsuarioDuplicado() throws Exception {
-
         m_UserC = new UsuarioController();
-        Usuario objUsr = m_UserC.SearchUserByName(txtUser.getText());
-        if (objUsr != null) {
+        if (m_objUser == null) {
+            Usuario objUser = m_UserC.SearchUserByName(txtUser.getText());
+            if (objUser != null) {
+                Dialogs.showWarning(USUARIO_DUPLICADO);
+            }
+            return (objUser != null);
+        } else if (m_UserC.DuplicatedUser(m_objUser.getId(), txtUser.getText())) {
             Dialogs.showWarning(USUARIO_DUPLICADO);
+            return true;
+        } else {
+            return false;
         }
-        return (objUsr == null);
     }
 
     @SuppressWarnings("unchecked")
@@ -126,6 +132,7 @@ public class frmCadUsuario extends javax.swing.JFrame {
         tbUsers = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("SHX Usuarios");
         setResizable(false);
 
         jPasswordField4.addActionListener(new java.awt.event.ActionListener() {
@@ -250,22 +257,22 @@ public class frmCadUsuario extends javax.swing.JFrame {
         jLabel6.setText("Usuario:");
 
         txtUser.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtUserKeyTyped(evt);
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUserKeyPressed(evt);
             }
         });
 
         txtPass.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPassKeyTyped(evt);
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPassKeyPressed(evt);
             }
         });
 
         chkAdmin.setText("Administrador");
 
         txtConf.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtConfKeyTyped(evt);
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtConfKeyPressed(evt);
             }
         });
 
@@ -408,19 +415,21 @@ public class frmCadUsuario extends javax.swing.JFrame {
         // TODO add your handling code here
         try {
             if (btnNovo.getText().equals("Salvar") || btnNovo.getText().equals("Save")) {
-                if (objUser == null) {
+                if (m_objUser == null) {
                     if (m_showGrid) {
                         if (!UsuarioDuplicado()) {
                             InserirUsuario();
                         }
                     } else if (!m_showGrid) {
+                        String uName = txtUser.getText();
                         InserirUsuario();
                         this.dispose();
-                        new frmPrincipal(txtUser.getText().toUpperCase()).setVisible(true);
+                        new frmPrincipal(uName.toUpperCase()).setVisible(true);
                     }
                 } else if (!UsuarioDuplicado()) {
-                    m_UserC.Edit(objUser.getId(), txtUser.getText(), txtConf.getText(), txtPass.getText(), chkAdmin.isSelected());
+                    m_UserC.Edit(m_objUser.getId(), txtUser.getText(), txtConf.getText(), txtPass.getText(), chkAdmin.isSelected());
                     Dialogs.showInfo("Usuario editado com sucesso!");
+                    m_objUser = null;
                     defaultLayout(true);
                 }
             } else if (btnNovo.getText().equals("Novo") || btnNovo.getText().equals("New")) {
@@ -432,38 +441,16 @@ public class frmCadUsuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnNovoActionPerformed
 
-    private void txtUserKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyTyped
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == 10) {
-            txtPass.requestFocus();
-        }
-    }//GEN-LAST:event_txtUserKeyTyped
-
-    private void txtPassKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyTyped
-        // TODO add your handling code here
-        if (evt.getKeyCode() == 10) {
-            txtConf.requestFocus();
-        }
-    }//GEN-LAST:event_txtPassKeyTyped
-
-    private void txtConfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConfKeyTyped
-        // TODO add your handling code here
-
-        if (evt.getKeyCode() == 10) {
-            chkAdmin.requestFocus();
-        }
-    }//GEN-LAST:event_txtConfKeyTyped
-
     private void tbUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsersMouseClicked
         // TODO add your handling code here:
         try {
-            objUser = m_UserC.getByID(((Integer) tbUsers.getModel().getValueAt(tbUsers.getSelectedRow(), 0)));
-            if (objUser != null) {
+            m_objUser = m_UserC.getByID(((Integer) tbUsers.getModel().getValueAt(tbUsers.getSelectedRow(), 0)));
+            if (m_objUser != null) {
                 defaultLayout(false);
-                txtUser.setText(objUser.getName());
-                txtPass.setText(objUser.getPassword());
-                txtConf.setText(objUser.getPassword());
-                chkAdmin.setSelected(objUser.getAdmin());
+                txtUser.setText(m_objUser.getName());
+                txtPass.setText(m_objUser.getPassword());
+                txtConf.setText(m_objUser.getPassword());
+                chkAdmin.setSelected(m_objUser.getAdmin());
                 txtUser.selectAll();
                 txtUser.requestFocus();
             }
@@ -472,6 +459,27 @@ public class frmCadUsuario extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_tbUsersMouseClicked
+
+    private void txtUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == 10) {
+            txtPass.requestFocus();
+        }
+    }//GEN-LAST:event_txtUserKeyPressed
+
+    private void txtPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == 10) {
+            txtConf.requestFocus();
+        }
+    }//GEN-LAST:event_txtPassKeyPressed
+
+    private void txtConfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConfKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == 10) {
+            chkAdmin.requestFocus();
+        }
+    }//GEN-LAST:event_txtConfKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;

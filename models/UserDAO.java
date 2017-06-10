@@ -100,7 +100,7 @@ public class UserDAO extends GenericDAO {
     public Object SearchEntity(String name) throws SQLException {
         String sql = "SELECT * FROM USERS WHERE NAME = ?";
         super.Sql = super.Conn.prepareStatement(sql);
-        Sql.setString(1, name);
+        Sql.setString(1, name.toUpperCase());
         ResultSet rs = super.Sql.executeQuery();
         User obj = null;
         

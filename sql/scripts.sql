@@ -21,8 +21,8 @@ create table registro_ponto (
     saida_a int,
     entrada_b int,
     saida_b int,
-    percent_aplicado decimal(5,2), -- 50% ou 100% (controlado pela aplicaçao)
     horas_excedidas int, -- quantidade de minutos excedidos
+    percent_aplicado decimal(5,2), -- 50% ou 100% (controlado pela aplicaçao)
     valor_extra decimal(10,2) -- valor acumulado de horas extras no dia
     total_recebido decimal(10,2) --valor cheio recebido no dia com horas extras
 );

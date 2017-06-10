@@ -12,10 +12,11 @@ create table usuario (
 
 create table funcionario (
     id serial primary key,
-    name varchar(255),
+    nome varchar(255),
+    cpf varchar(11),
     salario decimal(10,2),
-    hora_base integer,
-    valor_hora decimal(10,2)
+    hora_base integer, -- salva em minutos
+    valor_hora decimal(10,2) -- em reais
 );
 
 create table registro_ponto (

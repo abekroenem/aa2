@@ -51,7 +51,7 @@ public class UsuarioDAO extends GenericDAO {
 
     @Override
     public Object updateEntity(Object obj) throws SQLException {
-        String sql = "UPDATE USERS SET NOME=?,SENHA=?,ISADMIN=? WHERE ID=?";
+        String sql = "UPDATE USUARIO SET NOME=?,SENHA=?,ISADMIN=? WHERE ID=?";
         super.Sql = super.Conn.prepareStatement(sql);
         super.Sql.setString(1, ((Usuario) obj).getName());
         super.Sql.setString(2, ((Usuario) obj).getPassword());

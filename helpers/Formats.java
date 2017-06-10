@@ -3,16 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Env;
+package helpers;
 
 /**
  *
  * @author qwerty
  */
-public class Constants {
-
-    public static final int PT_BR = 0;
-    public static final int EN_US = 1;
-    public static final double SALARIO_MINIMO = 937;
-
+public class Formats {
+    
 }

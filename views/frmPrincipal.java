@@ -28,42 +28,94 @@ public class frmPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         desktopPane = new javax.swing.JDesktopPane();
-        jToolBar1 = new javax.swing.JToolBar();
-        jToolBar2 = new javax.swing.JToolBar();
         lblUser = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JToolBar.Separator();
+        jToolBar2 = new javax.swing.JToolBar();
+        jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
+        jMenu4 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         cutMenuItem = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
-        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
+        rbPTBR = new javax.swing.JRadioButtonMenuItem();
+        rbENUS = new javax.swing.JRadioButtonMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1270, 780));
+        setPreferredSize(new java.awt.Dimension(1150, 509));
 
-        jToolBar1.setRollover(true);
-        desktopPane.add(jToolBar1);
-        jToolBar1.setBounds(-2, -6, 1150, 60);
+        lblUser.setText("Usuario:<usuario>");
+        desktopPane.add(lblUser);
+        lblUser.setBounds(10, 410, 170, 17);
 
         jToolBar2.setRollover(true);
 
-        lblUser.setText("Usuario:<user>");
-        jToolBar2.add(lblUser);
+        jButton2.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/employee.png"))); // NOI18N
+        jButton2.setText("Cadastrar Funcionario");
+        jButton2.setFocusable(false);
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(jButton2);
 
-        jSeparator2.setRequestFocusEnabled(false);
-        jSeparator2.setSeparatorSize(new java.awt.Dimension(950, 10));
-        jToolBar2.add(jSeparator2);
+        jButton1.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/clock.png"))); // NOI18N
+        jButton1.setText("Registrar Ponto");
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(jButton1);
+
+        jButton3.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/report.png"))); // NOI18N
+        jButton3.setText("Relatorio Horas Extras");
+        jButton3.setFocusable(false);
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(jButton3);
+
+        jButton4.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/auditoria.png"))); // NOI18N
+        jButton4.setText("Auditoria");
+        jButton4.setFocusable(false);
+        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(jButton4);
 
         desktopPane.add(jToolBar2);
-        jToolBar2.setBounds(0, 430, 1140, 20);
+        jToolBar2.setBounds(0, 0, 1140, 90);
+
+        jMenu4.setText("Sistema");
+        menuBar.add(jMenu4);
 
         jMenu3.setText("Cadastros");
 
@@ -92,6 +144,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         cutMenuItem.setText("Registrar Ponto");
         editMenu.add(cutMenuItem);
 
+        jMenuItem3.setText("Auditoria");
+        editMenu.add(jMenuItem3);
+
         menuBar.add(editMenu);
 
         helpMenu.setMnemonic('h');
@@ -109,15 +164,18 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Idioma");
 
-        jRadioButtonMenuItem1.setSelected(true);
-        jRadioButtonMenuItem1.setText("Portugues pt-br");
-        jRadioButtonMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pt_br.png"))); // NOI18N
-        jMenu1.add(jRadioButtonMenuItem1);
+        rbPTBR.setText("Portugues pt-br");
+        rbPTBR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pt_br.png"))); // NOI18N
+        rbPTBR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbPTBRActionPerformed(evt);
+            }
+        });
+        jMenu1.add(rbPTBR);
 
-        jRadioButtonMenuItem2.setSelected(true);
-        jRadioButtonMenuItem2.setText("Ingles en-us");
-        jRadioButtonMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/en_us.png"))); // NOI18N
-        jMenu1.add(jRadioButtonMenuItem2);
+        rbENUS.setText("Ingles en-us");
+        rbENUS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/en_us.png"))); // NOI18N
+        jMenu1.add(rbENUS);
 
         menuBar.add(jMenu1);
 
@@ -130,16 +188,14 @@ public class frmPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1140, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1141, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
-                .addGap(2, 2, 2))
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(1150, 501));
+        setSize(new java.awt.Dimension(1151, 509));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -155,6 +211,26 @@ public class frmPrincipal extends javax.swing.JFrame {
         objFun.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void rbPTBRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPTBRActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbPTBRActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
@@ -163,18 +239,22 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
-    private javax.swing.JToolBar.Separator jSeparator2;
-    private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JLabel lblUser;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JRadioButtonMenuItem rbENUS;
+    private javax.swing.JRadioButtonMenuItem rbPTBR;
     // End of variables declaration//GEN-END:variables
 
 }

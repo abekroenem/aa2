@@ -11,14 +11,14 @@ import java.util.Objects;
  *
  * @author qwerty
  */
-public class User {
+public class Usuario {
 
     int Id;
     String Name;
     String Password;
     boolean isAdmin;
 
-    public User() {
+    public Usuario() {
         this.Id = 0;
         this.Name = "";
         this.Password = "";

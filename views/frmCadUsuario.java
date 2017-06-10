@@ -5,24 +5,24 @@
  */
 package views;
 
-import controllers.UserController;
+import controllers.UsuarioController;
 import helpers.Dialogs;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import models.User;
+import models.Usuario;
 
 /**
  *
  * @author qwerty
  */
-public class frmCadUser extends javax.swing.JFrame {
+public class frmCadUsuario extends javax.swing.JFrame {
 
     private boolean m_showGrid = true;
     private String USUARIO_DUPLICADO, USUARIO_EM_BRANCO, SENHAS_DIFERENTES, SENHA_EM_BRANCO, USUARIO_INSERIDO_SUCESS;
-    private UserController m_UserC;
+    private UsuarioController m_UserC;
 
-    public void configurarMSGs() {
+    public void Traduz() {
         SENHAS_DIFERENTES = "As Senhas devem ser identicas!";
         USUARIO_EM_BRANCO = "Usuario deve ser informado!";
         SENHA_EM_BRANCO = "Senhas devem ser informadas!";
@@ -30,13 +30,15 @@ public class frmCadUser extends javax.swing.JFrame {
         USUARIO_INSERIDO_SUCESS = "Usuario inserido com Sucesso!";
     }
 
-    public frmCadUser(boolean showGrid) {
+    public frmCadUsuario(boolean showGrid) {
         initComponents();
         m_showGrid = showGrid;
-        configurarMSGs();
+        Traduz();
         if (!showGrid) {
             setSize(298, 225);
             btnNovo.setText("Salvar");
+        } else {
+            loadTable();
         }
     }
 
@@ -52,11 +54,12 @@ public class frmCadUser extends javax.swing.JFrame {
     private void loadTable() {
 
         try {
-            List<User> lstUsers = m_UserC.getAll();
+            m_UserC = new UsuarioController();
+            List<Usuario> lstUsers = m_UserC.getAll();
             DefaultTableModel tablemd = (DefaultTableModel) tbUsers.getModel();
             tablemd.getDataVector().removeAllElements();
             if (lstUsers.size() > 0) {
-                for (User user : lstUsers) {
+                for (Usuario user : lstUsers) {
                     tablemd.addRow(new Object[]{user.getId(), user.getName(), user.getAdmin()});
                 }
                 tbUsers.clearSelection();
@@ -69,7 +72,7 @@ public class frmCadUser extends javax.swing.JFrame {
     }
 
     private void InserirUsuario() throws SQLException {
-        m_UserC = new UserController();
+        m_UserC = new UsuarioController();
         m_UserC.Add(txtUser.getText(), txtPass.getText(), chkAdmin.isSelected());
         defaultLayout(true);
         if (m_showGrid) {
@@ -417,15 +420,18 @@ public class frmCadUser extends javax.swing.JFrame {
                     return;
                 } else if (m_showGrid) {
 
-                    m_UserC = new UserController();
-                    User objUsr = m_UserC.SearchUser(txtUser.getText());
+                    m_UserC = new UsuarioController();
+                    Usuario objUsr = m_UserC.SearchUser(txtUser.getText());
                     if (objUsr != null) {
                         Dialogs.showWarning(USUARIO_DUPLICADO);
                     } else {
                         InserirUsuario();
+                        this.dispose();
                     }
                 } else if (!m_showGrid) {
                     InserirUsuario();
+                    this.dispose();
+                    new frmPrincipal(txtUser.getText()).setVisible(true);
                 }
             }
         } catch (SQLException ex) {

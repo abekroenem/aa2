@@ -5,8 +5,7 @@
  */
 package views;
 
-import helpers.Dialogs;
-import models.DB;
+import java.sql.SQLException;
 
 /**
  *
@@ -14,10 +13,9 @@ import models.DB;
  */
 public class frmPrincipal extends javax.swing.JFrame {
 
-    public frmPrincipal(String UserName) {
+    public frmPrincipal(String UserName) throws SQLException {
         initComponents();
         lblUser.setText("Usuario:" + UserName);
-        lblBD.setText("DB:" + DB.hostname + "@" + DB.database);
     }
 
     /**
@@ -33,8 +31,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         jToolBar1 = new javax.swing.JToolBar();
         jToolBar2 = new javax.swing.JToolBar();
         lblUser = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JToolBar.Separator();
-        lblBD = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
         menuBar = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -50,6 +47,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1270, 780));
 
         jToolBar1.setRollover(true);
         desktopPane.add(jToolBar1);
@@ -60,14 +58,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         lblUser.setText("Usuario:<user>");
         jToolBar2.add(lblUser);
 
-        jSeparator1.setMaximumSize(new java.awt.Dimension(250, 10));
-        jSeparator1.setMinimumSize(new java.awt.Dimension(250, 10));
-        jSeparator1.setPreferredSize(new java.awt.Dimension(250, 10));
-        jSeparator1.setSeparatorSize(new java.awt.Dimension(250, 10));
-        jToolBar2.add(jSeparator1);
-
-        lblBD.setText("DB:<server@banco_de_dados>");
-        jToolBar2.add(lblBD);
+        jSeparator2.setRequestFocusEnabled(false);
+        jSeparator2.setSeparatorSize(new java.awt.Dimension(950, 10));
+        jToolBar2.add(jSeparator2);
 
         desktopPane.add(jToolBar2);
         jToolBar2.setBounds(0, 430, 1140, 20);
@@ -132,21 +125,22 @@ public class frmPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1140, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1140, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(desktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+                .addGap(2, 2, 2))
         );
 
-        setSize(new java.awt.Dimension(1150, 498));
+        setSize(new java.awt.Dimension(1150, 501));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
+        new frmCadUsuario(true).setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
 
@@ -164,10 +158,9 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
-    private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
-    private javax.swing.JLabel lblBD;
     private javax.swing.JLabel lblUser;
     private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables

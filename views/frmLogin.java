@@ -5,12 +5,12 @@
  */
 package views;
 
-import controllers.UserController;
+import controllers.UsuarioController;
 import helpers.Dialogs;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import models.User;
+import models.Usuario;
 
 /**
  *
@@ -18,7 +18,7 @@ import models.User;
  */
 public class frmLogin extends javax.swing.JFrame {
 
-    private UserController m_UserC;
+    private UsuarioController m_UserC;
     private boolean defaultUser = false;
     private String USUARIO_NAO_CADASTRADO, NENHUM_USUARIO_CAD, SENHA_INCORRETA;
 
@@ -35,7 +35,7 @@ public class frmLogin extends javax.swing.JFrame {
 
     public frmLogin() throws SQLException {
         configurarMSGs();
-        this.m_UserC = new UserController();
+        this.m_UserC = new UsuarioController();
         defaultUser = m_UserC.isEmpty(); // caso nao existam usuarios cadastrados
         if (defaultUser) {
             Dialogs.showInfo(NENHUM_USUARIO_CAD);
@@ -153,7 +153,7 @@ public class frmLogin extends javax.swing.JFrame {
                 if (txtUser.getText().equals("admin")) {
                     if (txtPassword.getText().equals("admin")) {
                         this.dispose();
-                        new frmCadUser(false).setVisible(true);
+                        new frmCadUsuario(false).setVisible(true);
                     } else {
                         Dialogs.showWarning(SENHA_INCORRETA);
                     }
@@ -161,7 +161,7 @@ public class frmLogin extends javax.swing.JFrame {
                     Dialogs.showWarning(USUARIO_NAO_CADASTRADO);
                 }
             } else {
-                User obUser = this.m_UserC.SearchUser(txtUser.getText());
+                Usuario obUser = this.m_UserC.SearchUser(txtUser.getText());
                 if (obUser != null) {
                     if (!obUser.getPassword().equals(txtPassword.getText())) {
                         Dialogs.showWarning(SENHA_INCORRETA);

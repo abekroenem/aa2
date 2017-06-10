@@ -7,24 +7,24 @@ package controllers;
 
 import java.sql.SQLException;
 import java.util.List;
-import models.User;
-import models.UserDAO;
+import models.Usuario;
+import models.UsuarioDAO;
 
 /**
  *
  * @author qwerty
  */
-public class UserController {
+public class UsuarioController {
 
-    UserDAO usrDAO;
+    UsuarioDAO usrDAO;
 
-    public UserController() throws SQLException {
-        usrDAO = new UserDAO();
+    public UsuarioController() throws SQLException {
+        usrDAO = new UsuarioDAO();
 
     }
 
     public void Add(String Name, String Password, boolean isAdmin) throws SQLException {
-        User obj = new User();
+        Usuario obj = new Usuario();
         obj.setName(Name);
         obj.setPassword(Password);
         obj.setAdmin(isAdmin);
@@ -32,7 +32,7 @@ public class UserController {
     }
 
     public void Edit(int Id, String Name, String Password, boolean isAdmin) throws SQLException {
-        User obj = new User();
+        Usuario obj = new Usuario();
         obj.setId(Id);
         obj.setName(Name);
         obj.setPassword(Password);
@@ -41,20 +41,20 @@ public class UserController {
     }
 
     public void Delete(int Id, String Name) throws SQLException {
-        User obj = new User();
+        Usuario obj = new Usuario();
         obj.setId(Id);
         obj.setName(Name);
         usrDAO.removeEntity(obj);
 
     }
 
-    public List<User> getAll() throws SQLException {
+    public List<Usuario> getAll() throws SQLException {
         return usrDAO.getAllEntitys();
     }
 
-    public User SearchUser(String name) throws SQLException {
+    public Usuario SearchUser(String name) throws SQLException {
 
-        return (User) usrDAO.SearchEntity(name);
+        return (Usuario) usrDAO.SearchEntity(name);
 
     }
 

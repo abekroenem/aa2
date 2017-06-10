@@ -5,7 +5,7 @@ drop table config;
 
 create table usuario (
     id serial primary key,
-    nome varchar(255) unique key,
+    nome varchar(255) unique,
     senha varchar(255),
     isAdmin boolean default false
 );
@@ -13,10 +13,10 @@ create table usuario (
 create table funcionario (
     id serial primary key,
     nome varchar(255),
-    cpf varchar(11) unique key,
+    cpf varchar(11) unique,
     salario decimal(10,2),
     hora_base integer, -- salva em minutos
-    valor_hora double(10,2)
+    valor_hora decimal(10,2)
 );
 
 create table registro_ponto (

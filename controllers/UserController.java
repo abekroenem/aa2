@@ -23,18 +23,20 @@ public class UserController {
 
     }
 
-    public void Add(String Name, String Password) throws SQLException {
+    public void Add(String Name, String Password, boolean isAdmin) throws SQLException {
         User obj = new User();
         obj.setName(Name);
         obj.setPassword(Password);
+        obj.setAdmin(isAdmin);
         usrDAO.addEntity(obj);
     }
 
-    public void Edit(int Id, String Name, String Password) throws SQLException {
+    public void Edit(int Id, String Name, String Password, boolean isAdmin) throws SQLException {
         User obj = new User();
         obj.setId(Id);
         obj.setName(Name);
         obj.setPassword(Password);
+        obj.setAdmin(isAdmin);
         usrDAO.updateEntity(obj);
     }
 

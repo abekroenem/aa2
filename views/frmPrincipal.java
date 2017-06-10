@@ -22,7 +22,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     public void startApp(boolean runCadUser) {
         initComponents();
         if (runCadUser) {
-            new infrmCadUsuario(runCadUser).setVisible(true);
+            new frmCadUser(runCadUser).setVisible(true);
             setVisible(true);
         } else {
             setVisible(true);

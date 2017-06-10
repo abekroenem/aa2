@@ -93,6 +93,12 @@ public class frmLogin extends javax.swing.JFrame {
             }
         });
 
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -147,7 +153,7 @@ public class frmLogin extends javax.swing.JFrame {
                 if (txtUser.getText().equals("admin")) {
                     if (txtPassword.getText().equals("admin")) {
                         this.dispose();
-                        new infrmCadUsuario(false).setVisible(true);
+                        new frmCadUser(false).setVisible(true);
                     } else {
                         Dialogs.showWarning(SENHA_INCORRETA);
                     }
@@ -178,6 +184,13 @@ public class frmLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         txtUser.requestFocus();
     }//GEN-LAST:event_txtUserComponentAdded
+
+    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == 10) {
+            btnLogin.doClick();
+        }
+    }//GEN-LAST:event_txtPasswordKeyPressed
 
     /**
      * @param args the command line arguments

@@ -16,11 +16,13 @@ public class User {
     int Id;
     String Name;
     String Password;
-    
+    boolean isAdmin;
+
     public User() {
         this.Id = 0;
         this.Name = "";
         this.Password = "";
+        this.isAdmin = false;
     }
 
     public int getId() {
@@ -34,6 +36,15 @@ public class User {
     public String getName() {
         return Name;
     }
+
+    public void setAdmin(boolean admin) {
+        this.isAdmin = admin;
+    }
+
+    public boolean getAdmin() {
+        return this.isAdmin;
+    }
+
     public void setName(String Name) throws IllegalArgumentException {
         if (Name.isEmpty()) {
             throw new IllegalArgumentException("Nome do usuario deve ser informado!");
@@ -41,9 +52,11 @@ public class User {
             this.Name = Name.toUpperCase();
         }
     }
+
     public String getPassword() {
         return Password;
     }
+
     public void setPassword(String Password) throws IllegalArgumentException {
         if (Password.isEmpty()) {
             throw new IllegalArgumentException("Senha do usuario deve ser informada!");

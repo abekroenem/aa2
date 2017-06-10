@@ -17,7 +17,6 @@ public class Funcionario {
     private String Nome;
     private double salario;
     private int hora_base;
-    private double valor_hora;
     private String CPF;
 
     public String getCPF() {
@@ -62,26 +61,17 @@ public class Funcionario {
     }
 
     public int getHora_base() {
-        return hora_base;
+        return hora_base / 60;
     }
 
     public void setHora_base(int hora_base) throws Exception {
-        if (hora_base < 60) {
+        if (hora_base == 1) {
             throw new Exception("Funcionario deve ter pelo menos 1h como hora base!");
         }
-        this.hora_base = hora_base;
+        this.hora_base = hora_base * 60;
     }
 
     public double getValor_hora() {
-        return valor_hora;
+        return ((this.salario / 30) / this.hora_base);
     }
-
-    public void setValor_hora(double valor_hora) throws Exception {
-        if (valor_hora <= 0) {
-            throw new Exception("Valor/Hora do Funcionario deve ser maior que zero!");
-
-        }
-        this.valor_hora = valor_hora;
-    }
-
 }

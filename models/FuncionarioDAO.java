@@ -10,8 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -29,12 +27,11 @@ public class FuncionarioDAO extends GenericDAO {
         obj.setCPF(rs.getString("cpf"));
         obj.setSalario(rs.getDouble("salario"));
         obj.setHora_base(rs.getInt("hora_base"));
-        obj.setValor_hora(rs.getDouble("valor_hora"));
     }
 
     @Override
     public void addEntity(Object obj) throws SQLException {
-        String sql = "INSERT INTO FUNCIONARIO (NOME, CPF, SALARIO, HORA_BASE, HORA_EXTRA) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO FUNCIONARIO (NOME, CPF, SALARIO, HORA_BASE, VALOR_HORA) VALUES (?,?,?,?,?)";
         super.Sql = super.Conn.prepareStatement(sql);
         super.Sql.setString(1, ((Funcionario) obj).getNome());
         super.Sql.setString(2, ((Funcionario) obj).getCPF());
@@ -57,7 +54,7 @@ public class FuncionarioDAO extends GenericDAO {
 
     @Override
     public Object updateEntity(Object obj) throws SQLException {
-        String sql = "UPDATE FUNCIONARIO SET NOME=?,CPF=?,SALARIO=?,HORA_BASE=?, VALOR_HORA=? WHERE ID=?";
+        String sql = "UPDATE FUNCIONARIO SET NOME=?,CPF=?,SALARIO=?,HORA_BASE=?,VALOR_HORA=? WHERE ID=?";
         super.Sql = super.Conn.prepareStatement(sql);
         super.Sql.setString(1, ((Funcionario) obj).getNome());
         super.Sql.setString(2, ((Funcionario) obj).getCPF());
@@ -114,10 +111,10 @@ public class FuncionarioDAO extends GenericDAO {
 
     }
 
-    public Object SearchEntity(String name) throws SQLException {
-        String sql = "SELECT * FROM FUNCIONARIO WHERE NOME = ?";
+    public Object SearchEntity(String CFP) throws SQLException {
+        String sql = "SELECT * FROM FUNCIONARIO WHERE CFP = ?";
         super.Sql = super.Conn.prepareStatement(sql);
-        Sql.setString(1, name.toUpperCase());
+        Sql.setString(1, CFP);
         ResultSet rs = super.Sql.executeQuery();
         Funcionario obj = null;
         if (rs.next()) {
@@ -130,10 +127,12 @@ public class FuncionarioDAO extends GenericDAO {
         }
         return obj;
     }
-
-    public boolean isEmptyEntity() throws SQLException {
-        String sql = "SELECT * FROM FUNCIONARIO LIMIT 1";
-        return !super.Conn.prepareStatement(sql).executeQuery().next();
+    
+      public boolean DuplicatedEntity(int Id, String CPF) throws SQLException {
+        String sql = "SELECT * FROM FUNCIONARIO WHERE CPF  = ? AND ID <> ?";
+        super.Sql = super.Conn.prepareStatement(sql);
+        super.Sql.setString(1, CPF);
+        super.Sql.setInt(2, Id);
+        return super.Sql.executeQuery().next();
     }
-
 }

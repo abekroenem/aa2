@@ -8,6 +8,8 @@ package views;
 import Env.Constants;
 import java.sql.SQLException;
 import helpers.Config;
+import java.awt.Dimension;
+import javax.swing.JInternalFrame;
 
 /**
  *
@@ -21,6 +23,15 @@ public class frmPrincipal extends javax.swing.JFrame {
         rbPTBR.setSelected((Config.getLang() == Constants.PT_BR));
     }
 
+    public void showInternal(JInternalFrame obj) {
+        this.desktopPane.add(obj);
+        Dimension dS = desktopPane.getSize();
+        Dimension ifz = obj.getSize();
+        obj.setLocation((dS.width - ifz.width) / 2,
+                (dS.height - ifz.height) / 2);
+        obj.setVisible(true);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,20 +42,20 @@ public class frmPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         desktopPane = new javax.swing.JDesktopPane();
-        iashd = new javax.swing.JLabel();
         jToolBar2 = new javax.swing.JToolBar();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        iashd = new javax.swing.JLabel();
         asdasdasd = new javax.swing.JLabel();
-        asdasd = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
         lblUser = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        iashd1 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        cadUser = new javax.swing.JMenuItem();
+        cadFun = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         cutMenuItem = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -58,17 +69,10 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SHX Principal");
-        setPreferredSize(new java.awt.Dimension(1150, 509));
+        setPreferredSize(new java.awt.Dimension(1360, 740));
         setResizable(false);
 
         desktopPane.setBackground(new java.awt.Color(66, 66, 66));
-
-        iashd.setBackground(new java.awt.Color(254, 254, 254));
-        iashd.setFont(new java.awt.Font("DejaVu Sans", 1, 24)); // NOI18N
-        iashd.setForeground(new java.awt.Color(254, 254, 254));
-        iashd.setText("SHX");
-        desktopPane.add(iashd);
-        iashd.setBounds(10, 97, 60, 30);
 
         jToolBar2.setBackground(new java.awt.Color(93, 93, 93));
         jToolBar2.setRollover(true);
@@ -126,7 +130,14 @@ public class frmPrincipal extends javax.swing.JFrame {
         jToolBar2.add(jButton4);
 
         desktopPane.add(jToolBar2);
-        jToolBar2.setBounds(0, 0, 1230, 90);
+        jToolBar2.setBounds(0, 0, 1440, 90);
+
+        iashd.setBackground(new java.awt.Color(254, 254, 254));
+        iashd.setFont(new java.awt.Font("DejaVu Sans", 1, 24)); // NOI18N
+        iashd.setForeground(new java.awt.Color(254, 254, 254));
+        iashd.setText("v1.0.4");
+        desktopPane.add(iashd);
+        iashd.setBounds(1270, 100, 90, 30);
 
         asdasdasd.setBackground(new java.awt.Color(254, 254, 254));
         asdasdasd.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
@@ -135,27 +146,6 @@ public class frmPrincipal extends javax.swing.JFrame {
         desktopPane.add(asdasdasd);
         asdasdasd.setBounds(10, 130, 280, 17);
 
-        asdasd.setBackground(new java.awt.Color(254, 254, 254));
-        asdasd.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
-        asdasd.setForeground(new java.awt.Color(254, 254, 254));
-        asdasd.setText("v1.0.3");
-        desktopPane.add(asdasd);
-        asdasd.setBounds(1130, 430, 50, 20);
-
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/main.png"))); // NOI18N
-        jButton5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jButton5.setBorderPainted(false);
-        jButton5.setContentAreaFilled(false);
-        jButton5.setEnabled(false);
-        jButton5.setFocusPainted(false);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-        desktopPane.add(jButton5);
-        jButton5.setBounds(-10, -100, 1210, 620);
-
         lblUser.setBackground(new java.awt.Color(254, 254, 254));
         lblUser.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
         lblUser.setForeground(new java.awt.Color(254, 254, 254));
@@ -163,27 +153,38 @@ public class frmPrincipal extends javax.swing.JFrame {
         desktopPane.add(lblUser);
         lblUser.setBounds(10, 170, 170, 20);
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/main.png"))); // NOI18N
+        desktopPane.add(jLabel1);
+        jLabel1.setBounds(-80, -100, 1560, 840);
+
+        iashd1.setBackground(new java.awt.Color(254, 254, 254));
+        iashd1.setFont(new java.awt.Font("DejaVu Sans", 1, 24)); // NOI18N
+        iashd1.setForeground(new java.awt.Color(254, 254, 254));
+        iashd1.setText("SHX");
+        desktopPane.add(iashd1);
+        iashd1.setBounds(10, 97, 60, 30);
+
         menuBar.setBackground(new java.awt.Color(100, 98, 98));
 
         jMenu3.setBackground(new java.awt.Color(254, 254, 254));
         jMenu3.setForeground(new java.awt.Color(254, 254, 254));
         jMenu3.setText("Cadastros");
 
-        jMenuItem1.setText("Usuarios");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        cadUser.setText("Usuarios");
+        cadUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                cadUserActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem1);
+        jMenu3.add(cadUser);
 
-        jMenuItem2.setText("Funcionarios");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        cadFun.setText("Funcionarios");
+        cadFun.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                cadFunActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem2);
+        jMenu3.add(cadFun);
 
         menuBar.add(jMenu3);
 
@@ -251,40 +252,26 @@ public class frmPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1188, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1360, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(1198, 539));
+        setSize(new java.awt.Dimension(1370, 770));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-        frmCadUsuario objCadUser = new frmCadUsuario(true);
-        objCadUser.setAlwaysOnTop(true);
-        objCadUser.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-        infrmCadFuncionario objFun = new infrmCadFuncionario();
-        this.add(objFun);
-        objFun.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        cadFun.doClick();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -295,41 +282,49 @@ public class frmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void rbPTBRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPTBRActionPerformed
-        // TODO add your handling code here:
-        rbENUS.setSelected(false);
-    }//GEN-LAST:event_rbPTBRActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
-
     private void rbENUSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbENUSActionPerformed
         // TODO add your handling code here:
         rbPTBR.setSelected(false);
     }//GEN-LAST:event_rbENUSActionPerformed
 
+    private void rbPTBRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPTBRActionPerformed
+        // TODO add your handling code here:
+        rbENUS.setSelected(false);
+    }//GEN-LAST:event_rbPTBRActionPerformed
+
+    private void cadFunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadFunActionPerformed
+        infrmCadFun objFun = new infrmCadFun();
+        showInternal(objFun);
+    }//GEN-LAST:event_cadFunActionPerformed
+
+    private void cadUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadUserActionPerformed
+        // TODO add your handling code here:
+        frmCadUsuario objCadUser = new frmCadUsuario(true);
+        objCadUser.setAlwaysOnTop(true);
+        objCadUser.setVisible(true);
+    }//GEN-LAST:event_cadUserActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
-    private javax.swing.JLabel asdasd;
     private javax.swing.JLabel asdasdasd;
+    private javax.swing.JMenuItem cadFun;
+    private javax.swing.JMenuItem cadUser;
     private javax.swing.JMenuItem contentMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JLabel iashd;
+    private javax.swing.JLabel iashd1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JLabel lblUser;

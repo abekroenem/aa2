@@ -7,7 +7,6 @@ package views;
 
 import controllers.UsuarioController;
 import helpers.Dialogs;
-import java.sql.SQLException;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import models.Usuario;
@@ -19,7 +18,7 @@ import models.Usuario;
 public class frmCadUsuario extends javax.swing.JFrame {
 
     private boolean m_showGrid = true;
-    private String USUARIO_DUPLICADO, USUARIO_EM_BRANCO, SENHAS_DIFERENTES, SENHA_EM_BRANCO, USUARIO_INSERIDO_SUCESS;
+    private String USUARIO_DUPLICADO, USUARIO_EM_BRANCO, SENHAS_DIFERENTES, SENHA_EM_BRANCO, USUARIO_INSERIDO_SUCESS, BTN_NOVO, BTN_SALVAR;
     private UsuarioController m_UserC;
     private Usuario m_objUser = null;
 
@@ -29,13 +28,15 @@ public class frmCadUsuario extends javax.swing.JFrame {
         SENHA_EM_BRANCO = "Senhas devem ser informadas!";
         USUARIO_DUPLICADO = "Usuario ja cadastrado!";
         USUARIO_INSERIDO_SUCESS = "Usuario inserido com Sucesso!";
+        BTN_NOVO = "Novo";
+        BTN_SALVAR = "Salvar";
     }
 
     public frmCadUsuario(boolean showGrid) {
         initComponents();
+        Traduz();
         defaultLayout(true);
         m_showGrid = showGrid;
-        Traduz();
         if (!showGrid) {
             defaultLayout(false);
             setSize(292, 200);
@@ -44,7 +45,7 @@ public class frmCadUsuario extends javax.swing.JFrame {
 
     private void defaultLayout(boolean dl) {
         btnCancelar.setEnabled(!dl);
-        btnNovo.setText((dl) ? "Novo" : "Salvar");
+        btnNovo.setText((dl) ? BTN_NOVO : BTN_SALVAR);
         txtUser.setText("");
         txtPass.setText("");
         txtConf.setText("");
@@ -414,7 +415,7 @@ public class frmCadUsuario extends javax.swing.JFrame {
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         // TODO add your handling code here
         try {
-            if (btnNovo.getText().equals("Salvar") || btnNovo.getText().equals("Save")) {
+            if (btnNovo.getText().equals(BTN_SALVAR)) {
                 if (m_objUser == null) {
                     if (m_showGrid) {
                         if (!UsuarioDuplicado()) {
@@ -428,11 +429,11 @@ public class frmCadUsuario extends javax.swing.JFrame {
                     }
                 } else if (!UsuarioDuplicado()) {
                     m_UserC.Edit(m_objUser.getId(), txtUser.getText(), txtConf.getText(), txtPass.getText(), chkAdmin.isSelected());
-                    Dialogs.showInfo("Usuario editado com sucesso!");
+                    Dialogs.showInfo(USUARIO_INSERIDO_SUCESS);
                     m_objUser = null;
                     defaultLayout(true);
                 }
-            } else if (btnNovo.getText().equals("Novo") || btnNovo.getText().equals("New")) {
+            } else if (btnNovo.getText().equals(BTN_NOVO)) {
                 defaultLayout(false);
                 txtUser.requestFocus();
             }

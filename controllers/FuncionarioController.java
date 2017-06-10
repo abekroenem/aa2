@@ -9,56 +9,53 @@ import java.sql.SQLException;
 import java.util.List;
 import models.Funcionario;
 import models.FuncionarioDAO;
+
 /**
  *
  * @author qwerty
  */
 public class FuncionarioController {
 
-    FuncionarioDAO usrDAO;
+    FuncionarioDAO funcDAO;
 
     public FuncionarioController() throws SQLException {
-        usrDAO = new FuncionarioDAO();
+        funcDAO = new FuncionarioDAO();
 
     }
 
-    public void Add(String Nome, String CFP, double Salario, int Hora_Base, double Valor_Hora) throws Exception {
+    public void Add(String Nome, String CFP, double Salario, int Hora_Base) throws Exception {
         Funcionario obj = new Funcionario();
         obj.setNome(Nome);
         obj.setCPF(CFP);
         obj.setHora_base(Hora_Base);
-        obj.setValor_hora(Valor_Hora);
-        usrDAO.addEntity(obj);
+        funcDAO.addEntity(obj);
     }
 
-    public void Edit(int Id, String Nome, String CFP, double Salario, int Hora_Base, double Valor_Hora) throws Exception {
+    public void Edit(int Id, String Nome, String CFP, double Salario, int Hora_Base) throws Exception {
         Funcionario obj = new Funcionario();
         obj.setNome(Nome);
         obj.setCPF(CFP);
         obj.setHora_base(Hora_Base);
-        obj.setValor_hora(Valor_Hora);
-        usrDAO.updateEntity(obj);
+        funcDAO.updateEntity(obj);
     }
 
     public void Delete(int Id, String Nome) throws Exception {
         Funcionario obj = new Funcionario();
         obj.setId(Id);
         obj.setNome(Nome);
-        usrDAO.removeEntity(obj);
+        funcDAO.removeEntity(obj);
 
     }
 
     public List<Funcionario> getAll() throws SQLException {
-        return usrDAO.getAllEntitys();
+        return funcDAO.getAllEntitys();
     }
 
-    public Funcionario SearchUser(String name) throws SQLException {
-
-        return (Funcionario) usrDAO.SearchEntity(name);
-
+    public Funcionario SearchFuncionarioByCPF(String CPF) throws SQLException {
+        return (Funcionario) funcDAO.SearchEntity(CPF);
     }
 
-    public boolean isEmpty() throws SQLException {
-        return usrDAO.isEmptyEntity();
+    public boolean DuplicatedFuncionario(int ID, String CPF) throws Exception {
+        return funcDAO.DuplicatedEntity(ID, CPF);
     }
 }

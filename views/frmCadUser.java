@@ -9,9 +9,6 @@ import controllers.UserController;
 import helpers.Dialogs;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.User;
 
@@ -408,26 +405,28 @@ public class frmCadUser extends javax.swing.JFrame {
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         // TODO add your handling code here
         try {
-            if (txtUser.getText().isEmpty()) {
-                Dialogs.showWarning(USUARIO_EM_BRANCO);
-                return;
-            } else if (txtPass.getText().isEmpty() || txtConf.getText().isEmpty()) {
-                Dialogs.showWarning(SENHA_EM_BRANCO);
-                return;
-            } else if (!(txtPass.getText().equals(txtConf.getText()))) {
-                Dialogs.showWarning(SENHAS_DIFERENTES);
-                return;
-            } else if (m_showGrid) {
+            if (btnNovo.getText().equals("Salvar") || btnNovo.getText().equals("Save")) {
+                if (txtUser.getText().isEmpty()) {
+                    Dialogs.showWarning(USUARIO_EM_BRANCO);
+                    return;
+                } else if (txtPass.getText().isEmpty() || txtConf.getText().isEmpty()) {
+                    Dialogs.showWarning(SENHA_EM_BRANCO);
+                    return;
+                } else if (!(txtPass.getText().equals(txtConf.getText()))) {
+                    Dialogs.showWarning(SENHAS_DIFERENTES);
+                    return;
+                } else if (m_showGrid) {
 
-                m_UserC = new UserController();
-                User objUsr = m_UserC.SearchUser(txtUser.getText());
-                if (objUsr != null) {
-                    Dialogs.showWarning(USUARIO_DUPLICADO);
-                } else {
+                    m_UserC = new UserController();
+                    User objUsr = m_UserC.SearchUser(txtUser.getText());
+                    if (objUsr != null) {
+                        Dialogs.showWarning(USUARIO_DUPLICADO);
+                    } else {
+                        InserirUsuario();
+                    }
+                } else if (!m_showGrid) {
                     InserirUsuario();
                 }
-            } else if (!m_showGrid) {
-                InserirUsuario();
             }
         } catch (SQLException ex) {
             Dialogs.showError(ex.getMessage());
@@ -455,46 +454,6 @@ public class frmCadUser extends javax.swing.JFrame {
             chkAdmin.requestFocus();
         }
     }//GEN-LAST:event_txtConfKeyTyped
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmCadUser.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmCadUser.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmCadUser.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmCadUser.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmCadUser(true).setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;

@@ -6,9 +6,7 @@
 package views;
 
 import helpers.Dialogs;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import models.DB;
 
 /**
  *
@@ -16,28 +14,10 @@ import java.util.logging.Logger;
  */
 public class frmPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form frmPrincipal
-     */
-    public void startApp(boolean runCadUser) {
+    public frmPrincipal(String UserName) {
         initComponents();
-        if (runCadUser) {
-            new frmCadUser(runCadUser).setVisible(true);
-            setVisible(true);
-        } else {
-            setVisible(true);
-        }
-
-    }
-
-    public frmPrincipal(boolean runLogin) {
-        if (runLogin) {
-            try {
-                new frmLogin().setVisible(true);
-            } catch (Exception ex) {
-                Dialogs.showError(ex.getMessage());
-            }
-        }
+        lblUser.setText("Usuario:" + UserName);
+        lblBD.setText("DB:" + DB.hostname + "@" + DB.database);
     }
 
     /**
@@ -51,6 +31,10 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         desktopPane = new javax.swing.JDesktopPane();
         jToolBar1 = new javax.swing.JToolBar();
+        jToolBar2 = new javax.swing.JToolBar();
+        lblUser = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JToolBar.Separator();
+        lblBD = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -70,6 +54,23 @@ public class frmPrincipal extends javax.swing.JFrame {
         jToolBar1.setRollover(true);
         desktopPane.add(jToolBar1);
         jToolBar1.setBounds(-2, -6, 1150, 60);
+
+        jToolBar2.setRollover(true);
+
+        lblUser.setText("Usuario:<user>");
+        jToolBar2.add(lblUser);
+
+        jSeparator1.setMaximumSize(new java.awt.Dimension(250, 10));
+        jSeparator1.setMinimumSize(new java.awt.Dimension(250, 10));
+        jSeparator1.setPreferredSize(new java.awt.Dimension(250, 10));
+        jSeparator1.setSeparatorSize(new java.awt.Dimension(250, 10));
+        jToolBar2.add(jSeparator1);
+
+        lblBD.setText("DB:<server@banco_de_dados>");
+        jToolBar2.add(lblBD);
+
+        desktopPane.add(jToolBar2);
+        jToolBar2.setBounds(0, 430, 1140, 20);
 
         jMenu3.setText("Cadastros");
 
@@ -148,40 +149,6 @@ public class frmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmPrincipal(true).setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
@@ -197,7 +164,11 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
+    private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JToolBar jToolBar2;
+    private javax.swing.JLabel lblBD;
+    private javax.swing.JLabel lblUser;
     private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
 

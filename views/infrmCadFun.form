@@ -29,43 +29,52 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblNome" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblCPF" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblSalario" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="btnCancelar" min="-2" pref="114" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                      <Component id="btnNovo" min="-2" pref="114" max="-2" attributes="0"/>
-                      <EmptySpace pref="111" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtNome" alignment="0" max="32767" attributes="0"/>
+                          <Component id="lblNome" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCPF" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblSalario" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="txtNome" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="txtSalario" alignment="1" pref="161" max="32767" attributes="0"/>
-                                  <Component id="txtCPF" alignment="1" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                              <Component id="btnCancelar" min="-2" pref="114" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="txtCPF" alignment="0" pref="161" max="32767" attributes="0"/>
+                          <Component id="txtSalario" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblHoraBase" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblValorHora" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblValorHoraT" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="lblValorHoraT" alignment="0" pref="109" max="32767" attributes="0"/>
                                   <Component id="txtHoraBase" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="btnNovo" min="-2" pref="114" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
           <Component id="jScrollPane1" alignment="0" pref="0" max="32767" attributes="0"/>
       </Group>
@@ -80,17 +89,21 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtCPF" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblCPF" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtHoraBase" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblHoraBase" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtCPF" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtSalario" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblSalario" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblValorHora" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblValorHoraT" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblValorHora" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblValorHoraT" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtSalario" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblSalario" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -114,19 +127,16 @@
         <Property name="text" type="java.lang.String" value="CPF"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtCPF">
-    </Component>
     <Component class="javax.swing.JTextField" name="txtNome">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNomeActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNomeKeyPressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblSalario">
       <Properties>
         <Property name="text" type="java.lang.String" value="Salario"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtSalario">
     </Component>
     <Component class="javax.swing.JLabel" name="lblValorHora">
       <Properties>
@@ -139,6 +149,13 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtHoraBase">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+      </Properties>
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtHoraBaseKeyTyped"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtHoraBaseKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblValorHoraT">
       <Properties>
@@ -149,18 +166,13 @@
         <Property name="text" type="java.lang.String" value="Valor Hora"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnNovo">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Novo"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNovoActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="btnCancelar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -172,7 +184,8 @@
         <Component class="javax.swing.JTable" name="tbFunc">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="3" rowCount="4">
+              <Table columnCount="4" rowCount="4">
+                <Column editable="true" title="ID" type="java.lang.Integer"/>
                 <Column editable="false" title="Nome" type="java.lang.String"/>
                 <Column editable="true" title="Salario" type="java.lang.Double"/>
                 <Column editable="false" title="V. Hora" type="java.lang.Double"/>
@@ -180,7 +193,12 @@
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
-                <Column maxWidth="250" minWidth="250" prefWidth="250" resizable="true">
+                <Column maxWidth="35" minWidth="35" prefWidth="35" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="200" minWidth="200" prefWidth="200" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -201,8 +219,40 @@
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbFuncMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JFormattedTextField" name="txtCPF">
+      <Properties>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+          <Format format="###.###.###-##" subtype="-1" type="5"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+      </Properties>
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCPFKeyTyped"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCPFKeyPressed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnNovo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Novo"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNovoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtSalario">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+      </Properties>
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtSalarioKeyTyped"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtSalarioKeyPressed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

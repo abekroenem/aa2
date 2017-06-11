@@ -15,7 +15,7 @@ create table funcionario (
     nome varchar(255),
     cpf varchar(11) unique,
     salario decimal(10,2),
-    hora_base integer, -- salva em minutos
+    hora_dia integer, -- salva em minutos
     valor_hora decimal(10,2)
 );
 
@@ -42,5 +42,7 @@ insert into config(key,value) values('lang', 0);
 
 
 select * from config;
+
+select * from funcionario;
 
 truncate table usuario;

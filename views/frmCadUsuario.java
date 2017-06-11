@@ -409,6 +409,7 @@ public class frmCadUsuario extends javax.swing.JFrame {
             System.exit(0);
         } else {
             defaultLayout(true);
+            m_objUser = null;
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
 

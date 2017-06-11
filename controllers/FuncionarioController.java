@@ -23,19 +23,22 @@ public class FuncionarioController {
 
     }
 
-    public void Add(String Nome, String CFP, double Salario, int Hora_Base) throws Exception {
+    public void Add(String Nome, String CFP, double Salario, int hora_dia) throws Exception {
         Funcionario obj = new Funcionario();
         obj.setNome(Nome);
         obj.setCPF(CFP);
-        obj.setHora_base(Hora_Base);
+        obj.setSalario(Salario);
+        obj.sethora_dia(hora_dia);
         funcDAO.addEntity(obj);
     }
 
-    public void Edit(int Id, String Nome, String CFP, double Salario, int Hora_Base) throws Exception {
+    public void Edit(int Id, String Nome, String CFP, double Salario, int hora_dia) throws Exception {
         Funcionario obj = new Funcionario();
+        obj.setId(Id);
         obj.setNome(Nome);
         obj.setCPF(CFP);
-        obj.setHora_base(Hora_Base);
+        obj.setSalario(Salario);
+        obj.sethora_dia(hora_dia);
         funcDAO.updateEntity(obj);
     }
 
@@ -57,5 +60,9 @@ public class FuncionarioController {
 
     public boolean DuplicatedFuncionario(int ID, String CPF) throws Exception {
         return funcDAO.DuplicatedEntity(ID, CPF);
+    }
+    
+     public Funcionario getByID(int id) throws SQLException {
+        return (Funcionario) funcDAO.getEntityById(id);
     }
 }

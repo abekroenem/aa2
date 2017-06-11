@@ -6,6 +6,7 @@
 package models;
 
 import Env.Constants;
+import helpers.Formats;
 
 /**
  *
@@ -16,18 +17,18 @@ public class Funcionario {
     private int Id;
     private String Nome;
     private double salario;
-    private int hora_base;
+    private int hora_dia;
     private String CPF;
 
     public String getCPF() {
         return CPF;
     }
 
-    public void setCPF(String CPF) throws Exception {
+    public void setCPF(String CPF) throws IllegalArgumentException {
         if (CPF.isEmpty()) {
-            throw new Exception("CPF do Funcionario deve ser informado!");
+            throw new IllegalArgumentException("CPF do Funcionario deve ser informado!");
         }
-        this.CPF = CPF;
+        this.CPF = Formats.CPF.Unformat(CPF);
     }
 
     public int getId() {
@@ -42,9 +43,9 @@ public class Funcionario {
         return Nome;
     }
 
-    public void setNome(String Nome) throws Exception {
+    public void setNome(String Nome) throws IllegalArgumentException {
         if (Nome.isEmpty()) {
-            throw new Exception("Nome do Funcionario deve ser preencido!");
+            throw new IllegalArgumentException("Nome do Funcionario deve ser preencido!");
         }
         this.Nome = Nome.toUpperCase();
     }
@@ -53,25 +54,25 @@ public class Funcionario {
         return salario;
     }
 
-    public void setSalario(double salario) throws Exception {
-        if (salario < Constants.SALARIO_MINIMO) {
-            throw new Exception("Salario do Funcionario deve ser maior ou igual ao piso salarial de 937,00!");
+    public void setSalario(double salario) throws IllegalArgumentException {
+        if (salario < Double.valueOf(Constants.SALARIO_MINIMO)) {
+            throw new IllegalArgumentException("Salario do Funcionario deve ser maior ou igual ao piso salarial de 937,00!");
         }
         this.salario = salario;
     }
 
-    public int getHora_base() {
-        return hora_base / 60;
+    public int gethora_dia() {
+        return hora_dia / 60;
     }
 
-    public void setHora_base(int hora_base) throws Exception {
-        if (hora_base == 1) {
-            throw new Exception("Funcionario deve ter pelo menos 1h como hora base!");
+    public void sethora_dia(int hora_dia) throws IllegalArgumentException {
+        if (hora_dia < 4) {
+            throw new IllegalArgumentException("Funcionario deve ter pelo menos 4h como hora base para um dia de trabalho!");
         }
-        this.hora_base = hora_base * 60;
+        this.hora_dia = hora_dia * 60;
     }
 
     public double getValor_hora() {
-        return ((this.salario / 30) / this.hora_base);
+        return Double.parseDouble(String.format("%.2f", ((this.salario / 30) / (this.hora_dia / 60))).replace(",", "."));
     }
 }

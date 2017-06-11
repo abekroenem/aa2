@@ -13,6 +13,6 @@ public class Constants {
 
     public static final int PT_BR = 0;
     public static final int EN_US = 1;
-    public static final double SALARIO_MINIMO = 937;
+    public static final double SALARIO_MINIMO = 937.00;
 
 }

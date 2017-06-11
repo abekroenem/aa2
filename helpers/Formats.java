@@ -10,5 +10,17 @@ package helpers;
  * @author qwerty
  */
 public class Formats {
-    
+
+    public static class CPF {
+
+        public static String Unformat(String cpf) {
+
+            cpf = cpf.replace(".", "");
+            cpf = cpf.replace("-", "");
+            cpf = cpf.replaceAll(" ", "");
+            return cpf;
+        }
+
+    }
+
 }

@@ -5,6 +5,8 @@
  */
 package Env;
 
+import models.Usuario;
+
 /**
  *
  * @author qwerty
@@ -15,4 +17,5 @@ public class Constants {
     public static final int EN_US = 1;
     public static final double SALARIO_MINIMO = 937.00;
 
+    public static Usuario ObjUser = null;
 }

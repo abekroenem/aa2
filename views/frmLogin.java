@@ -9,7 +9,6 @@ import controllers.UsuarioController;
 import helpers.Dialogs;
 import helpers.Forms;
 import java.sql.SQLException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Usuario;
 
@@ -163,6 +162,7 @@ public class frmLogin extends javax.swing.JFrame {
                         Dialogs.showWarning(SENHA_INCORRETA);
                     } else {
                         this.dispose();
+                        Env.Constants.ObjUser = obUser;
                         new frmPrincipal(obUser.getName()).setVisible(true);
                     }
                 } else {

@@ -23,18 +23,34 @@ public class PontoDAO extends GenericDAO {
 
     private void preencherObj(Usuario obj, ResultSet rs) throws SQLException {
         obj.setId(rs.getInt("id"));
-        obj.setName(rs.getString("nome"));
-        obj.setPassword(rs.getString("senha"));
-        obj.setAdmin(rs.getBoolean("isAdmin"));
+        obj.setName(rs.getString("dia"));
+        obj.setPassword(rs.getString("id_funcionario"));
+        obj.setAdmin(rs.getBoolean("entrada_a"));
+        obj.setAdmin(rs.getBoolean("saida_b"));
+        obj.setAdmin(rs.getBoolean("entrada_b"));
+        obj.setAdmin(rs.getBoolean("saida_b"));
+        obj.setAdmin(rs.getBoolean(""));
+        obj.setAdmin(rs.getBoolean("entrada_a"));
     }
 
     @Override
     public void addEntity(Object obj) throws SQLException {
-        String sql = "INSERT INTO USUARIO (NOME, SENHA, ISADMIN) VALUES (?,?,?)";
+        String sql = "INSERT INTO REGISTRO_PONTO "
+                + "(DIA, ID_FUNCIONARIO, ENTRADA_A, SAIDA_A, ENTRADA_B, SAIDA_B, HORAS_EXCEDIDAS, PERCENT_APLICADO, VALOR_EXTRA, TOTAL_RECEBIDO)"
+                + " VALUES (?,?,?,?,?,?,?,?,?,?)";
+
         super.Sql = super.Conn.prepareStatement(sql);
-        super.Sql.setString(1, ((Usuario) obj).getName());
-        super.Sql.setString(2, ((Usuario) obj).getPassword());
-        super.Sql.setBoolean(3, ((Usuario) obj).getAdmin());
+        super.Sql.setDate(1, ((Ponto) obj).getData());
+        super.Sql.setInt(2, ((Ponto) obj).getId_funcionario());
+        super.Sql.setInt(3, ((Ponto) obj).getEntrada_a());
+        super.Sql.setInt(4, ((Ponto) obj).getSaida_a());
+        super.Sql.setInt(5, ((Ponto) obj).getEntrada_b());
+        super.Sql.setInt(6, ((Ponto) obj).getSaida_b());
+        super.Sql.setInt(7, ((Ponto) obj).getHoras_excedidas());
+        super.Sql.setDouble(8, ((Ponto) obj).getPercent_aplicado());
+        super.Sql.setDouble(9, ((Ponto) obj).getValor_extra());
+        super.Sql.setDouble(10, ((Ponto) obj).getTotal_recebido());
+
         super.Sql.execute();
         super.Sql.close();
     }

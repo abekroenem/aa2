@@ -5,13 +5,16 @@
  */
 package helpers;
 
-import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 /**
  *
  * @author qwerty
  */
 public class Formats {
+
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     public static class CPF {
 
@@ -51,7 +54,14 @@ public class Formats {
 
     public static class Data {
 
-        public static String Format() {
+        public static String Format(java.sql.Date DataBanco) {
+            return sdf.format(DataBanco);
+        }
+
+        public static java.sql.Date Unformat(String DataCampo) throws ParseException {
+            java.util.Date data = sdf.parse(DataCampo);
+
+            return (new java.sql.Date(data.getTime()));
 
         }
 

@@ -6,7 +6,6 @@
 package models;
 
 import java.sql.Date;
-import java.util.Objects;
 
 /**
  *
@@ -64,7 +63,7 @@ public class Ponto {
     }
 
     public void setId_funcionario(int id_funcionario) {
-        if (id_funcionario == 0) {
+        if (id_funcionario < 1) {
             throw new IllegalArgumentException("Funcionario deve ser informado em um registro de ponto!");
         }
         this.id_funcionario = id_funcionario;
@@ -75,7 +74,7 @@ public class Ponto {
     }
 
     public void setEntrada_a(int entrada_a) {
-        if (entrada_a == 0) {
+        if (entrada_a < 1) {
             throw new IllegalArgumentException("Primeira entrada do dia deve ser informada!");
         }
         this.entrada_a = entrada_a;
@@ -86,7 +85,7 @@ public class Ponto {
     }
 
     public void setSaida_a(int saida_a) {
-        if (saida_a == 0) {
+        if (saida_a < 1) {
             throw new IllegalArgumentException("Primeira saida do dia deve ser informada!");
         }
         this.saida_a = saida_a;
@@ -97,7 +96,7 @@ public class Ponto {
     }
 
     public void setEntrada_b(int entrada_b) {
-        if (entrada_b == 0) {
+        if (entrada_b < 1) {
             throw new IllegalArgumentException("Segunda entrada do dia deve ser informada!");
         }
 
@@ -109,7 +108,7 @@ public class Ponto {
     }
 
     public void setSaida_b(int saida_b) {
-        if (saida_b == 0) {
+        if (saida_b < 1) {
             throw new IllegalArgumentException("Segunda saida do dia deve ser informada!");
         }
         this.saida_b = saida_b;
@@ -144,6 +143,10 @@ public class Ponto {
     }
 
     public void setTotal_recebido(double total_recebido) {
+        if (total_recebido < 1) {
+            throw new IllegalArgumentException("Total recebido no dia deve ser maior que zero!");
+        }
+
         this.total_recebido = total_recebido;
     }
 

@@ -282,7 +282,6 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_rbENUSActionPerformed
 
     private void rbPTBRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPTBRActionPerformed
-        // TODO add your handling code here:
         rbENUS.setSelected(false);
     }//GEN-LAST:event_rbPTBRActionPerformed
 

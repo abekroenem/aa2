@@ -29,6 +29,3 @@ public class DB {
     }
 
 }
-
-
-//jdbc:postgresql://localhost:5432/database [postgres em public]

@@ -9,10 +9,8 @@ import Env.Constants;
 import java.sql.SQLException;
 import helpers.Config;
 import helpers.Forms;
-import java.awt.Dimension;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import javax.swing.JInternalFrame;
 
 /**
  *

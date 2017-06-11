@@ -61,8 +61,8 @@ public class FuncionarioController {
     public boolean DuplicatedFuncionario(int ID, String CPF) throws Exception {
         return funcDAO.DuplicatedEntity(ID, CPF);
     }
-    
-     public Funcionario getByID(int id) throws SQLException {
+
+    public Funcionario getByID(int id) throws SQLException {
         return (Funcionario) funcDAO.getEntityById(id);
     }
 }

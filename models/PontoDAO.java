@@ -28,10 +28,6 @@ public class PontoDAO extends GenericDAO {
         obj.setSaida_a(rs.getInt("saida_a"));
         obj.setEntrada_b(rs.getInt("entrada_b"));
         obj.setSaida_b(rs.getInt("saida_a"));
-        obj.setHoras_excedidas(rs.getInt("horas_excedidas"));
-        obj.setPercent_aplicado(rs.getDouble("percent_aplicado"));
-        obj.setValor_extra(rs.getInt("valor_extra"));
-        obj.setTotal_recebido(rs.getInt("total_recebido"));
     }
 
     @Override

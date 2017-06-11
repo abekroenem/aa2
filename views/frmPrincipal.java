@@ -21,10 +21,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import models.DB;
-import net.sf.jasperreports.engine.JasperFillManager;
+
+/*import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.swing.JRViewer;
-
+ */
 /**
  *
  * @author qwerty
@@ -325,10 +326,9 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_cadUserActionPerformed
 
     private void contentMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contentMenuItemActionPerformed
-         try {
+        /*    try {
             //Pegando-se a conexão do banco
-                       
-           
+
             //Pegando-se o arquivo do relatorio
             InputStream inputStream = getClass().getResourceAsStream("../Relatorio/relatorio_funcionario.jasper");
 
@@ -336,7 +336,7 @@ public class frmPrincipal extends javax.swing.JFrame {
             Map parametros = new HashMap();
 
             //usando uma conexão
-            JasperPrint print = JasperFillManager.fillReport(inputStream, parametros, DB.Connect());
+              JasperPrint print = JasperFillManager.fillReport(inputStream, parametros, DB.Connect());
 
             JRViewer viewer = new JRViewer(print);
 
@@ -363,13 +363,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         }
         
 
-
-
-
-
-
-
-
+         */
 // TODO add your handling code here:
     }//GEN-LAST:event_contentMenuItemActionPerformed
 
@@ -381,7 +375,6 @@ public class frmPrincipal extends javax.swing.JFrame {
         abaRelatorio.setText(propriedades.getString("Report"));
         abaIdioma.setText(propriedades.getString("Language"));
         abaSobre.setText(propriedades.getString("About"));
-
 
     }
 

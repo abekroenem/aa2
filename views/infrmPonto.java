@@ -6,6 +6,7 @@
 package views;
 
 import controllers.FuncionarioController;
+import controllers.PontoController;
 import helpers.Dialogs;
 import helpers.Formats;
 import helpers.Forms;
@@ -13,6 +14,7 @@ import java.util.List;
 import javax.swing.JDesktopPane;
 import javax.swing.table.DefaultTableModel;
 import models.Funcionario;
+import models.Ponto;
 
 /**
  *
@@ -20,16 +22,17 @@ import models.Funcionario;
  */
 public class infrmPonto extends javax.swing.JInternalFrame {
 
-    private FuncionarioController m_FuncC = null;
-    private String CPF_CADASTRADO, FUNCIONARIO_INSERIDO_SUCESS, FUNCINOARIO_EDITADO_SUCESS, BTN_NOVO, BTN_SALVAR;
+    private PontoController m_PontoC = null;
+    private String PONTO_REGISTRADO, PONTO_EDITADO, PONTO_JA_CADASTRADO, BTN_NOVO, BTN_SALVAR;
+    private Ponto m_objPonto = null;
     private Funcionario m_objFunc = null;
     private boolean ersHora = false;
     private JDesktopPane inDesktop = null;
 
     public void Traduz() {
-        CPF_CADASTRADO = "CPF ja cadastrado em outro funcionario!";
-        FUNCIONARIO_INSERIDO_SUCESS = "Funcionario inserido com Sucesso!";
-        FUNCINOARIO_EDITADO_SUCESS = "Funcionario editado com Sucesso!";
+        PONTO_JA_CADASTRADO = "Ponto ja cadastrado para o funcionario";
+        PONTO_REGISTRADO = "Funcionario inserido com Sucesso!";
+        PONTO_EDITADO = "Funcionario editado com Sucesso!";
         BTN_NOVO = "Novo";
         BTN_SALVAR = "Salvar";
     }
@@ -45,7 +48,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
         txtEntrada2.setText("");
         txtSaida1.setText("");
         txtSaida2.setText("");
-        lblPerc.setVisible("");
+        lblPerc.setVisible(false);
         txtFuncionario.setEnabled(!dl);
         txtData.setEnabled(!dl);
         txtEntrada1.setEnabled(!dl);
@@ -61,42 +64,59 @@ public class infrmPonto extends javax.swing.JInternalFrame {
 
     private void loadTable() {
         try {
-            m_FuncC = new FuncionarioController();
-            List<Funcionario> lstFor = m_FuncC.getAll();
-            DefaultTableModel tablemd = (DefaultTableModel) tbFunc.getModel();
+            m_PontoC = new PontoController();
+            List<Ponto> lstPnt = m_PontoC.getAll();
+            DefaultTableModel tablemd = (DefaultTableModel) tbPonto.getModel();
             tablemd.getDataVector().removeAllElements();
-            if (lstFor.size() > 0) {
-                for (Funcionario forn : lstFor) {
-                    tablemd.addRow(new Object[]{forn.getId(), forn.getNome(), Formats.CPF.Format(forn.getCPF()), forn.getSalario(), forn.getValor_hora()});
+            if (lstPnt.size() > 0) {
+                for (Ponto pnt : lstPnt) {
+
+                    FuncionarioController ctlFnc = new FuncionarioController();
+                    Funcionario objFunc = ctlFnc.getByID(pnt.getId_funcionario());
+
+                    tbPonto.addRow(new Object[]{
+                        Formats.Data.Format(pnt.getData()),
+                        objFunc.getNome(),
+                        Formats.Hora.Format(pnt.getHoras_Trabalhadas()),
+                        Formats.Hora.Format(pnt.getHoras_excedidas()),
+                        pnt.getPercent_aplicado(),
+                        Formats.Valor.Format(pnt.getValor_extra()),
+                        Formats.valor.Format(pnt.getTotal_recebido())});
+
                 }
-                tbFunc.clearSelection();
+                tbPonto.clearSelection();
             }
-            tbFunc.updateUI();
+            tbPonto.updateUI();
         } catch (Exception ex) {
             Dialogs.showError(ex.getMessage());
         }
-
     }
 
-    private void InserirFuncionario() throws Exception {
-        /* m_FuncC = new FuncionarioController();
-        m_FuncC.Add(txtFuncionario.getText(), txtData.getText(),
-                Double.parseDouble((txtSalario.getText().isEmpty()) ? "0" : txtSalario.getText()),
-                Integer.valueOf((txtHoraBase.getText().isEmpty() ? "0" : txtHoraBase.getText())));
+    private void InserirPonto() throws Exception {
+        m_PontoC = new PontoController();
+        m_PontoC.Add(
+                Formats.Data.Unformat(txtData.getText()),
+                m_objFunc.getId(),
+                Formats.Hora.Unformat(txtEntrada1.getText()),
+                Formats.Hora.Unformat(txtSaida1.getText()),
+                Formats.Hora.Unformat(txtEntrada2.getText()),
+                Formats.Hora.Unformat(txtSaida2.getText()),,
+                Integer.valueOf((txtHoraBase.getText().isEmpty() ? "0" : txtHoraBase.getText()))
+        );
         defaultLayout(true);
-        Dialogs.showInfo(FUNCIONARIO_INSERIDO_SUCESS);*/
+        Dialogs.showInfo(FUNCIONARIO_INSERIDO_SUCESS);  */
     }
 
-    private boolean FuncionarioDuplicado() throws Exception {
-        m_FuncC = new FuncionarioController();
-        if (m_objFunc == null) {
-            Funcionario objFunc = m_FuncC.SearchFuncionarioByCPF(Formats.CPF.Unformat(txtData.getText()));
-            if (objFunc != null) {
+    private boolean PontoDuplicado() throws Exception {
+        m_PontoC = new PontoController();
+        if (m_objPonto == null) {
+            Ponto objPnt = m_PontoC.SearchUserByFunDay(Formats.Data.Unformat(txtData.getText()), HIDE_ON_CLOSE);
+            if (objPnt != null) {
                 Dialogs.showWarning(CPF_CADASTRADO);
                 return true;
             }
-            return (objFunc != null);
-        } else if (m_FuncC.DuplicatedFuncionario(m_objFunc.getId(), Formats.CPF.Unformat(txtData.getText()))) {
+            return (objPnt != null);
+        } else if (m_PontoC.DuplicatedUser(m_objPonto.getId(), Formats.Data.Unformat(txtData.getText()), m_objPonto.getId_Funcionario())) {
             Dialogs.showWarning(CPF_CADASTRADO);
             return true;
         } else {
@@ -200,20 +220,20 @@ public class infrmPonto extends javax.swing.JInternalFrame {
 
         tbPonto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Data", "Funcionario", "H. Trab.", "H. Extra", "%", "T. Extra", "T. Dia"
+                "Data", "Funcionario", "H. Base", "H. Trab.", "H. Extra", "%", "T. Extra", "T. Dia"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, true, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -238,12 +258,15 @@ public class infrmPonto extends javax.swing.JInternalFrame {
             tbPonto.getColumnModel().getColumn(3).setMinWidth(60);
             tbPonto.getColumnModel().getColumn(3).setPreferredWidth(60);
             tbPonto.getColumnModel().getColumn(3).setMaxWidth(60);
-            tbPonto.getColumnModel().getColumn(4).setMinWidth(40);
-            tbPonto.getColumnModel().getColumn(4).setPreferredWidth(40);
-            tbPonto.getColumnModel().getColumn(4).setMaxWidth(40);
-            tbPonto.getColumnModel().getColumn(6).setMinWidth(80);
-            tbPonto.getColumnModel().getColumn(6).setPreferredWidth(80);
-            tbPonto.getColumnModel().getColumn(6).setMaxWidth(80);
+            tbPonto.getColumnModel().getColumn(4).setMinWidth(60);
+            tbPonto.getColumnModel().getColumn(4).setPreferredWidth(60);
+            tbPonto.getColumnModel().getColumn(4).setMaxWidth(60);
+            tbPonto.getColumnModel().getColumn(5).setMinWidth(40);
+            tbPonto.getColumnModel().getColumn(5).setPreferredWidth(40);
+            tbPonto.getColumnModel().getColumn(5).setMaxWidth(40);
+            tbPonto.getColumnModel().getColumn(7).setMinWidth(80);
+            tbPonto.getColumnModel().getColumn(7).setPreferredWidth(80);
+            tbPonto.getColumnModel().getColumn(7).setMaxWidth(80);
         }
 
         lblPerc.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
@@ -392,8 +415,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnNovo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnCancelar)))
         );
 

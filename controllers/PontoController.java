@@ -24,7 +24,7 @@ public class PontoController {
     }
 
     public void Add(java.sql.Date data, int id_funcionario, int entrada_a, int saida_a, int entrada_b, int saida_b,
-            int horas_excedidas, double percent_aplicado, double valor_extra, double total_recebido) throws Exception {
+            double percent_aplicado) throws Exception {
         Ponto obj = new Ponto();
         obj.setData(data);
         obj.setId_funcionario(id_funcionario);
@@ -32,15 +32,11 @@ public class PontoController {
         obj.setSaida_a(saida_a);
         obj.setEntrada_b(entrada_b);
         obj.setSaida_b(saida_a);
-        obj.setHoras_excedidas(horas_excedidas);
-        obj.setPercent_aplicado(percent_aplicado);
-        obj.setValor_extra(valor_extra);
-        obj.setTotal_recebido(total_recebido);
         pntDAO.addEntity(obj);
     }
 
     public void Edit(int Id, java.sql.Date data, int id_funcionario, int entrada_a, int saida_a, int entrada_b, int saida_b,
-            int horas_excedidas, double percent_aplicado, double valor_extra, double total_recebido) throws Exception {
+            double percent_aplicado) throws Exception {
         Ponto obj = new Ponto();
         obj.setId(Id);
         obj.setData(data);
@@ -49,10 +45,6 @@ public class PontoController {
         obj.setSaida_a(saida_a);
         obj.setEntrada_b(entrada_b);
         obj.setSaida_b(saida_a);
-        obj.setHoras_excedidas(horas_excedidas);
-        obj.setPercent_aplicado(percent_aplicado);
-        obj.setValor_extra(valor_extra);
-        obj.setTotal_recebido(total_recebido);
         pntDAO.updateEntity(obj);
     }
 

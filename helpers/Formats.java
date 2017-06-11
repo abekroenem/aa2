@@ -45,26 +45,38 @@ public class Formats {
         }
 
         public static int Unformat(String Valor_Campo) {
-            int hora = Integer.parseInt(Valor_Campo.substring(0, Valor_Campo.indexOf(':'))) * 60;
-            int minutos = Integer.parseInt(Valor_Campo.substring(Valor_Campo.indexOf(':') + 1, Valor_Campo.length()));
-            return hora + minutos;
+            if (!Valor_Campo.replaceAll(" ", "").equals(":")) {
+                int hora = Integer.parseInt(Valor_Campo.substring(0, Valor_Campo.indexOf(':'))) * 60;
+                int minutos = Integer.parseInt(Valor_Campo.substring(Valor_Campo.indexOf(':') + 1, Valor_Campo.length()));
+                return hora + minutos;
+            } else {
+                return 0;
+            }
+
+        }
+
+        public static class Data {
+
+            public static String Format(java.sql.Date DataBanco) {
+                return sdf.format(DataBanco);
+            }
+
+            public static java.sql.Date Unformat(String DataCampo) throws ParseException {
+                java.util.Date data = sdf.parse(DataCampo);
+
+                return (new java.sql.Date(data.getTime()));
+
+            }
+
+        }
+
+        public static class Valor {
+
+            public static String Format(double Valor_Format) {
+                return String.format("R$ %.2f", Valor_Format);
+            }
+
         }
 
     }
-
-    public static class Data {
-
-        public static String Format(java.sql.Date DataBanco) {
-            return sdf.format(DataBanco);
-        }
-
-        public static java.sql.Date Unformat(String DataCampo) throws ParseException {
-            java.util.Date data = sdf.parse(DataCampo);
-
-            return (new java.sql.Date(data.getTime()));
-
-        }
-
-    }
-
 }

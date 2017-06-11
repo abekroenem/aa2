@@ -5,7 +5,10 @@
  */
 package models;
 
+import controllers.FuncionarioController;
 import java.sql.Date;
+import java.sql.SQLException;
+import java.util.Calendar;
 
 /**
  *
@@ -20,10 +23,7 @@ public class Ponto {
     int saida_a;
     int entrada_b;
     int saida_b;
-    int horas_excedidas;
-    double percent_aplicado;
-    double valor_extra;
-    double total_recebido;
+    private Funcionario objFun = null;
 
     public Ponto() {
         this.Id = 0;
@@ -33,10 +33,6 @@ public class Ponto {
         this.saida_a = 0;
         this.entrada_b = 0;
         this.saida_b = 0;
-        this.horas_excedidas = 0;
-        this.percent_aplicado = 0;
-        this.valor_extra = 0;
-        this.total_recebido = 0;
     }
 
     public int getId() {
@@ -62,7 +58,8 @@ public class Ponto {
         return id_funcionario;
     }
 
-    public void setId_funcionario(int id_funcionario) {
+    public void setId_funcionario(int id_funcionario) throws SQLException {
+        objFun = new FuncionarioController().getByID(this.id_funcionario);
         if (id_funcionario < 1) {
             throw new IllegalArgumentException("Funcionario deve ser informado em um registro de ponto!");
         }
@@ -115,39 +112,47 @@ public class Ponto {
     }
 
     public int getHoras_excedidas() {
-        return horas_excedidas;
-    }
-
-    public void setHoras_excedidas(int horas_excedidas) {
-        this.horas_excedidas = horas_excedidas;
-    }
-
-    public double getPercent_aplicado() {
-        return percent_aplicado;
-    }
-
-    public void setPercent_aplicado(double percent_aplicado) {
-        this.percent_aplicado = percent_aplicado;
-    }
-
-    public double getValor_extra() {
-        return valor_extra;
-    }
-
-    public void setValor_extra(double valor_extra) {
-        this.valor_extra = valor_extra;
-    }
-
-    public double getTotal_recebido() {
-        return total_recebido;
-    }
-
-    public void setTotal_recebido(double total_recebido) {
-        if (total_recebido < 1) {
-            throw new IllegalArgumentException("Total recebido no dia deve ser maior que zero!");
+        if (objFun != null) {
+            return (this.getHoras_Trabalhadas() - objFun.gethora_dia());
+        } else {
+            return 0;
         }
+    }
 
-        this.total_recebido = total_recebido;
+    public double getPercent_aplicado() throws SQLException {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(this.getData());
+        int dayofwk = cal.get(Calendar.DAY_OF_WEEK);
+        if (this.getHoras_excedidas() != 0) {
+            if (dayofwk == Calendar.SUNDAY) {
+                return 100;
+            } else {
+                return 50;
+            }
+        } else {
+            return 0;
+        }
+    }
+
+    public double getValor_extra() throws SQLException {
+        if (objFun != null) {
+            double min_value = objFun.getValor_hora() * 60;
+            return ((this.getHoras_excedidas() * min_value) * (this.getPercent_aplicado() / 100)) / 60;
+        } else {
+            return 0;
+        }
+    }
+
+    public double getTotal_recebido() throws SQLException {
+        if (objFun != null) {
+            return (objFun.gethora_dia() * 60) + this.getValor_extra();
+        } else {
+            return 0;
+        }
+    }
+
+    public int getHoras_Trabalhadas() {
+        return ((this.saida_a) - (this.entrada_a)) + ((this.saida_b) - (this.entrada_b));
     }
 
 }

@@ -8,9 +8,22 @@ package views;
 import Env.Constants;
 import java.sql.SQLException;
 import helpers.Config;
+import helpers.Dialogs;
 import helpers.Forms;
+import java.awt.BorderLayout;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import models.DB;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.swing.JRViewer;
 
 /**
  *
@@ -161,16 +174,13 @@ public class frmPrincipal extends javax.swing.JFrame {
         btnCadastro.setForeground(new java.awt.Color(254, 254, 254));
         btnCadastro.setText("Cadastros");
 
-
         cadUser.setText("Usuarios");
         cadUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cadUserActionPerformed(evt);
             }
         });
-
         btnCadastro.add(cadUser);
-
 
         cadFun.setText("Funcionarios");
         cadFun.addActionListener(new java.awt.event.ActionListener() {
@@ -178,11 +188,9 @@ public class frmPrincipal extends javax.swing.JFrame {
                 cadFunActionPerformed(evt);
             }
         });
-
         btnCadastro.add(cadFun);
 
         menuBar.add(btnCadastro);
-
 
         abaEditMenu.setBackground(new java.awt.Color(254, 254, 254));
         abaEditMenu.setForeground(new java.awt.Color(254, 254, 254));
@@ -205,6 +213,11 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         contentMenuItem.setMnemonic('c');
         contentMenuItem.setText("Funcionarios");
+        contentMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contentMenuItemActionPerformed(evt);
+            }
+        });
         abaRelatorio.add(contentMenuItem);
 
         aboutMenuItem.setMnemonic('a');
@@ -311,10 +324,59 @@ public class frmPrincipal extends javax.swing.JFrame {
         objCadUser.setVisible(true);
     }//GEN-LAST:event_cadUserActionPerformed
 
+    private void contentMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contentMenuItemActionPerformed
+         try {
+            //Pegando-se a conexão do banco
+                       
+           
+            //Pegando-se o arquivo do relatorio
+            InputStream inputStream = getClass().getResourceAsStream("../Relatorio/relatorio_funcionario.jasper");
+
+            //Caso seja necessário relatório parametrizado
+            Map parametros = new HashMap();
+
+            //usando uma conexão
+            JasperPrint print = JasperFillManager.fillReport(inputStream, parametros, DB.Connect());
+
+            JRViewer viewer = new JRViewer(print);
+
+            //Criar o jFrame
+            JFrame frameRelatorio = new JFrame("Janela de relatorio");
+
+            //adiciona o JRViewer no JFram
+            frameRelatorio.add(viewer, BorderLayout.CENTER);
+
+            //configura o tamanho padrão da Jframe
+            frameRelatorio.setSize(500, 500);
+
+            //Maximiza o JFrame para ocupar a tela toda.
+            frameRelatorio.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+            //configura a operação padrao quando o jframe for fechado.
+            frameRelatorio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+            //exibi em tela Jframe
+            frameRelatorio.setVisible(true);
+
+        } catch (Exception ex) {
+             Dialogs.showError(ex.getMessage());
+        }
+        
+
+
+
+
+
+
+
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_contentMenuItemActionPerformed
+
     public void Traduz() {
 
         ResourceBundle propriedades = ResourceBundle.getBundle("lang/lg");
-        abaCad.setText(propriedades.getString("Register"));
+        btnCadastro.setText(propriedades.getString("Register"));
         abaEditMenu.setText(propriedades.getString("Score"));
         abaRelatorio.setText(propriedades.getString("Report"));
         abaIdioma.setText(propriedades.getString("Language"));
@@ -324,7 +386,6 @@ public class frmPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu abaCad;
     private javax.swing.JMenu abaEditMenu;
     private javax.swing.JMenu abaIdioma;
     private javax.swing.JMenu abaRelatorio;
@@ -344,8 +405,6 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JLabel lblUser;

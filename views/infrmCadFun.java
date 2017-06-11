@@ -329,9 +329,7 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNomeActionPerformed
 
     private void txtNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyPressed
-        if (evt.getKeyCode() == 10) {
-            txtCPF.requestFocus();
-        }
+        Forms.goNextField(evt.getKeyCode(), txtCPF);
     }//GEN-LAST:event_txtNomeKeyPressed
 
     private void txtCPFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCPFKeyTyped
@@ -367,24 +365,16 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void txtCPFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCPFKeyPressed
-
-        if (evt.getKeyCode() == 10) {
-            txtSalario.requestFocus();
-        }
+        Forms.goNextField(evt.getKeyCode(), txtSalario);
     }//GEN-LAST:event_txtCPFKeyPressed
 
     private void txtSalarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSalarioKeyPressed
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == 10) {
-            txtHoraBase.requestFocus();
-        }
+        Forms.goNextField(evt.getKeyCode(), txtHoraBase);
+
     }//GEN-LAST:event_txtSalarioKeyPressed
 
     private void txtHoraBaseKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHoraBaseKeyPressed
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == 10) {
-            btnNovo.doClick();
-        }
+        Forms.goNextField(evt.getKeyCode(), btnNovo);
         ersHora = (evt.getKeyCode() == 8);
     }//GEN-LAST:event_txtHoraBaseKeyPressed
 

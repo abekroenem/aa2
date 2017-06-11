@@ -7,6 +7,7 @@ package views;
 
 import controllers.UsuarioController;
 import helpers.Dialogs;
+import helpers.Forms;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -175,16 +176,12 @@ public class frmLogin extends javax.swing.JFrame {
 
     private void txtUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == 10) {
-            txtPassword.requestFocus();
-        }
+        Forms.goNextField(evt.getKeyCode(), txtPassword);
     }//GEN-LAST:event_txtUserKeyPressed
 
     private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == 10) {
-            btnLogin.doClick();
-        }
+        Forms.goNextField(evt.getKeyCode(), btnLogin);
     }//GEN-LAST:event_txtPasswordKeyPressed
 
 

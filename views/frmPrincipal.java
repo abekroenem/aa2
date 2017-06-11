@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import helpers.Config;
 import helpers.Forms;
 import java.awt.Dimension;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.swing.JInternalFrame;
 
 /**
@@ -277,11 +279,22 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void rbENUSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbENUSActionPerformed
+        Locale.setDefault(Locale.ENGLISH);
+
+        this.Traduz();
+
         // TODO add your handling code here:
         rbPTBR.setSelected(false);
     }//GEN-LAST:event_rbENUSActionPerformed
 
     private void rbPTBRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPTBRActionPerformed
+
+        Locale Pt = new Locale("pt", "BR");
+        // TODO add your handling code here:
+        Locale.setDefault(Pt);
+
+        this.Traduz();
+
         rbENUS.setSelected(false);
     }//GEN-LAST:event_rbPTBRActionPerformed
 
@@ -297,6 +310,15 @@ public class frmPrincipal extends javax.swing.JFrame {
         objCadUser.setVisible(true);
     }//GEN-LAST:event_cadUserActionPerformed
 
+    public void Traduz() {
+        ResourceBundle propriedades = ResourceBundle.getBundle("lang/lg.properties");
+        jMenu3.setText(propriedades.getString("Register"));
+        editMenu.setText(propriedades.getString("Score"));
+        helpMenu.setText(propriedades.getString("Report"));
+        jMenu1.setText(propriedades.getString("Language"));
+        jMenu2.setText(propriedades.getString("About"));
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;

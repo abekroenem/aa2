@@ -11,6 +11,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JDesktopPane;
 import javax.swing.JFormattedTextField;
 import javax.swing.JInternalFrame;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
@@ -46,6 +47,8 @@ public class Forms {
                 ((JTextField) Field).requestFocus();
             } else if (Field.getClass() == JFormattedTextField.class) {
                 ((JFormattedTextField) Field).requestFocus();
+            } else if (Field.getClass() == JPasswordField.class) {
+                ((JPasswordField) Field).requestFocus();
             } else if (Field.getClass() == JCheckBox.class) {
                 ((JCheckBox) Field).requestFocus();
             } else if (Field.getClass() == JButton.class) {

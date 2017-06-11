@@ -90,32 +90,35 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtData" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtSaida1" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtSaida2" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                              <Component id="txtData" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                              <Component id="txtSaida1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblNome4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                              <Component id="txtSaida2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblNome2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                      <Component id="lblSalario" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblNome3" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblNome1" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                      <Component id="txtFuncionario" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="btnSearch" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtEntrada1" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtEntrada2" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                                  <Component id="txtFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblSalario" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblNome" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblNome4" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblNome2" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnSearch" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                                  <Component id="txtEntrada1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblNome3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                                  <Component id="txtEntrada2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblNome1" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -186,10 +189,6 @@
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtFuncionarioActionPerformed"/>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtFuncionarioKeyPressed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblNome1">
       <Properties>

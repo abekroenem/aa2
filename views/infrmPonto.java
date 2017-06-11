@@ -35,7 +35,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
     }
 
     private void defaultLayout(boolean dl) {
-        btnCancelar.setEnabled(!dl);
+        /* btnCancelar.setEnabled(!dl);
         btnSearch.setText((dl) ? BTN_NOVO : BTN_SALVAR);
         txtFuncionario.setText("");
         txtData.setText("");
@@ -49,10 +49,11 @@ public class infrmPonto extends javax.swing.JInternalFrame {
         if (dl) {
             loadTable();
         }
+         */
     }
 
     private void loadTable() {
-        try {
+        /* try {
             m_FuncC = new FuncionarioController();
             List<Funcionario> lstFor = m_FuncC.getAll();
             DefaultTableModel tablemd = (DefaultTableModel) tbFunc.getModel();
@@ -67,15 +68,16 @@ public class infrmPonto extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             Dialogs.showError(ex.getMessage());
         }
+         */
     }
 
     private void InserirFuncionario() throws Exception {
-        m_FuncC = new FuncionarioController();
+        /* m_FuncC = new FuncionarioController();
         m_FuncC.Add(txtFuncionario.getText(), txtData.getText(),
                 Double.parseDouble((txtSalario.getText().isEmpty()) ? "0" : txtSalario.getText()),
                 Integer.valueOf((txtHoraBase.getText().isEmpty() ? "0" : txtHoraBase.getText())));
         defaultLayout(true);
-        Dialogs.showInfo(FUNCIONARIO_INSERIDO_SUCESS);
+        Dialogs.showInfo(FUNCIONARIO_INSERIDO_SUCESS);*/
     }
 
     private boolean FuncionarioDuplicado() throws Exception {
@@ -173,16 +175,6 @@ public class infrmPonto extends javax.swing.JInternalFrame {
         });
 
         txtFuncionario.setEditable(false);
-        txtFuncionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFuncionarioActionPerformed(evt);
-            }
-        });
-        txtFuncionario.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtFuncionarioKeyPressed(evt);
-            }
-        });
 
         lblNome1.setText("Entrada");
 
@@ -353,27 +345,28 @@ public class infrmPonto extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtData, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSaida1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSaida2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblNome))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtSaida1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblNome4))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtSaida2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblNome2))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblSalario, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(lblNome3, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(lblNome1, javax.swing.GroupLayout.Alignment.TRAILING))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtFuncionario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnSearch, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(txtEntrada1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtEntrada2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblNome, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblNome4, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblNome2, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblSalario))
+                                .addComponent(btnSearch, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtEntrada1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblNome3))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtEntrada2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblNome1)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(38, 38, 38)
                                 .addComponent(lblNome5)))
@@ -392,16 +385,6 @@ public class infrmPonto extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFuncionarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFuncionarioActionPerformed
-
-    private void txtFuncionarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFuncionarioKeyPressed
-        if (evt.getKeyCode() == 10) {
-            txtData.requestFocus();
-        }
-    }//GEN-LAST:event_txtFuncionarioKeyPressed
-
     private void txtDataKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataKeyTyped
         Forms.OnlyNumbers(evt);
     }//GEN-LAST:event_txtDataKeyTyped
@@ -414,10 +397,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void txtDataKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataKeyPressed
-
-        if (evt.getKeyCode() == 10) {
-            txtSaida1.requestFocus();
-        }
+        Forms.goNextField(evt.getKeyCode(), txtEntrada1);
     }//GEN-LAST:event_txtDataKeyPressed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -438,13 +418,13 @@ public class infrmPonto extends javax.swing.JInternalFrame {
                     if (!FuncionarioDuplicado()) {
                         InserirFuncionario();
                     }
-                } else if (!FuncionarioDuplicado()) {
+                    /*  } else if (!FuncionarioDuplicado()) {
                     m_FuncC.Edit(m_objFunc.getId(), txtFuncionario.getText(), txtData.getText(),
                             Double.parseDouble((txtSalario.getText().isEmpty()) ? "0" : txtSalario.getText()),
                             Integer.valueOf((txtHoraBase.getText().isEmpty() ? "0" : txtHoraBase.getText())));
                     Dialogs.showInfo(FUNCINOARIO_EDITADO_SUCESS);
                     m_objFunc = null;
-                    defaultLayout(true);
+                    defaultLayout(true);*/
                 }
             } else if (btnSearch.getText().equals(BTN_NOVO)) {
                 defaultLayout(false);
@@ -457,7 +437,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
 
     private void txtEntrada1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEntrada1KeyTyped
         // TODO add your handling code here:
-        Forms.onlyNumbers(evt);
+        Forms.OnlyNumbers(evt);
     }//GEN-LAST:event_txtEntrada1KeyTyped
 
     private void txtEntrada1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEntrada1KeyPressed
@@ -467,7 +447,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
 
     private void txtEntrada2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEntrada2KeyTyped
         // TODO add your handling code here:
-         Forms.onlyNumbers(evt);
+        Forms.OnlyNumbers(evt);
     }//GEN-LAST:event_txtEntrada2KeyTyped
 
     private void txtEntrada2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEntrada2KeyPressed

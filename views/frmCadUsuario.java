@@ -40,7 +40,8 @@ public class frmCadUsuario extends javax.swing.JFrame {
         m_showGrid = showGrid;
         if (!showGrid) {
             defaultLayout(false);
-            setSize(292, 200);
+            pnTable.setVisible(false);
+            setSize(292, 250);
         }
     }
 
@@ -130,6 +131,7 @@ public class frmCadUsuario extends javax.swing.JFrame {
         chkAdmin = new javax.swing.JCheckBox();
         txtConf = new javax.swing.JPasswordField();
         btnNovo = new javax.swing.JButton();
+        pnTable = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbUsers = new javax.swing.JTable();
 
@@ -290,6 +292,8 @@ public class frmCadUsuario extends javax.swing.JFrame {
             }
         });
 
+        pnTable.setPreferredSize(new java.awt.Dimension(100, 100));
+
         tbUsers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -316,6 +320,8 @@ public class frmCadUsuario extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbUsers.setMaximumSize(new java.awt.Dimension(280, 50));
+        tbUsers.setPreferredSize(new java.awt.Dimension(280, 72));
         tbUsers.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbUsersMouseClicked(evt);
@@ -326,51 +332,64 @@ public class frmCadUsuario extends javax.swing.JFrame {
             tbUsers.getColumnModel().getColumn(0).setMinWidth(50);
             tbUsers.getColumnModel().getColumn(0).setPreferredWidth(50);
             tbUsers.getColumnModel().getColumn(0).setMaxWidth(50);
-            tbUsers.getColumnModel().getColumn(1).setMinWidth(170);
-            tbUsers.getColumnModel().getColumn(1).setPreferredWidth(170);
-            tbUsers.getColumnModel().getColumn(1).setMaxWidth(170);
+            tbUsers.getColumnModel().getColumn(1).setMinWidth(200);
+            tbUsers.getColumnModel().getColumn(1).setPreferredWidth(200);
+            tbUsers.getColumnModel().getColumn(1).setMaxWidth(200);
+            tbUsers.getColumnModel().getColumn(2).setMinWidth(60);
+            tbUsers.getColumnModel().getColumn(2).setPreferredWidth(60);
+            tbUsers.getColumnModel().getColumn(2).setMaxWidth(60);
         }
+
+        org.jdesktop.layout.GroupLayout pnTableLayout = new org.jdesktop.layout.GroupLayout(pnTable);
+        pnTable.setLayout(pnTableLayout);
+        pnTableLayout.setHorizontalGroup(
+            pnTableLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
+        );
+        pnTableLayout.setVerticalGroup(
+            pnTableLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+        );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, pnTable, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 311, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .add(layout.createSequentialGroup()
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabel6)
-                    .add(jLabel5)
-                    .add(jLabel4))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 31, Short.MAX_VALUE)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                            .add(txtPass, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
-                            .add(txtUser))
-                        .addContainerGap())
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                        .add(txtConf, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 143, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                        .add(chkAdmin)
-                        .add(20, 20, 20))))
-            .add(layout.createSequentialGroup()
-                .add(26, 26, 26)
-                .add(btnCancelar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 107, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(36, 36, 36)
-                .add(btnNovo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 102, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(0, 0, Short.MAX_VALUE))
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jLabel6)
+                            .add(jLabel5)
+                            .add(jLabel4))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                                .add(txtPass)
+                                .add(txtUser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 143, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, txtConf, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 143, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                                .add(chkAdmin)
+                                .add(8, 8, 8))))
+                    .add(layout.createSequentialGroup()
+                        .add(14, 14, 14)
+                        .add(btnCancelar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 107, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(36, 36, 36)
+                        .add(btnNovo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 102, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(6, 6, 6)))
+                .addContainerGap())
             .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                 .add(layout.createSequentialGroup()
-                    .add(0, 155, Short.MAX_VALUE)
+                    .add(0, 156, Short.MAX_VALUE)
                     .add(jInternalFrame1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(0, 155, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-                .add(10, 10, 10)
+                .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(txtUser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jLabel6))
@@ -388,16 +407,16 @@ public class frmCadUsuario extends javax.swing.JFrame {
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(btnNovo)
                     .add(btnCancelar))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(pnTable, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 155, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
             .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                 .add(layout.createSequentialGroup()
-                    .add(0, 149, Short.MAX_VALUE)
+                    .add(0, 169, Short.MAX_VALUE)
                     .add(jInternalFrame1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(0, 149, Short.MAX_VALUE)))
+                    .add(0, 169, Short.MAX_VALUE)))
         );
 
-        setSize(new java.awt.Dimension(320, 328));
+        setSize(new java.awt.Dimension(321, 368));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -509,6 +528,7 @@ public class frmCadUsuario extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JPanel pnTable;
     private javax.swing.JTable tbUsers;
     private javax.swing.JPasswordField txtConf;
     private javax.swing.JPasswordField txtPass;

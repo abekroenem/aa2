@@ -51,7 +51,7 @@ public class Ponto {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(java.sql.Date data) {
         if (data == null) {
             throw new IllegalArgumentException("Dia do registro de ponto deve ser informado!");
         }

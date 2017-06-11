@@ -35,6 +35,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
     }
 
     private void defaultLayout(boolean dl) {
+
         btnCancelar.setEnabled(!dl);
         btnNovo.setText((dl) ? BTN_NOVO : BTN_SALVAR);
         btnSearch.setEnabled(!dl);
@@ -44,7 +45,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
         txtEntrada2.setText("");
         txtSaida1.setText("");
         txtSaida2.setText("");
-
+        lblPerc.setVisible("");
         txtFuncionario.setEnabled(!dl);
         txtData.setEnabled(!dl);
         txtEntrada1.setEnabled(!dl);
@@ -59,7 +60,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
     }
 
     private void loadTable() {
-        /* try {
+        try {
             m_FuncC = new FuncionarioController();
             List<Funcionario> lstFor = m_FuncC.getAll();
             DefaultTableModel tablemd = (DefaultTableModel) tbFunc.getModel();
@@ -74,7 +75,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             Dialogs.showError(ex.getMessage());
         }
-         */
+
     }
 
     private void InserirFuncionario() throws Exception {
@@ -132,7 +133,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
         btnSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbPonto = new javax.swing.JTable();
-        lblNome5 = new javax.swing.JLabel();
+        lblPerc = new javax.swing.JLabel();
         txtEntrada1 = new javax.swing.JFormattedTextField();
         txtEntrada2 = new javax.swing.JFormattedTextField();
         txtSaida1 = new javax.swing.JFormattedTextField();
@@ -245,9 +246,9 @@ public class infrmPonto extends javax.swing.JInternalFrame {
             tbPonto.getColumnModel().getColumn(6).setMaxWidth(80);
         }
 
-        lblNome5.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
-        lblNome5.setForeground(new java.awt.Color(251, 8, 8));
-        lblNome5.setText("Percentual aplicado para o dia: 50%");
+        lblPerc.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
+        lblPerc.setForeground(new java.awt.Color(251, 8, 8));
+        lblPerc.setText("Percentual aplicado para o dia: 50%");
 
         try {
             txtEntrada1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
@@ -325,7 +326,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(4, 4, 4)
-                                .addComponent(lblNome5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(lblPerc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -385,7 +386,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
                             .addComponent(lblNome1)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(38, 38, 38)
-                        .addComponent(lblNome5)))
+                        .addComponent(lblPerc)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -494,7 +495,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblNome2;
     private javax.swing.JLabel lblNome3;
     private javax.swing.JLabel lblNome4;
-    private javax.swing.JLabel lblNome5;
+    private javax.swing.JLabel lblPerc;
     private javax.swing.JLabel lblSalario;
     private javax.swing.JTable tbPonto;
     private javax.swing.JFormattedTextField txtData;

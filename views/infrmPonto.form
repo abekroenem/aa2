@@ -41,7 +41,7 @@
                           <Group type="102" attributes="0">
                               <Component id="txtData" min="-2" pref="85" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                              <Component id="lblNome5" max="32767" attributes="0"/>
+                              <Component id="lblPerc" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="txtFuncionario" min="-2" pref="328" max="-2" attributes="0"/>
@@ -122,7 +122,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="38" pref="38" max="-2" attributes="0"/>
-                      <Component id="lblNome5" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblPerc" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -280,7 +280,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="lblNome5">
+    <Component class="javax.swing.JLabel" name="lblPerc">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="DejaVu Sans" size="13" style="1"/>

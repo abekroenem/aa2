@@ -8,6 +8,7 @@ package views;
 import Env.Constants;
 import java.sql.SQLException;
 import helpers.Config;
+import helpers.Forms;
 import java.awt.Dimension;
 import javax.swing.JInternalFrame;
 
@@ -21,15 +22,6 @@ public class frmPrincipal extends javax.swing.JFrame {
         initComponents();
         lblUser.setText("Usuario: " + UserName);
         rbPTBR.setSelected((Config.getLang() == Constants.PT_BR));
-    }
-
-    public void showInternal(JInternalFrame obj) {
-        this.desktopPane.add(obj);
-        Dimension dS = desktopPane.getSize();
-        Dimension ifz = obj.getSize();
-        obj.setLocation((dS.width - ifz.width) / 2,
-                (dS.height - ifz.height) / 2);
-        obj.setVisible(true);
     }
 
     /**
@@ -268,6 +260,8 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        infrmPonto objPnt = new infrmPonto(this.desktopPane);
+        Forms.showInternal(desktopPane, objPnt);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -294,7 +288,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void cadFunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadFunActionPerformed
         infrmCadFun objFun = new infrmCadFun();
-        showInternal(objFun);
+        Forms.showInternal(desktopPane, objFun);
     }//GEN-LAST:event_cadFunActionPerformed
 
     private void cadUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadUserActionPerformed

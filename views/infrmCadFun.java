@@ -8,6 +8,7 @@ package views;
 import controllers.FuncionarioController;
 import helpers.Dialogs;
 import helpers.Formats;
+import helpers.Forms;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import jdk.nashorn.internal.objects.Global;
@@ -334,17 +335,11 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNomeKeyPressed
 
     private void txtCPFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCPFKeyTyped
-        int xKey = Character.getNumericValue(evt.getKeyChar());
-        if (!(((xKey >= 0) && (xKey <= 9)))) {
-            evt.consume();
-        }
+        Forms.OnlyNumbers(evt);
     }//GEN-LAST:event_txtCPFKeyTyped
 
     private void txtSalarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSalarioKeyTyped
-        int xKey = Character.getNumericValue(evt.getKeyChar());
-        if (!(((xKey >= 0) && (xKey <= 9)) || (evt.getKeyChar() == '.'))) {
-            evt.consume();
-        }
+        Forms.OnlyNumbers(evt);
     }//GEN-LAST:event_txtSalarioKeyTyped
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
@@ -407,9 +402,7 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
                 lblValorHoraT.setText("0,00 R$/h");
             }
         } else if (!ersHora) {
-            if (!((xKey >= 0) && (xKey <= 9))) {
-                evt.consume();
-            } else {
+            if (Forms.OnlyNumbers(evt)) {
                 double salario = Double.parseDouble((txtSalario.getText().isEmpty()) ? "0" : txtSalario.getText());
                 xKey = (txtHoraBase.getText().isEmpty()) ? xKey : Integer.parseInt(txtHoraBase.getText() + String.valueOf(xKey));
                 salario = (salario / 30) / xKey;

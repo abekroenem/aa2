@@ -8,9 +8,10 @@ package views;
 import controllers.FuncionarioController;
 import helpers.Dialogs;
 import helpers.Formats;
+import helpers.Forms;
 import java.util.List;
+import javax.swing.JDesktopPane;
 import javax.swing.table.DefaultTableModel;
-import jdk.nashorn.internal.objects.Global;
 import models.Funcionario;
 
 /**
@@ -23,6 +24,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
     private String CPF_CADASTRADO, FUNCIONARIO_INSERIDO_SUCESS, FUNCINOARIO_EDITADO_SUCESS, BTN_NOVO, BTN_SALVAR;
     private Funcionario m_objFunc = null;
     private boolean ersHora = false;
+    private JDesktopPane inDesktop = null;
 
     public void Traduz() {
         CPF_CADASTRADO = "CPF ja cadastrado em outro funcionario!";
@@ -93,8 +95,9 @@ public class infrmPonto extends javax.swing.JInternalFrame {
         }
     }
 
-    public infrmPonto() {
+    public infrmPonto(JDesktopPane inDesktop) {
         initComponents();
+        this.inDesktop = inDesktop;
         Traduz();
         defaultLayout(true);
     }
@@ -115,16 +118,17 @@ public class infrmPonto extends javax.swing.JInternalFrame {
         txtData = new javax.swing.JFormattedTextField();
         txtFuncionario = new javax.swing.JTextField();
         lblNome1 = new javax.swing.JLabel();
-        txtEntrada1 = new javax.swing.JTextField();
         txtSaida1 = new javax.swing.JTextField();
+        txtEntrada1 = new javax.swing.JTextField();
         lblNome2 = new javax.swing.JLabel();
         lblNome3 = new javax.swing.JLabel();
-        txtEntrada2 = new javax.swing.JTextField();
         txtSaida2 = new javax.swing.JTextField();
+        txtEntrada2 = new javax.swing.JTextField();
         lblNome4 = new javax.swing.JLabel();
         btnSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        lblNome5 = new javax.swing.JLabel();
 
         setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setClosable(true);
@@ -182,25 +186,21 @@ public class infrmPonto extends javax.swing.JInternalFrame {
 
         lblNome1.setText("Entrada");
 
-        txtEntrada1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEntrada1ActionPerformed(evt);
+        txtSaida1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSaida1KeyTyped(evt);
             }
-        });
-        txtEntrada1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtEntrada1KeyPressed(evt);
+                txtSaida1KeyPressed(evt);
             }
         });
 
-        txtSaida1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSaida1ActionPerformed(evt);
+        txtEntrada1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEntrada1KeyTyped(evt);
             }
-        });
-        txtSaida1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtSaida1KeyPressed(evt);
+                txtEntrada1KeyPressed(evt);
             }
         });
 
@@ -208,25 +208,21 @@ public class infrmPonto extends javax.swing.JInternalFrame {
 
         lblNome3.setText("Entrada");
 
-        txtEntrada2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEntrada2ActionPerformed(evt);
+        txtSaida2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSaida2KeyTyped(evt);
             }
-        });
-        txtEntrada2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtEntrada2KeyPressed(evt);
+                txtSaida2KeyPressed(evt);
             }
         });
 
-        txtSaida2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSaida2ActionPerformed(evt);
+        txtEntrada2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEntrada2KeyTyped(evt);
             }
-        });
-        txtSaida2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtSaida2KeyPressed(evt);
+                txtEntrada2KeyPressed(evt);
             }
         });
 
@@ -276,89 +272,94 @@ public class infrmPonto extends javax.swing.JInternalFrame {
             jTable1.getColumnModel().getColumn(2).setMaxWidth(100);
         }
 
+        lblNome5.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
+        lblNome5.setForeground(new java.awt.Color(251, 8, 8));
+        lblNome5.setText("Percentual aplicado para o dia: 50%");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSalario, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblNome, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblSalario, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblNome, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4)
+                                .addComponent(lblNome5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(lblNome4))
+                            .addComponent(lblNome3)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(lblNome4))
-                    .addComponent(lblNome3))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtEntrada1, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
-                    .addComponent(txtSaida1))
+                    .addComponent(txtSaida1, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                    .addComponent(txtEntrada1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNome2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblNome1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtSaida2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEntrada2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(230, 230, 230)
-                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEntrada2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSaida2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblSalario)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblNome3)
-                                    .addComponent(txtSaida1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(btnSearch)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtEntrada1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblNome4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblNome3)
+                            .addComponent(txtEntrada1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtSaida1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNome4)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSearch))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblNome))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lblNome)
+                            .addComponent(lblNome5)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNome1)
-                            .addComponent(txtSaida2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtEntrada2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNome2)
-                            .addComponent(txtEntrada2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtSaida2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
                     .addComponent(btnNovo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
         );
 
         pack();
@@ -375,20 +376,20 @@ public class infrmPonto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtFuncionarioKeyPressed
 
     private void txtDataKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataKeyTyped
-        int xKey = Character.getNumericValue(evt.getKeyChar());
-        if (!(((xKey >= 0) && (xKey <= 9)))) {
-            evt.consume();
-        }
+        Forms.OnlyNumbers(evt);
     }//GEN-LAST:event_txtDataKeyTyped
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+
+        infrmConsFunc objConsF = new infrmConsFunc(this.inDesktop);
+        Forms.showInternal(this.inDesktop, objConsF);
 
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void txtDataKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataKeyPressed
 
         if (evt.getKeyCode() == 10) {
-            txtSalario.requestFocus();
+            txtSaida1.requestFocus();
         }
     }//GEN-LAST:event_txtDataKeyPressed
 
@@ -427,37 +428,50 @@ public class infrmPonto extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnNovoActionPerformed
 
-    private void txtEntrada1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEntrada1ActionPerformed
+    private void txtSaida1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSaida1KeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtEntrada1ActionPerformed
+        if (evt.getKeyCode() == 10) {
+            txtEntrada2.requestFocus();
+        }
+    }//GEN-LAST:event_txtSaida1KeyPressed
 
     private void txtEntrada1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEntrada1KeyPressed
         // TODO add your handling code here:
+        if (evt.getKeyCode() == 10) {
+            txtSaida1.requestFocus();
+        }
     }//GEN-LAST:event_txtEntrada1KeyPressed
-
-    private void txtSaida1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSaida1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSaida1ActionPerformed
-
-    private void txtSaida1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSaida1KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSaida1KeyPressed
-
-    private void txtEntrada2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEntrada2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEntrada2ActionPerformed
-
-    private void txtEntrada2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEntrada2KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEntrada2KeyPressed
-
-    private void txtSaida2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSaida2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSaida2ActionPerformed
 
     private void txtSaida2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSaida2KeyPressed
         // TODO add your handling code here:
+        if (evt.getKeyCode() == 10) {
+            btnNovo.doClick();
+        }
     }//GEN-LAST:event_txtSaida2KeyPressed
+
+    private void txtEntrada2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEntrada2KeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == 10) {
+            txtSaida2.requestFocus();
+        }
+    }//GEN-LAST:event_txtEntrada2KeyPressed
+
+    private void txtEntrada1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEntrada1KeyTyped
+        Forms.OnlyNumbers(evt);
+    }//GEN-LAST:event_txtEntrada1KeyTyped
+
+    private void txtSaida1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSaida1KeyTyped
+        Forms.OnlyNumbers(evt);
+    }//GEN-LAST:event_txtSaida1KeyTyped
+
+    private void txtEntrada2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEntrada2KeyTyped
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtEntrada2KeyTyped
+
+    private void txtSaida2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSaida2KeyTyped
+        Forms.OnlyNumbers(evt);
+    }//GEN-LAST:event_txtSaida2KeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -470,6 +484,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblNome2;
     private javax.swing.JLabel lblNome3;
     private javax.swing.JLabel lblNome4;
+    private javax.swing.JLabel lblNome5;
     private javax.swing.JLabel lblSalario;
     private javax.swing.JFormattedTextField txtData;
     private javax.swing.JTextField txtEntrada1;

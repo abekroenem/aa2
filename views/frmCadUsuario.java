@@ -7,6 +7,7 @@ package views;
 
 import controllers.UsuarioController;
 import helpers.Dialogs;
+import helpers.Forms;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import models.Usuario;
@@ -270,6 +271,11 @@ public class frmCadUsuario extends javax.swing.JFrame {
         });
 
         chkAdmin.setText("Administrador");
+        chkAdmin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                chkAdminKeyPressed(evt);
+            }
+        });
 
         txtConf.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -464,24 +470,23 @@ public class frmCadUsuario extends javax.swing.JFrame {
 
     private void txtUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == 10) {
-            txtPass.requestFocus();
-        }
+        Forms.goNextField(evt.getKeyCode(), txtPass);
     }//GEN-LAST:event_txtUserKeyPressed
 
     private void txtPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == 10) {
-            txtConf.requestFocus();
-        }
+        Forms.goNextField(evt.getKeyCode(), txtConf);
     }//GEN-LAST:event_txtPassKeyPressed
 
     private void txtConfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConfKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == 10) {
-            chkAdmin.requestFocus();
-        }
+        Forms.goNextField(evt.getKeyCode(), chkAdmin);
     }//GEN-LAST:event_txtConfKeyPressed
+
+    private void chkAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkAdminKeyPressed
+        // TODO add your handling code here:
+        Forms.goNextField(evt.getKeyCode(), btnNovo);
+    }//GEN-LAST:event_chkAdminKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;

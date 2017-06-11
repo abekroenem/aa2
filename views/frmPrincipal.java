@@ -47,23 +47,22 @@ public class frmPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         iashd1 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
-        jMenu3 = new javax.swing.JMenu();
+        abaCad = new javax.swing.JMenu();
         cadUser = new javax.swing.JMenuItem();
         cadFun = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
+        abaEditMenu = new javax.swing.JMenu();
         cutMenuItem = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        helpMenu = new javax.swing.JMenu();
+        abaRelatorio = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
+        abaIdioma = new javax.swing.JMenu();
         rbPTBR = new javax.swing.JRadioButtonMenuItem();
         rbENUS = new javax.swing.JRadioButtonMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        abaSobre = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SHX Principal");
-        setPreferredSize(new java.awt.Dimension(1360, 740));
         setResizable(false);
 
         desktopPane.setBackground(new java.awt.Color(66, 66, 66));
@@ -160,9 +159,9 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         menuBar.setBackground(new java.awt.Color(100, 98, 98));
 
-        jMenu3.setBackground(new java.awt.Color(254, 254, 254));
-        jMenu3.setForeground(new java.awt.Color(254, 254, 254));
-        jMenu3.setText("Cadastros");
+        abaCad.setBackground(new java.awt.Color(254, 254, 254));
+        abaCad.setForeground(new java.awt.Color(254, 254, 254));
+        abaCad.setText("Cadastros");
 
         cadUser.setText("Usuarios");
         cadUser.addActionListener(new java.awt.event.ActionListener() {
@@ -170,7 +169,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                 cadUserActionPerformed(evt);
             }
         });
-        jMenu3.add(cadUser);
+        abaCad.add(cadUser);
 
         cadFun.setText("Funcionarios");
         cadFun.addActionListener(new java.awt.event.ActionListener() {
@@ -178,42 +177,42 @@ public class frmPrincipal extends javax.swing.JFrame {
                 cadFunActionPerformed(evt);
             }
         });
-        jMenu3.add(cadFun);
+        abaCad.add(cadFun);
 
-        menuBar.add(jMenu3);
+        menuBar.add(abaCad);
 
-        editMenu.setBackground(new java.awt.Color(254, 254, 254));
-        editMenu.setForeground(new java.awt.Color(254, 254, 254));
-        editMenu.setMnemonic('e');
-        editMenu.setText("Ponto");
+        abaEditMenu.setBackground(new java.awt.Color(254, 254, 254));
+        abaEditMenu.setForeground(new java.awt.Color(254, 254, 254));
+        abaEditMenu.setMnemonic('e');
+        abaEditMenu.setText("Ponto");
 
         cutMenuItem.setMnemonic('t');
         cutMenuItem.setText("Registrar Ponto");
-        editMenu.add(cutMenuItem);
+        abaEditMenu.add(cutMenuItem);
 
         jMenuItem3.setText("Auditoria");
-        editMenu.add(jMenuItem3);
+        abaEditMenu.add(jMenuItem3);
 
-        menuBar.add(editMenu);
+        menuBar.add(abaEditMenu);
 
-        helpMenu.setBackground(new java.awt.Color(254, 254, 254));
-        helpMenu.setForeground(new java.awt.Color(254, 254, 254));
-        helpMenu.setMnemonic('h');
-        helpMenu.setText("Relatorios");
+        abaRelatorio.setBackground(new java.awt.Color(254, 254, 254));
+        abaRelatorio.setForeground(new java.awt.Color(254, 254, 254));
+        abaRelatorio.setMnemonic('h');
+        abaRelatorio.setText("Relatorios");
 
         contentMenuItem.setMnemonic('c');
         contentMenuItem.setText("Funcionarios");
-        helpMenu.add(contentMenuItem);
+        abaRelatorio.add(contentMenuItem);
 
         aboutMenuItem.setMnemonic('a');
         aboutMenuItem.setText("Folha de Ponto");
-        helpMenu.add(aboutMenuItem);
+        abaRelatorio.add(aboutMenuItem);
 
-        menuBar.add(helpMenu);
+        menuBar.add(abaRelatorio);
 
-        jMenu1.setBackground(new java.awt.Color(254, 254, 254));
-        jMenu1.setForeground(new java.awt.Color(254, 254, 254));
-        jMenu1.setText("Idioma");
+        abaIdioma.setBackground(new java.awt.Color(254, 254, 254));
+        abaIdioma.setForeground(new java.awt.Color(254, 254, 254));
+        abaIdioma.setText("Idioma");
 
         rbPTBR.setText("Portugues pt-br");
         rbPTBR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pt_br.png"))); // NOI18N
@@ -222,7 +221,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                 rbPTBRActionPerformed(evt);
             }
         });
-        jMenu1.add(rbPTBR);
+        abaIdioma.add(rbPTBR);
 
         rbENUS.setText("Ingles en-us");
         rbENUS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/en_us.png"))); // NOI18N
@@ -231,14 +230,14 @@ public class frmPrincipal extends javax.swing.JFrame {
                 rbENUSActionPerformed(evt);
             }
         });
-        jMenu1.add(rbENUS);
+        abaIdioma.add(rbENUS);
 
-        menuBar.add(jMenu1);
+        menuBar.add(abaIdioma);
 
-        jMenu2.setBackground(new java.awt.Color(254, 254, 254));
-        jMenu2.setForeground(new java.awt.Color(254, 254, 254));
-        jMenu2.setText("Sobre");
-        menuBar.add(jMenu2);
+        abaSobre.setBackground(new java.awt.Color(254, 254, 254));
+        abaSobre.setForeground(new java.awt.Color(254, 254, 254));
+        abaSobre.setText("Sobre");
+        menuBar.add(abaSobre);
 
         setJMenuBar(menuBar);
 
@@ -312,15 +311,20 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     public void Traduz() {
         ResourceBundle propriedades = ResourceBundle.getBundle("lang/lg.properties");
-        jMenu3.setText(propriedades.getString("Register"));
-        editMenu.setText(propriedades.getString("Score"));
-        helpMenu.setText(propriedades.getString("Report"));
-        jMenu1.setText(propriedades.getString("Language"));
-        jMenu2.setText(propriedades.getString("About"));
+        abaCad.setText(propriedades.getString("Register"));
+        abaEditMenu.setText(propriedades.getString("Score"));
+        abaRelatorio.setText(propriedades.getString("Report"));
+        abaIdioma.setText(propriedades.getString("Language"));
+        abaSobre.setText(propriedades.getString("About"));
 
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu abaCad;
+    private javax.swing.JMenu abaEditMenu;
+    private javax.swing.JMenu abaIdioma;
+    private javax.swing.JMenu abaRelatorio;
+    private javax.swing.JMenu abaSobre;
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JLabel asdasdasd;
     private javax.swing.JMenuItem cadFun;
@@ -328,8 +332,6 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem contentMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JDesktopPane desktopPane;
-    private javax.swing.JMenu editMenu;
-    private javax.swing.JMenu helpMenu;
     private javax.swing.JLabel iashd;
     private javax.swing.JLabel iashd1;
     private javax.swing.JButton jButton1;
@@ -337,9 +339,6 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JLabel lblUser;

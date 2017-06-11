@@ -20,7 +20,6 @@ public class FuncionarioController {
 
     public FuncionarioController() throws SQLException {
         funcDAO = new FuncionarioDAO();
-
     }
 
     public void Add(String Nome, String CFP, double Salario, int hora_dia) throws Exception {

@@ -184,9 +184,10 @@
         <Component class="javax.swing.JTable" name="tbFunc">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="4" rowCount="4">
+              <Table columnCount="5" rowCount="4">
                 <Column editable="true" title="ID" type="java.lang.Integer"/>
                 <Column editable="false" title="Nome" type="java.lang.String"/>
+                <Column editable="true" title="CPF" type="java.lang.String"/>
                 <Column editable="true" title="Salario" type="java.lang.Double"/>
                 <Column editable="false" title="V. Hora" type="java.lang.Double"/>
               </Table>
@@ -198,17 +199,22 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="200" minWidth="200" prefWidth="200" resizable="true">
+                <Column maxWidth="150" minWidth="150" prefWidth="150" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="130" minWidth="130" prefWidth="130" resizable="true">
+                <Column maxWidth="110" minWidth="110" prefWidth="110" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                <Column maxWidth="90" minWidth="90" prefWidth="90" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="65" minWidth="65" prefWidth="65" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>

@@ -57,7 +57,7 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
             tablemd.getDataVector().removeAllElements();
             if (lstFor.size() > 0) {
                 for (Funcionario forn : lstFor) {
-                    tablemd.addRow(new Object[]{forn.getId(), forn.getNome(), forn.getSalario(), forn.getValor_hora()});
+                    tablemd.addRow(new Object[]{forn.getId(), forn.getNome(), Formats.CPF.Format(forn.getCPF()), forn.getSalario(), forn.getValor_hora()});
                 }
                 tbFunc.clearSelection();
             }
@@ -69,7 +69,9 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
 
     private void InserirFuncionario() throws Exception {
         m_FuncC = new FuncionarioController();
-        m_FuncC.Add(txtNome.getText(), txtCPF.getText(), Double.parseDouble(txtSalario.getText()), Integer.valueOf(txtHoraBase.getText()));
+        m_FuncC.Add(txtNome.getText(), txtCPF.getText(),
+                Double.parseDouble((txtSalario.getText().isEmpty()) ? "0" : txtSalario.getText()),
+                Integer.valueOf((txtHoraBase.getText().isEmpty() ? "0" : txtHoraBase.getText())));
         defaultLayout(true);
         Dialogs.showInfo(FUNCIONARIO_INSERIDO_SUCESS);
     }
@@ -169,20 +171,20 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
 
         tbFunc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nome", "Salario", "V. Hora"
+                "ID", "Nome", "CPF", "Salario", "V. Hora"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, true, false
+                true, false, true, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -203,12 +205,18 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
             tbFunc.getColumnModel().getColumn(0).setMinWidth(35);
             tbFunc.getColumnModel().getColumn(0).setPreferredWidth(35);
             tbFunc.getColumnModel().getColumn(0).setMaxWidth(35);
-            tbFunc.getColumnModel().getColumn(1).setMinWidth(200);
-            tbFunc.getColumnModel().getColumn(1).setPreferredWidth(200);
-            tbFunc.getColumnModel().getColumn(1).setMaxWidth(200);
-            tbFunc.getColumnModel().getColumn(2).setMinWidth(130);
-            tbFunc.getColumnModel().getColumn(2).setPreferredWidth(130);
-            tbFunc.getColumnModel().getColumn(2).setMaxWidth(130);
+            tbFunc.getColumnModel().getColumn(1).setMinWidth(150);
+            tbFunc.getColumnModel().getColumn(1).setPreferredWidth(150);
+            tbFunc.getColumnModel().getColumn(1).setMaxWidth(150);
+            tbFunc.getColumnModel().getColumn(2).setMinWidth(110);
+            tbFunc.getColumnModel().getColumn(2).setPreferredWidth(110);
+            tbFunc.getColumnModel().getColumn(2).setMaxWidth(110);
+            tbFunc.getColumnModel().getColumn(3).setMinWidth(90);
+            tbFunc.getColumnModel().getColumn(3).setPreferredWidth(90);
+            tbFunc.getColumnModel().getColumn(3).setMaxWidth(90);
+            tbFunc.getColumnModel().getColumn(4).setMinWidth(65);
+            tbFunc.getColumnModel().getColumn(4).setPreferredWidth(65);
+            tbFunc.getColumnModel().getColumn(4).setMaxWidth(65);
         }
 
         try {
@@ -347,8 +355,9 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
                         InserirFuncionario();
                     }
                 } else if (!FuncionarioDuplicado()) {
-                    m_FuncC.Edit(m_objFunc.getId(), txtNome.getText(), Formats.CPF.Unformat(txtCPF.getText()),
-                            Double.parseDouble(txtSalario.getText()), Integer.valueOf(txtHoraBase.getText()));
+                    m_FuncC.Edit(m_objFunc.getId(), txtNome.getText(), txtCPF.getText(),
+                            Double.parseDouble((txtSalario.getText().isEmpty()) ? "0" : txtSalario.getText()),
+                            Integer.valueOf((txtHoraBase.getText().isEmpty() ? "0" : txtHoraBase.getText())));
                     Dialogs.showInfo(FUNCINOARIO_EDITADO_SUCESS);
                     m_objFunc = null;
                     defaultLayout(true);

@@ -227,17 +227,17 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
+        <Component class="javax.swing.JTable" name="tbPonto">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="7" rowCount="4">
                 <Column editable="false" title="Data" type="java.lang.String"/>
                 <Column editable="false" title="Funcionario" type="java.lang.String"/>
                 <Column editable="false" title="H. Trab." type="java.lang.String"/>
-                <Column editable="true" title="H. Extra" type="java.lang.Object"/>
-                <Column editable="true" title="%" type="java.lang.Object"/>
-                <Column editable="true" title="T. Extra" type="java.lang.Object"/>
-                <Column editable="true" title="T. Dia" type="java.lang.Object"/>
+                <Column editable="false" title="H. Extra" type="java.lang.Object"/>
+                <Column editable="false" title="%" type="java.lang.Object"/>
+                <Column editable="false" title="T. Extra" type="java.lang.Object"/>
+                <Column editable="false" title="T. Dia" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -247,32 +247,32 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                <Column maxWidth="350" minWidth="350" prefWidth="350" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="100" minWidth="100" prefWidth="100" resizable="true">
+                <Column maxWidth="60" minWidth="60" prefWidth="60" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                <Column maxWidth="60" minWidth="60" prefWidth="60" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                <Column maxWidth="40" minWidth="40" prefWidth="40" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="80" minWidth="80" prefWidth="80" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>

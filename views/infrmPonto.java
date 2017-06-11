@@ -125,7 +125,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
         lblNome4 = new javax.swing.JLabel();
         btnSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbPonto = new javax.swing.JTable();
         lblNome5 = new javax.swing.JLabel();
         txtEntrada1 = new javax.swing.JFormattedTextField();
         txtEntrada2 = new javax.swing.JFormattedTextField();
@@ -191,7 +191,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbPonto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -206,7 +206,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, true, true, true
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -217,15 +217,26 @@ public class infrmPonto extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setMinWidth(80);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(80);
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(80);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setMinWidth(100);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(2).setMaxWidth(100);
+        jScrollPane1.setViewportView(tbPonto);
+        if (tbPonto.getColumnModel().getColumnCount() > 0) {
+            tbPonto.getColumnModel().getColumn(0).setMinWidth(80);
+            tbPonto.getColumnModel().getColumn(0).setPreferredWidth(80);
+            tbPonto.getColumnModel().getColumn(0).setMaxWidth(80);
+            tbPonto.getColumnModel().getColumn(1).setMinWidth(350);
+            tbPonto.getColumnModel().getColumn(1).setPreferredWidth(350);
+            tbPonto.getColumnModel().getColumn(1).setMaxWidth(350);
+            tbPonto.getColumnModel().getColumn(2).setMinWidth(60);
+            tbPonto.getColumnModel().getColumn(2).setPreferredWidth(60);
+            tbPonto.getColumnModel().getColumn(2).setMaxWidth(60);
+            tbPonto.getColumnModel().getColumn(3).setMinWidth(60);
+            tbPonto.getColumnModel().getColumn(3).setPreferredWidth(60);
+            tbPonto.getColumnModel().getColumn(3).setMaxWidth(60);
+            tbPonto.getColumnModel().getColumn(4).setMinWidth(40);
+            tbPonto.getColumnModel().getColumn(4).setPreferredWidth(40);
+            tbPonto.getColumnModel().getColumn(4).setMaxWidth(40);
+            tbPonto.getColumnModel().getColumn(6).setMinWidth(80);
+            tbPonto.getColumnModel().getColumn(6).setPreferredWidth(80);
+            tbPonto.getColumnModel().getColumn(6).setMaxWidth(80);
         }
 
         lblNome5.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
@@ -475,7 +486,6 @@ public class infrmPonto extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSearch;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblNome1;
     private javax.swing.JLabel lblNome2;
@@ -483,6 +493,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblNome4;
     private javax.swing.JLabel lblNome5;
     private javax.swing.JLabel lblSalario;
+    private javax.swing.JTable tbPonto;
     private javax.swing.JFormattedTextField txtData;
     private javax.swing.JFormattedTextField txtEntrada1;
     private javax.swing.JFormattedTextField txtEntrada2;

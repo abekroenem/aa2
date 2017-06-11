@@ -18,19 +18,20 @@ public class PontoDAO extends GenericDAO {
 
     public PontoDAO() throws SQLException {
         super();
-
     }
 
-    private void preencherObj(Usuario obj, ResultSet rs) throws SQLException {
+    private void preencherObj(Ponto obj, ResultSet rs) throws SQLException {
         obj.setId(rs.getInt("id"));
-        obj.setName(rs.getString("dia"));
-        obj.setPassword(rs.getString("id_funcionario"));
-        obj.setAdmin(rs.getBoolean("entrada_a"));
-        obj.setAdmin(rs.getBoolean("saida_b"));
-        obj.setAdmin(rs.getBoolean("entrada_b"));
-        obj.setAdmin(rs.getBoolean("saida_b"));
-        obj.setAdmin(rs.getBoolean(""));
-        obj.setAdmin(rs.getBoolean("entrada_a"));
+        obj.setData((java.sql.Date) rs.getDate("dia"));
+        obj.setId_funcionario(rs.getInt("id_funcionario"));
+        obj.setEntrada_a(rs.getInt("entrada_a"));
+        obj.setSaida_a(rs.getInt("saida_a"));
+        obj.setEntrada_b(rs.getInt("entrada_b"));
+        obj.setSaida_b(rs.getInt("saida_a"));
+        obj.setHoras_excedidas(rs.getInt("horas_excedidas"));
+        obj.setPercent_aplicado(rs.getDouble("percent_aplicado"));
+        obj.setValor_extra(rs.getInt("valor_extra"));
+        obj.setTotal_recebido(rs.getInt("total_recebido"));
     }
 
     @Override
@@ -40,6 +41,7 @@ public class PontoDAO extends GenericDAO {
                 + " VALUES (?,?,?,?,?,?,?,?,?,?)";
 
         super.Sql = super.Conn.prepareStatement(sql);
+
         super.Sql.setDate(1, ((Ponto) obj).getData());
         super.Sql.setInt(2, ((Ponto) obj).getId_funcionario());
         super.Sql.setInt(3, ((Ponto) obj).getEntrada_a());
@@ -57,22 +59,32 @@ public class PontoDAO extends GenericDAO {
 
     @Override
     public void removeEntity(Object obj) throws SQLException {
-        String sql = "DELETE FROM USUARIO WHERE ID=? AND NOME=?";
+        String sql = "DELETE FROM PONTO WHERE ID=?";
         super.Sql = super.Conn.prepareStatement(sql);
-        super.Sql.setInt(1, ((Usuario) obj).getId());
-        super.Sql.setString(2, ((Usuario) obj).getName());
+        super.Sql.setInt(1, ((Ponto) obj).getId());
         super.Sql.execute();
         super.Sql.close();
     }
 
     @Override
     public Object updateEntity(Object obj) throws SQLException {
-        String sql = "UPDATE USUARIO SET NOME=?,SENHA=?,ISADMIN=? WHERE ID=?";
+        String sql = "UPDATE REGISTRO_PONTO SET"
+                + " DIA = ?, ID_FUNCIONARIO = ?, ENTRADA_A = ?, SAIDA_A = ?, ENTRADA_B = ?, SAIDA_B = ?, HORAS_EXCEDIDAS = ?, PERCENT_APLICADO = ?, VALOR_EXTRA = ?, TOTAL_RECEBIDO = ?"
+                + " WHERE ID=?";
         super.Sql = super.Conn.prepareStatement(sql);
-        super.Sql.setString(1, ((Usuario) obj).getName());
-        super.Sql.setString(2, ((Usuario) obj).getPassword());
-        super.Sql.setBoolean(3, ((Usuario) obj).getAdmin());
-        super.Sql.setInt(4, ((Usuario) obj).getId());
+
+        super.Sql.setDate(1, ((Ponto) obj).getData());
+        super.Sql.setInt(2, ((Ponto) obj).getId_funcionario());
+        super.Sql.setInt(3, ((Ponto) obj).getEntrada_a());
+        super.Sql.setInt(4, ((Ponto) obj).getSaida_a());
+        super.Sql.setInt(5, ((Ponto) obj).getEntrada_b());
+        super.Sql.setInt(6, ((Ponto) obj).getSaida_b());
+        super.Sql.setInt(7, ((Ponto) obj).getHoras_excedidas());
+        super.Sql.setDouble(8, ((Ponto) obj).getPercent_aplicado());
+        super.Sql.setDouble(9, ((Ponto) obj).getValor_extra());
+        super.Sql.setDouble(10, ((Ponto) obj).getTotal_recebido());
+        super.Sql.setInt(11, ((Ponto) obj).getId());
+
         super.Sql.executeUpdate();
         super.Sql.close();
         return obj;
@@ -80,15 +92,15 @@ public class PontoDAO extends GenericDAO {
 
     @Override
     public Object getEntityById(int id) throws SQLException {
-        Usuario obj = null;
-        String sql = "SELECT * FROM USUARIO WHERE ID=?";
+        Ponto obj = null;
+        String sql = "SELECT * FROM REGISTRO_PONTO WHERE ID=?";
         super.Sql = super.Conn.prepareStatement(sql);
         Sql.setInt(1, id);
 
         ResultSet rs = super.Sql.executeQuery();
 
         if (rs.next()) {
-            obj = new Usuario();
+            obj = new Ponto();
             preencherObj(obj, rs);
         }
         rs.close();
@@ -98,46 +110,50 @@ public class PontoDAO extends GenericDAO {
 
     @Override
     public <T> List<T> getAllEntitys() throws SQLException {
-        List<Usuario> listUser = new ArrayList();
-        String sql = "SELECT * FROM USUARIO";
+        List<Ponto> listPonto = new ArrayList();
+        String sql = "SELECT * FROM REGISTRO_PONTO";
         super.Sql = super.Conn.prepareStatement(sql);
         ResultSet rs = super.Sql.executeQuery();
 
         while (rs.next()) {
-            Usuario obj = new Usuario();
+            Ponto obj = new Ponto();
             preencherObj(obj, rs);
-            listUser.add(obj);
+            listPonto.add(obj);
         }
         rs.close();
         super.Sql.close();
-        return (List<T>) listUser;
+        return (List<T>) listPonto;
 
     }
 
-    public Object SearchEntity(String name) throws SQLException {
-        String sql = "SELECT * FROM USUARIO WHERE NOME = ?";
+    public Object SearchEntity(java.sql.Date data, int Id_Funcionario) throws SQLException {
+        String sql = "SELECT * FROM REGISTRO_PONTO WHERE DIA = ? AND ID_FUNCIONARIO = ?";
         super.Sql = super.Conn.prepareStatement(sql);
-        Sql.setString(1, name.toUpperCase());
+
+        Sql.setDate(1, data);
+        Sql.setInt(2, Id_Funcionario);
+
         ResultSet rs = super.Sql.executeQuery();
-        Usuario obj = null;
+        Ponto obj = null;
 
         if (rs.next()) {
-            obj = new Usuario();
+            obj = new Ponto();
             preencherObj(obj, rs);
         }
         return obj;
     }
 
     public boolean isEmptyEntity() throws SQLException {
-        String sql = "SELECT * FROM USUARIO LIMIT 1";
+        String sql = "SELECT * FROM REGISTRO_PONTO LIMIT 1";
         return !super.Conn.prepareStatement(sql).executeQuery().next();
     }
 
-    public boolean DuplicatedEntity(int Id, String name) throws SQLException {
-        String sql = "SELECT * FROM USUARIO WHERE NOME  = ? AND ID <> ?";
+    public boolean DuplicatedEntity(int Id, java.sql.Date data, int id_funcionario) throws SQLException {
+        String sql = "SELECT * FROM REGISTRO_PONTO WHERE ID_FUNCIONARIO  = ? AND DIA = ? AND ID <> ?";
         super.Sql = super.Conn.prepareStatement(sql);
-        super.Sql.setString(1, name.toUpperCase());
-        super.Sql.setInt(2, Id);
+        super.Sql.setInt(1, id_funcionario);
+        super.Sql.setDate(2, data);
+        super.Sql.setInt(3, Id);
         return super.Sql.executeQuery().next();
     }
 

@@ -47,7 +47,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         iashd1 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
-        abaCad = new javax.swing.JMenu();
+        btnCadastro = new javax.swing.JMenu();
         cadUser = new javax.swing.JMenuItem();
         cadFun = new javax.swing.JMenuItem();
         abaEditMenu = new javax.swing.JMenu();
@@ -159,9 +159,10 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         menuBar.setBackground(new java.awt.Color(100, 98, 98));
 
-        abaCad.setBackground(new java.awt.Color(254, 254, 254));
-        abaCad.setForeground(new java.awt.Color(254, 254, 254));
-        abaCad.setText("Cadastros");
+        btnCadastro.setBackground(new java.awt.Color(254, 254, 254));
+        btnCadastro.setForeground(new java.awt.Color(254, 254, 254));
+        btnCadastro.setText("Cadastros");
+
 
         cadUser.setText("Usuarios");
         cadUser.addActionListener(new java.awt.event.ActionListener() {
@@ -169,7 +170,9 @@ public class frmPrincipal extends javax.swing.JFrame {
                 cadUserActionPerformed(evt);
             }
         });
-        abaCad.add(cadUser);
+
+        btnCadastro.add(cadUser);
+
 
         cadFun.setText("Funcionarios");
         cadFun.addActionListener(new java.awt.event.ActionListener() {
@@ -177,9 +180,11 @@ public class frmPrincipal extends javax.swing.JFrame {
                 cadFunActionPerformed(evt);
             }
         });
-        abaCad.add(cadFun);
 
-        menuBar.add(abaCad);
+        btnCadastro.add(cadFun);
+
+        menuBar.add(btnCadastro);
+
 
         abaEditMenu.setBackground(new java.awt.Color(254, 254, 254));
         abaEditMenu.setForeground(new java.awt.Color(254, 254, 254));
@@ -260,7 +265,6 @@ public class frmPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         infrmPonto objPnt = new infrmPonto(this.desktopPane);
         Forms.showInternal(desktopPane, objPnt);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -310,12 +314,14 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_cadUserActionPerformed
 
     public void Traduz() {
-        ResourceBundle propriedades = ResourceBundle.getBundle("lang/lg.properties");
+
+        ResourceBundle propriedades = ResourceBundle.getBundle("lang/lg");
         abaCad.setText(propriedades.getString("Register"));
         abaEditMenu.setText(propriedades.getString("Score"));
         abaRelatorio.setText(propriedades.getString("Report"));
         abaIdioma.setText(propriedades.getString("Language"));
         abaSobre.setText(propriedades.getString("About"));
+
 
     }
 
@@ -327,6 +333,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu abaSobre;
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JLabel asdasdasd;
+    private javax.swing.JMenu btnCadastro;
     private javax.swing.JMenuItem cadFun;
     private javax.swing.JMenuItem cadUser;
     private javax.swing.JMenuItem contentMenuItem;
@@ -339,6 +346,8 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JLabel lblUser;

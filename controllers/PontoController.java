@@ -5,10 +5,84 @@
  */
 package controllers;
 
+import java.sql.SQLException;
+import java.util.List;
+import models.PontoDAO;
+import models.Ponto;
+
 /**
  *
  * @author qwerty
  */
 public class PontoController {
+
+    PontoDAO pntDAO;
+
+    public PontoController() throws SQLException {
+        pntDAO = new PontoDAO();
+
+    }
+
+    public void Add(java.sql.Date data, int id_funcionario, int entrada_a, int saida_a, int entrada_b, int saida_b,
+            int horas_excedidas, double percent_aplicado, double valor_extra, double total_recebido) throws Exception {
+        Ponto obj = new Ponto();
+        obj.setData(data);
+        obj.setId_funcionario(id_funcionario);
+        obj.setEntrada_a(entrada_a);
+        obj.setSaida_a(saida_a);
+        obj.setEntrada_b(entrada_b);
+        obj.setSaida_b(saida_a);
+        obj.setHoras_excedidas(horas_excedidas);
+        obj.setPercent_aplicado(percent_aplicado);
+        obj.setValor_extra(valor_extra);
+        obj.setTotal_recebido(total_recebido);
+        pntDAO.addEntity(obj);
+    }
+
+    public void Edit(int Id, java.sql.Date data, int id_funcionario, int entrada_a, int saida_a, int entrada_b, int saida_b,
+            int horas_excedidas, double percent_aplicado, double valor_extra, double total_recebido) throws Exception {
+        Ponto obj = new Ponto();
+        obj.setId(Id);
+        obj.setData(data);
+        obj.setId_funcionario(id_funcionario);
+        obj.setEntrada_a(entrada_a);
+        obj.setSaida_a(saida_a);
+        obj.setEntrada_b(entrada_b);
+        obj.setSaida_b(saida_a);
+        obj.setHoras_excedidas(horas_excedidas);
+        obj.setPercent_aplicado(percent_aplicado);
+        obj.setValor_extra(valor_extra);
+        obj.setTotal_recebido(total_recebido);
+        pntDAO.updateEntity(obj);
+    }
+
+    public void Delete(int Id, java.sql.Date data, int id_funcionario) throws SQLException {
+        Ponto obj = new Ponto();
+        obj.setId(Id);
+        obj.setData(data);
+        obj.setId_funcionario(id_funcionario);
+        pntDAO.removeEntity(obj);
+
+    }
+
+    public List<Ponto> getAll() throws SQLException {
+        return pntDAO.getAllEntitys();
+    }
+
+    public Ponto getByID(int id) throws SQLException {
+        return (Ponto) pntDAO.getEntityById(id);
+    }
+
+    public Ponto SearchUserByFunDay(java.sql.Date data, int id_funcionario) throws SQLException {
+        return (Ponto) pntDAO.SearchEntity(data, id_funcionario);
+    }
+
+    public boolean DuplicatedUser(int ID, java.sql.Date data, int id_funcionario) throws SQLException {
+        return pntDAO.DuplicatedEntity(ID, data, id_funcionario);
+    }
+
+    public boolean isEmpty() throws SQLException {
+        return pntDAO.isEmptyEntity();
+    }
 
 }

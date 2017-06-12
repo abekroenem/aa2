@@ -39,13 +39,54 @@ create table config (
 );
 insert into config(key,value) values('lang', 0);
 
-    
-CREATE OR REPLACE FUNCTION fn_min_to_hr(mins int)
-RETURNS numeric AS
+
+CREATE OR REPLACE FUNCTION fn_min_to_hr(mins bigint)
+RETURNS text AS
 $BODY$ 
-select  cast(date_part('hours',interval '1 minute' * mins) * 1.0 + 
-(date_part('minutes',interval '1 minute' * mins) * .01) as numeric(18,2));
+select overlay(to_char(cast(date_part('hours',interval '1 minute' * mins) * 1.0 + 
+(date_part('minutes',interval '1 minute' * mins) * .01) as numeric(4,2)), '99.99') placing ':' from 4);
 $BODY$
 LANGUAGE sql VOLATILE;
+
+-- Relatorio principal (total de horas extras pagas)
+
+
+select
+to_char(rp.dia, 'dd/MM/yyyy'),
+f.nome,
+f.salario,
+f.hora_dia, f.valor_hora,
+fn_min_to_hr((rp.saida_b-rp.entrada_a)-(rp.entrada_b-rp.saida_a)) as horas_trabalhadas,
+rp.percent_aplicado,
+fn_min_to_hr(rp.horas_excedidas) as horas_extras,
+rp.valor_extra,
+rp.total_recebido
+from registro_ponto rp
+join funcionario f on f.id = rp.id_funcionario
+order by rp.dia
+
+-- Folha de ponto
+
+select to_char(rp.dia,'dd/MM/yyyy') as dia, f.nome,
+fn_min_to_hr(rp.entrada_a) as entrada_a,
+fn_min_to_hr(rp.saida_a) as saida_a,
+fn_min_to_hr(rp.entrada_b) as entrada_b,
+fn_min_to_hr(rp.saida_b) as saida_b
+from registro_ponto rp
+join funcionario f on f.id = rp.id_funcionario 
+where rp.id_funcionario = 0
+order by  rp.dia;
+
+
+-- Total recebido por funcionario 
+
+select f.nome, 
+fn_min_to_hr(sum(((rp.saida_b-rp.entrada_a)-(rp.entrada_b-rp.saida_a)) + rp.horas_excedidas)) as horas_trabalhadas,
+sum(rp.valor_extra) as horas_extras, 
+sum(rp.total_recebido) as total_do_dia 
+from registro_ponto rp
+join funcionario f on f.id = rp.id_funcionario
+group by f.nome, rp.id_funcionario;
+
 
 

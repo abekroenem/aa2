@@ -11,10 +11,19 @@ import helpers.Config;
 import helpers.Dialogs;
 import helpers.Dialogs;
 import helpers.Forms;
+import java.awt.BorderLayout;
+import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import models.DB;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.swing.JRViewer;
 
 /*import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -48,7 +57,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         desktopPane = new javax.swing.JDesktopPane();
         jToolBar2 = new javax.swing.JToolBar();
         jButton5 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btn_cad_funcionario = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -63,11 +72,12 @@ public class frmPrincipal extends javax.swing.JFrame {
         cadFun = new javax.swing.JMenuItem();
         abaEditMenu = new javax.swing.JMenu();
         cutMenuItem = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        abaAuditoria = new javax.swing.JMenuItem();
         abaRelatorio = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem1 = new javax.swing.JMenuItem();
+        rel_holerite = new javax.swing.JMenuItem();
         abaIdioma = new javax.swing.JMenu();
         rbPTBR = new javax.swing.JRadioButtonMenuItem();
         rbENUS = new javax.swing.JRadioButtonMenuItem();
@@ -95,18 +105,18 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         jToolBar2.add(jButton5);
 
-        jButton2.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/employee.png"))); // NOI18N
-        jButton2.setText("Cadastrar Funcionario");
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn_cad_funcionario.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
+        btn_cad_funcionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/employee.png"))); // NOI18N
+        btn_cad_funcionario.setText("Cadastrar Funcionario");
+        btn_cad_funcionario.setFocusable(false);
+        btn_cad_funcionario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_cad_funcionario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_cad_funcionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btn_cad_funcionarioActionPerformed(evt);
             }
         });
-        jToolBar2.add(jButton2);
+        jToolBar2.add(btn_cad_funcionario);
 
         jButton1.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/clock.png"))); // NOI18N
@@ -215,8 +225,13 @@ public class frmPrincipal extends javax.swing.JFrame {
         cutMenuItem.setText("Registrar Ponto");
         abaEditMenu.add(cutMenuItem);
 
-        jMenuItem3.setText("Auditoria");
-        abaEditMenu.add(jMenuItem3);
+        abaAuditoria.setText("Auditoria");
+        abaAuditoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abaAuditoriaActionPerformed(evt);
+            }
+        });
+        abaEditMenu.add(abaAuditoria);
 
         menuBar.add(abaEditMenu);
 
@@ -236,6 +251,11 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         aboutMenuItem.setMnemonic('a');
         aboutMenuItem.setText("Folha de Ponto");
+        aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutMenuItemActionPerformed(evt);
+            }
+        });
         abaRelatorio.add(aboutMenuItem);
 
         aboutMenuItem1.setMnemonic('a');
@@ -246,6 +266,15 @@ public class frmPrincipal extends javax.swing.JFrame {
             }
         });
         abaRelatorio.add(aboutMenuItem1);
+
+        rel_holerite.setMnemonic('a');
+        rel_holerite.setText("Modelo holerite");
+        rel_holerite.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rel_holeriteActionPerformed(evt);
+            }
+        });
+        abaRelatorio.add(rel_holerite);
 
         menuBar.add(abaRelatorio);
 
@@ -309,9 +338,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btn_cad_funcionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cad_funcionarioActionPerformed
         cadFun.doClick();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btn_cad_funcionarioActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -327,18 +356,18 @@ public class frmPrincipal extends javax.swing.JFrame {
         this.Traduz();
 
         // TODO add your handling code here:
-        rbPTBR.setSelected(false);
+        // rbPTBR.setSelected(false);
     }//GEN-LAST:event_rbENUSActionPerformed
 
     private void rbPTBRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPTBRActionPerformed
 
-        Locale Pt = new Locale("pt", "BR");
+        Locale Pt = new Locale("en", "US");
         // TODO add your handling code here:
         Locale.setDefault(Pt);
 
         this.Traduz();
 
-        rbENUS.setSelected(false);
+        //  rbENUS.setSelected(false);
     }//GEN-LAST:event_rbPTBRActionPerformed
 
     private void cadFunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadFunActionPerformed
@@ -358,7 +387,63 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_contentMenuItemActionPerformed
 
     private void aboutMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItem1ActionPerformed
-        /*    try {
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_aboutMenuItem1ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        try {
+            // TODO add your handling code here:
+            new frmLogin(this).setVisible(true);
+        } catch (SQLException ex) {
+            Dialogs.showError(ex.getMessage());
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void abaAuditoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaAuditoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_abaAuditoriaActionPerformed
+
+    private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
+        // TODO add your handling code here:
+        //Pegando-se o arquivo do relatorio
+
+        try {
+            InputStream inputStream = getClass().getResourceAsStream("../Relatorio/relatorio_usuarios.jasper");
+
+            //Caso seja necessário relatório parametrizado
+            Map parametros = new HashMap();
+
+            //usando uma conexão
+            JasperPrint print = JasperFillManager.fillReport(inputStream, parametros, DB.Connect());
+
+            JRViewer viewer = new JRViewer(print);
+
+            //Criar o jFrame
+            JFrame frameRelatorio = new JFrame("Janela de relatorio");
+
+            //adiciona o JRViewer no JFram
+            frameRelatorio.add(viewer, BorderLayout.CENTER);
+
+            //configura o tamanho padrão da Jframe
+            frameRelatorio.setSize(500, 500);
+
+            //Maximiza o JFrame para ocupar a tela toda.
+            frameRelatorio.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+            //configura a operação padrao quando o jframe for fechado.
+            frameRelatorio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+            //exibi em tela Jframe
+            frameRelatorio.setVisible(true);
+
+        } catch (Exception ex) {
+            Dialogs.showError(ex.getMessage());
+        }
+    }//GEN-LAST:event_aboutMenuItemActionPerformed
+
+    private void rel_holeriteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rel_holeriteActionPerformed
+        try {
             //Pegando-se a conexão do banco
             //Pegando-se o arquivo do relatorio
             InputStream inputStream = getClass().getResourceAsStream("../Relatorio/relatorio_usuarios.jasper");
@@ -392,31 +477,26 @@ public class frmPrincipal extends javax.swing.JFrame {
         } catch (Exception ex) {
             Dialogs.showError(ex.getMessage());
         }
-         */
-// TODO add your handling code here:
-    }//GEN-LAST:event_aboutMenuItem1ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        try {
-            // TODO add your handling code here:
-            new frmLogin(this).setVisible(true);
-        } catch (SQLException ex) {
-            Dialogs.showError(ex.getMessage());
-        }
-    }//GEN-LAST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rel_holeriteActionPerformed
 
     public void Traduz() {
 
         ResourceBundle propriedades = ResourceBundle.getBundle("lang/lg");
-        btnCadastro.setText(propriedades.getString("Register"));
-        abaEditMenu.setText(propriedades.getString("Score"));
-        abaRelatorio.setText(propriedades.getString("Report"));
-        abaIdioma.setText(propriedades.getString("Language"));
-        abaSobre.setText(propriedades.getString("About"));
+        btnCadastro.setText(propriedades.getString("btnCadastro"));
+        abaEditMenu.setText(propriedades.getString("abaEditMenu"));
+        abaRelatorio.setText(propriedades.getString("abaRelatorio"));
+        abaIdioma.setText(propriedades.getString("abaIdioma"));
+        abaSobre.setText(propriedades.getString("abaSobre"));
+        cadUser.setText(propriedades.getString("cadUser"));
+        cadFun.setText(propriedades.getString("cadFun"));
+        abaAuditoria.setText(propriedades.getString("abaAuditoria"));
 
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem abaAuditoria;
     private javax.swing.JMenu abaEditMenu;
     private javax.swing.JMenu abaIdioma;
     private javax.swing.JMenu abaRelatorio;
@@ -425,6 +505,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem aboutMenuItem1;
     private javax.swing.JLabel asdasdasd;
     private javax.swing.JMenu btnCadastro;
+    private javax.swing.JButton btn_cad_funcionario;
     private javax.swing.JMenuItem cadFun;
     private javax.swing.JMenuItem cadUser;
     private javax.swing.JMenuItem contentMenuItem;
@@ -433,17 +514,16 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel iashd;
     private javax.swing.JLabel iashd1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JLabel lblUser;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JRadioButtonMenuItem rbENUS;
     private javax.swing.JRadioButtonMenuItem rbPTBR;
+    private javax.swing.JMenuItem rel_holerite;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -512,6 +512,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         btnponto.setText(props.getString("assinar_ponto"));
         btnrelex.setText(props.getString("rel_horas_extras"));
 
+        rbENUS.setText(props.getString("enus"));
+        rbPTBR.setText(props.getString("ptbr"));
+
         lbldesc.setText(props.getString("sisdesc"));
 
         this.setTitle("SHX " + props.getString("maintitle"));

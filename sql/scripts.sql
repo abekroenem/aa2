@@ -39,9 +39,13 @@ create table config (
 );
 insert into config(key,value) values('lang', 0);
 
-select * from registro_ponto;
 
-select * from funcionario;
+CREATE OR REPLACE FUNCTION fn_min_to_hr(mins int)
+RETURNS numeric AS
+$BODY$ 
+select  cast(date_part('hours',interval '1 minute' * mins) * 1.0 + 
+(date_part('minutes',interval '1 minute' * mins) * .01) as numeric(18,2));
+$BODY$
+LANGUAGE sql VOLATILE;
 
-truncate table registro_ponto;
 

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Relatorio_Principal" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="18618a7c-349d-40d2-be6c-bab1ed72d524">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select
+to_char(rp.dia, 'dd/MM/yyyy'),
+f.nome,
+f.salario,
+f.hora_dia, f.valor_hora,
+fn_min_to_hr((rp.saida_b-rp.entrada_a)-(rp.entrada_b-rp.saida_a)) as horas_trabalhadas,
+rp.percent_aplicado,
+fn_min_to_hr(rp.horas_excedidas) as horas_extras,
+rp.valor_extra,
+rp.total_recebido
+from registro_ponto rp
+join funcionario f on f.id = rp.id_funcionario
+order by rp.dia]]>
+	</queryString>
+	<field name="to_char" class="java.lang.String"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="salario" class="java.math.BigDecimal"/>
+	<field name="hora_dia" class="java.lang.Integer"/>
+	<field name="valor_hora" class="java.math.BigDecimal"/>
+	<field name="horas_trabalhadas" class="java.lang.String"/>
+	<field name="percent_aplicado" class="java.math.BigDecimal"/>
+	<field name="horas_extras" class="java.lang.String"/>
+	<field name="valor_extra" class="java.math.BigDecimal"/>
+	<field name="total_recebido" class="java.math.BigDecimal"/>
+	<group name="Group1">
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Group2">
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Group3">
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Group4">
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="45b087ca-2087-433d-9078-6cc77771b9a7"/>
+				<staticText>
+					<reportElement x="20" y="20" width="515" height="43" forecolor="#FFFFFF" uuid="53b348e4-b596-4196-bcb3-6013542371ac"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Relatorio de Comissão]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="239" y="63" width="336" height="20" forecolor="#FFFFFF" uuid="bb327d75-1436-46bd-96af-e40655fbb815"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Sistema de Controle de Horas Extras]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="022f9bce-d5aa-45e7-8408-687e807c69a5"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="0" width="55" height="20" uuid="1ea6082a-eba2-42a3-a0b9-18fc69c595bf"/>
+				<text><![CDATA[to_char]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="55" y="0" width="55" height="20" uuid="2e39ff4c-13ca-4729-af41-2222f5ba273f"/>
+				<text><![CDATA[nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="0" width="55" height="20" uuid="248b15e5-4ed7-4197-a196-75d379cce456"/>
+				<text><![CDATA[salario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="165" y="0" width="55" height="20" uuid="b104c65a-0159-4e2f-93e9-78170333a59a"/>
+				<text><![CDATA[hora_dia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="220" y="0" width="55" height="20" uuid="b3405580-123b-4e38-a5fa-7a61129b3e22"/>
+				<text><![CDATA[valor_hora]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="275" y="0" width="55" height="20" uuid="fbd63c1b-15a1-4a49-ba7e-23a81e762c7e"/>
+				<text><![CDATA[horas_trabalhadas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="0" width="55" height="20" uuid="f5169c22-d914-42ac-b7b3-abf6f3d95a27"/>
+				<text><![CDATA[percent_aplicado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="385" y="0" width="55" height="20" uuid="0f85194a-8e8e-44ce-9e2d-85304541b85c"/>
+				<text><![CDATA[horas_extras]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="0" width="55" height="20" uuid="4d107803-b636-403b-846c-48511362bbff"/>
+				<text><![CDATA[valor_extra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="495" y="0" width="55" height="20" uuid="c0affe13-9493-4d96-9bae-6bf6428be1ab"/>
+				<text><![CDATA[total_recebido]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="82d34aef-92cf-4485-84b2-b6e2c620594c"/>
+			</line>
+			<textField>
+				<reportElement x="0" y="0" width="55" height="20" uuid="fcb105ef-bff0-4c78-8bfa-effa5b12e252"/>
+				<textFieldExpression><![CDATA[$F{to_char}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="55" y="0" width="55" height="20" uuid="c7b6d87a-de7c-4a88-b436-b3508d7b9aea"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="0" width="55" height="20" uuid="1dc90162-f805-43ce-8888-2e3067e230eb"/>
+				<textFieldExpression><![CDATA[$F{salario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="165" y="0" width="55" height="20" uuid="bec79f77-36d4-470b-93dc-64c3ba798808"/>
+				<textFieldExpression><![CDATA[$F{hora_dia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="220" y="0" width="55" height="20" uuid="99dd3e77-57ef-4f89-bc6d-b8f6ecf22885"/>
+				<textFieldExpression><![CDATA[$F{valor_hora}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="275" y="0" width="55" height="20" uuid="c8771878-0d84-467a-81b8-c4a2132949e1"/>
+				<textFieldExpression><![CDATA[$F{horas_trabalhadas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="330" y="0" width="55" height="20" uuid="063bfadc-6d50-4c88-8a28-aaf98e3dc891"/>
+				<textFieldExpression><![CDATA[$F{percent_aplicado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="385" y="0" width="55" height="20" uuid="dfe6eb6f-add2-411c-970b-f2459e869394"/>
+				<textFieldExpression><![CDATA[$F{horas_extras}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="0" width="55" height="20" uuid="08c5c2d4-09a2-4d9b-bea3-2f8b3346bcfc"/>
+				<textFieldExpression><![CDATA[$F{valor_extra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="495" y="0" width="55" height="20" uuid="fb3675be-ddd4-4786-bc61-63a01e3d1ec0"/>
+				<textFieldExpression><![CDATA[$F{total_recebido}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="b88df027-1e2d-426d-9c72-9fc96b6b7a33"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="5f4019a6-f222-4778-93b7-a5155951c334"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="4d90b5a8-647e-4a36-b030-8af5359f5cd4"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

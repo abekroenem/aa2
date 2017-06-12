@@ -25,8 +25,8 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.swing.JRViewer;
 
 /*import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.swing.JRViewer;
+ import net.sf.jasperreports.engine.JasperPrint;
+ import net.sf.jasperreports.swing.JRViewer;
  */
 /**
  *
@@ -79,6 +79,8 @@ public class frmPrincipal extends javax.swing.JFrame {
         rel_ponto = new javax.swing.JMenuItem();
         rel_users = new javax.swing.JMenuItem();
         rel_holerite = new javax.swing.JMenuItem();
+        rel_holerite1 = new javax.swing.JMenuItem();
+        rel_totalRecebido = new javax.swing.JMenuItem();
         abaIdioma = new javax.swing.JMenu();
         rbPTBR = new javax.swing.JRadioButtonMenuItem();
         rbENUS = new javax.swing.JRadioButtonMenuItem();
@@ -238,7 +240,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         abaRelatorio.add(rel_ponto);
 
         rel_users.setMnemonic('a');
-        rel_users.setText("Relatorio de Usuarios");
+        rel_users.setText("Usuarios");
         rel_users.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rel_usersActionPerformed(evt);
@@ -254,6 +256,24 @@ public class frmPrincipal extends javax.swing.JFrame {
             }
         });
         abaRelatorio.add(rel_holerite);
+
+        rel_holerite1.setMnemonic('a');
+        rel_holerite1.setText("Relatorio Principal");
+        rel_holerite1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rel_holerite1ActionPerformed(evt);
+            }
+        });
+        abaRelatorio.add(rel_holerite1);
+
+        rel_totalRecebido.setMnemonic('a');
+        rel_totalRecebido.setText("Total recebido por funcionario ");
+        rel_totalRecebido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rel_totalRecebidoActionPerformed(evt);
+            }
+        });
+        abaRelatorio.add(rel_totalRecebido);
 
         menuBar.add(abaRelatorio);
 
@@ -368,7 +388,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_cadUserActionPerformed
 
     private void rel_funcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rel_funcActionPerformed
- try {
+        try {
             InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Relatorio_Todos_Funcionarios.jasper");
 
             //Caso seja necessário relatório parametrizado
@@ -403,7 +423,40 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_rel_funcActionPerformed
 
     private void rel_usersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rel_usersActionPerformed
+        
+         try {
+            InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Relatorio_Todos_Usuarios.jasper");
 
+            //Caso seja necessário relatório parametrizado
+            Map parametros = new HashMap();
+
+            //usando uma conexão
+            JasperPrint print = JasperFillManager.fillReport(inputStream, parametros, DB.Connect());
+
+            JRViewer viewer = new JRViewer(print);
+
+            //Criar o jFrame
+            JFrame frameRelatorio = new JFrame("Janela de relatorio");
+
+            //adiciona o JRViewer no JFram
+            frameRelatorio.add(viewer, BorderLayout.CENTER);
+
+            //configura o tamanho padrão da Jframe
+            frameRelatorio.setSize(500, 500);
+
+            //Maximiza o JFrame para ocupar a tela toda.
+            frameRelatorio.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+            //configura a operação padrao quando o jframe for fechado.
+            frameRelatorio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+            //exibi em tela Jframe
+            frameRelatorio.setVisible(true);
+
+        } catch (Exception ex) {
+            Dialogs.showError(ex.getMessage());
+        }
+            
 // TODO add your handling code here:
     }//GEN-LAST:event_rel_usersActionPerformed
 
@@ -419,7 +472,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     private void rel_pontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rel_pontoActionPerformed
 
         try {
-            InputStream inputStream = getClass().getResourceAsStream("../Relatorio/relatorio_usuarios.jasper");
+            InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Relatorio_Folha_de_Ponto.jasper");
 
             //Caso seja necessário relatório parametrizado
             Map parametros = new HashMap();
@@ -452,11 +505,94 @@ public class frmPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_rel_pontoActionPerformed
 
+    private void rel_holerite1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rel_holerite1ActionPerformed
+        
+        try {
+            //Pegando-se a conexão do banco
+            //Pegando-se o arquivo do relatorio
+            InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Relatorio_Principal.jasper");
+
+            //Caso seja necessário relatório parametrizado
+            Map parametros = new HashMap();
+
+            //usando uma conexão
+            JasperPrint print = JasperFillManager.fillReport(inputStream, parametros, DB.Connect());
+
+            JRViewer viewer = new JRViewer(print);
+
+            //Criar o jFrame
+            JFrame frameRelatorio = new JFrame("Janela de relatorio");
+
+            //adiciona o JRViewer no JFram
+            frameRelatorio.add(viewer, BorderLayout.CENTER);
+
+            //configura o tamanho padrão da Jframe
+            frameRelatorio.setSize(500, 500);
+
+            //Maximiza o JFrame para ocupar a tela toda.
+            frameRelatorio.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+            //configura a operação padrao quando o jframe for fechado.
+            frameRelatorio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+            //exibi em tela Jframe
+            frameRelatorio.setVisible(true);
+
+        } catch (Exception ex) {
+            Dialogs.showError(ex.getMessage());
+        }
+
+
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_rel_holerite1ActionPerformed
+
+    private void rel_totalRecebidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rel_totalRecebidoActionPerformed
+
+         try {
+            //Pegando-se a conexão do banco
+            //Pegando-se o arquivo do relatorio
+            InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Relatorio_recebidoPorFuncionario.jasper");
+
+            //Caso seja necessário relatório parametrizado
+            Map parametros = new HashMap();
+
+            //usando uma conexão
+            JasperPrint print = JasperFillManager.fillReport(inputStream, parametros, DB.Connect());
+
+            JRViewer viewer = new JRViewer(print);
+
+            //Criar o jFrame
+            JFrame frameRelatorio = new JFrame("Janela de relatorio");
+
+            //adiciona o JRViewer no JFram
+            frameRelatorio.add(viewer, BorderLayout.CENTER);
+
+            //configura o tamanho padrão da Jframe
+            frameRelatorio.setSize(500, 500);
+
+            //Maximiza o JFrame para ocupar a tela toda.
+            frameRelatorio.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+            //configura a operação padrao quando o jframe for fechado.
+            frameRelatorio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+            //exibi em tela Jframe
+            frameRelatorio.setVisible(true);
+
+        } catch (Exception ex) {
+            Dialogs.showError(ex.getMessage());
+        }
+
+
+    // TODO add your handling code here:
+    }//GEN-LAST:event_rel_totalRecebidoActionPerformed
+
     private void rel_holeriteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rel_holeriteActionPerformed
         try {
             //Pegando-se a conexão do banco
             //Pegando-se o arquivo do relatorio
-            InputStream inputStream = getClass().getResourceAsStream("../Relatorio/relatorio_usuarios.jasper");
+           InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Relatorio_Principal.jasper");
 
             //Caso seja necessário relatório parametrizado
             Map parametros = new HashMap();
@@ -545,7 +681,9 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem regponto;
     private javax.swing.JMenuItem rel_func;
     private javax.swing.JMenuItem rel_holerite;
+    private javax.swing.JMenuItem rel_holerite1;
     private javax.swing.JMenuItem rel_ponto;
+    private javax.swing.JMenuItem rel_totalRecebido;
     private javax.swing.JMenuItem rel_users;
     // End of variables declaration//GEN-END:variables
 

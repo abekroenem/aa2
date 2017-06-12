@@ -1,99 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f75451bb-5f85-46bb-8368-de75af742542">
-	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
-	<queryString>
-		<![CDATA[select * from funcionario;]]>
-	</queryString>
-	<field name="id" class="java.lang.Integer"/>
-	<field name="nome" class="java.lang.String"/>
-	<field name="cpf" class="java.lang.String"/>
-	<field name="salario" class="java.math.BigDecimal"/>
-	<field name="hora_dia" class="java.lang.Integer"/>
-	<field name="valor_hora" class="java.math.BigDecimal"/>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
-	<title>
-		<band height="79" splitType="Stretch">
-			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="422" y="57" width="100" height="20" uuid="44e6f46f-3ec0-47be-88cb-33dd5e64f88d"/>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
-		</band>
-	</title>
-	<pageHeader>
-		<band height="35" splitType="Stretch"/>
-	</pageHeader>
-	<columnHeader>
-		<band height="61" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="0" width="92" height="20" uuid="9fb3916f-b82c-4b65-8cb3-7ec3e943f31c"/>
-				<text><![CDATA[id]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="92" y="0" width="92" height="20" uuid="ace436c9-e4fc-4da7-aa04-3b1fb2aa2bb5"/>
-				<text><![CDATA[nome]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="184" y="0" width="92" height="20" uuid="3abf3f38-f800-47ed-b795-49320cc4b7eb"/>
-				<text><![CDATA[cpf]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="276" y="0" width="92" height="20" uuid="17156e14-cab8-41a9-96ef-8d6117d5e5f2"/>
-				<text><![CDATA[salario]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="368" y="0" width="92" height="20" uuid="3b9ed19a-f8e7-4f87-9bb1-633d17081cc9"/>
-				<text><![CDATA[hora_dia]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="460" y="0" width="92" height="20" uuid="dc994cce-1417-435d-975b-00f1ec80b912"/>
-				<text><![CDATA[valor_hora]]></text>
-			</staticText>
-		</band>
-	</columnHeader>
-	<detail>
-		<band height="125" splitType="Stretch">
-			<textField>
-				<reportElement x="0" y="0" width="92" height="20" uuid="fe1f0d86-9bce-4aee-bc52-7833097c7f59"/>
-				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="92" y="0" width="92" height="20" uuid="707d8d49-4c43-47e6-b869-f177d1891e13"/>
-				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="184" y="0" width="92" height="20" uuid="cb5ae2d8-eaf1-422b-bd96-bc1ef6bda546"/>
-				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="276" y="0" width="92" height="20" uuid="490f72f5-b473-4355-81e1-19d44be1b9a4"/>
-				<textFieldExpression><![CDATA[$F{salario}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="368" y="0" width="92" height="20" uuid="e8d903ce-a05f-496c-9f10-845f5e33a47b"/>
-				<textFieldExpression><![CDATA[$F{hora_dia}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="460" y="0" width="92" height="20" uuid="3f4bf7ea-5307-4fc0-bfa3-39158e5c234a"/>
-				<textFieldExpression><![CDATA[$F{valor_hora}]]></textFieldExpression>
-			</textField>
-		</band>
-	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch">
-			<textField>
-				<reportElement x="47" y="17" width="100" height="20" uuid="312a3a59-049e-474c-becd-372bdef23b84"/>
-				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
-			</textField>
-		</band>
-	</summary>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD JasperReport//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+    <background>
+        <band/>
+    </background>
+    <title>
+        <band height="79"/>
+    </title>
+    <pageHeader>
+        <band height="35"/>
+    </pageHeader>
+    <columnHeader>
+        <band height="61"/>
+    </columnHeader>
+    <detail>
+        <band height="125"/>
+    </detail>
+    <columnFooter>
+        <band height="45"/>
+    </columnFooter>
+    <pageFooter>
+        <band height="54"/>
+    </pageFooter>
+    <summary>
+        <band height="42"/>
+    </summary>
 </jasperReport>

@@ -6,12 +6,12 @@
 package views;
 
 import controllers.FuncionarioController;
+import helpers.Config;
 import helpers.Dialogs;
 import helpers.Formats;
 import helpers.Forms;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ResourceBundle;
 import javax.swing.table.DefaultTableModel;
 import jdk.nashorn.internal.objects.Global;
 import models.Funcionario;
@@ -28,13 +28,30 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
     private boolean ersHora = false;
 
     public void Traduz() {
-        CPF_CADASTRADO = "CPF ja cadastrado em outro funcionario!";
-        FUNCIONARIO_INSERIDO_SUCESS = "Funcionario inserido com Sucesso!";
-        FUNCINOARIO_EDITADO_SUCESS = "Funcionario editado com Sucesso!";
-        BTN_NOVO = "Novo";
-        BTN_SALVAR = "Salvar";
 
-        DELETAR_FUNC = "Deseja deletar funcionario?";
+        ResourceBundle rbl = null;
+        rbl = Config.getResources();
+
+        CPF_CADASTRADO = rbl.getString("cpf_cadastrado");
+        FUNCIONARIO_INSERIDO_SUCESS = rbl.getString("func_sucess");
+        FUNCINOARIO_EDITADO_SUCESS = rbl.getString("func_editado");
+        BTN_NOVO = rbl.getString("btnNovo");
+        BTN_SALVAR = rbl.getString("btnSalvar");
+        DELETAR_FUNC = rbl.getString("deletar_func");
+
+        lblNome.setText(rbl.getString("nome"));
+        lblCPF.setText(rbl.getString("cpf"));
+        lblSalario.setText(rbl.getString("salario"));
+        lblHoraBase.setText(rbl.getString("hora_base"));
+        lblValorHora.setText(rbl.getString("valor_hora"));
+
+        btnDeletar.setText(rbl.getString("btndeletar"));
+
+        tbFunc.getColumnModel().getColumn(1).setHeaderValue(rbl.getString("cadFun"));
+        tbFunc.getColumnModel().getColumn(2).setHeaderValue(rbl.getString("cpf"));
+        tbFunc.getColumnModel().getColumn(3).setHeaderValue(rbl.getString("salario"));
+        tbFunc.getColumnModel().getColumn(4).setHeaderValue(rbl.getString("v_hora"));
+
     }
 
     private void defaultLayout(boolean dl) {

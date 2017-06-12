@@ -50,6 +50,13 @@ public class FuncionarioDAO extends GenericDAO {
         super.Sql.setString(2, ((Funcionario) obj).getNome());
         super.Sql.execute();
         super.Sql.close();
+
+        sql = "DELETE FROM REGISTRO_PONTO WHERE ID_FUNCIONARIO=?";
+        super.Sql = super.Conn.prepareStatement(sql);
+        super.Sql.setInt(1, ((Funcionario) obj).getId());
+        super.Sql.execute();
+
+        super.Sql.close();
     }
 
     @Override
@@ -127,7 +134,7 @@ public class FuncionarioDAO extends GenericDAO {
     public <T> List<T> SearchEntityByName(String Value) throws SQLException {
         List<Funcionario> listFunc = new ArrayList();
         String sql = "SELECT * FROM FUNCIONARIO WHERE NOME LIKE \'" + Value.toUpperCase() + "%\'";
-         super.Sql = super.Conn.prepareStatement(sql);
+        super.Sql = super.Conn.prepareStatement(sql);
         ResultSet rs = super.Sql.executeQuery();
         Funcionario obj = null;
         while (rs.next()) {

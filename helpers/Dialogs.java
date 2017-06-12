@@ -42,7 +42,7 @@ public class Dialogs {
 
     public static int showConfirm(String msg) {
         Traduz();
-        return JOptionPane.showOptionDialog(null, msg, CONFIRMAR, JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opcoes, opcoes[0]);
+        return JOptionPane.showOptionDialog(null, msg, CONFIRMAR, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoes, opcoes[0]);
 
     }
 

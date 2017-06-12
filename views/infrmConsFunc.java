@@ -6,10 +6,12 @@
 package views;
 
 import controllers.FuncionarioController;
+import helpers.Config;
 import helpers.Dialogs;
 import helpers.Formats;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import models.Funcionario;
@@ -20,16 +22,16 @@ import models.Funcionario;
  */
 public class infrmConsFunc extends javax.swing.JInternalFrame {
 
-    private String CPF_CADASTRADO, FUNCIONARIO_INSERIDO_SUCESS, FUNCINOARIO_EDITADO_SUCESS, BTN_NOVO, BTN_SALVAR;
     private infrmPonto out_Ponto;
     private FuncionarioController m_FuncC;
 
     public void Traduz() {
-        CPF_CADASTRADO = "CPF ja cadastrado em outro funcionario!";
-        FUNCIONARIO_INSERIDO_SUCESS = "Funcionario inserido com Sucesso!";
-        FUNCINOARIO_EDITADO_SUCESS = "Funcionario editado com Sucesso!";
-        BTN_NOVO = "Novo";
-        BTN_SALVAR = "Salvar";
+        ResourceBundle rbl = null;
+        rbl = Config.getResources();
+        lblFunc.setText(rbl.getString("cadFun"));
+
+        tbFunc.getColumnModel().getColumn(1).setHeaderValue(rbl.getString("cadFun"));
+        tbFunc.getColumnModel().getColumn(2).setHeaderValue(rbl.getString("cpf"));
     }
 
     private void loadTable() {
@@ -72,17 +74,17 @@ public class infrmConsFunc extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblSalario = new javax.swing.JLabel();
+        lblFunc = new javax.swing.JLabel();
         txtFuncionario = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbFunc = new javax.swing.JTable();
 
-        setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        setBorder(new javax.swing.border.SoftBevelBorder(0));
         setClosable(true);
         setTitle("SHX Consultar Func");
         setName("infrmConsFunc"); // NOI18N
 
-        lblSalario.setText("Funcionario");
+        lblFunc.setText("Funcionario");
 
         txtFuncionario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -137,7 +139,7 @@ public class infrmConsFunc extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(9, 9, 9)
-                .addComponent(lblSalario)
+                .addComponent(lblFunc)
                 .addGap(6, 6, 6)
                 .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -148,7 +150,7 @@ public class infrmConsFunc extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSalario))
+                    .addComponent(lblFunc))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -176,7 +178,7 @@ public class infrmConsFunc extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblSalario;
+    private javax.swing.JLabel lblFunc;
     private javax.swing.JTable tbFunc;
     private javax.swing.JTextField txtFuncionario;
     // End of variables declaration//GEN-END:variables

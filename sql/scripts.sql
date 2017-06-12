@@ -39,7 +39,7 @@ create table config (
 );
 insert into config(key,value) values('lang', 0);
 
-
+    
 CREATE OR REPLACE FUNCTION fn_min_to_hr(mins int)
 RETURNS numeric AS
 $BODY$ 

@@ -33,7 +33,6 @@ create table registro_ponto (
     total_recebido decimal(10,2) --valor cheio recebido no dia com horas extras
 );
 
-
 create table config (
     key_x varchar(10),
     value_x Int

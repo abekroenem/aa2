@@ -14,7 +14,7 @@ public class Config {
     public static int getLang() throws SQLException {
 
         int lang = Constants.PT_BR;
-        ResultSet rs = DB.Connect().prepareStatement("SELECT VALUE_X FROM CONFIG WHERE KEY_X='lang'").executeQuery();
+        ResultSet rs = DB.Connect().prepareStatement("SELECT VALUE_X FROM CONFIG WHERE KEY_X= 'lang' ").executeQuery();
         if (rs.next()) {
             lang = rs.getInt("VALUE_X");
         }
@@ -22,14 +22,14 @@ public class Config {
     }
 
     public static void setLang(int Lang) throws SQLException {
-        PreparedStatement pstm = DB.Connect().prepareStatement("UPDATE CONFIG SET VALUE_X = ? WHERE KEY_X = 'lang'");
+        PreparedStatement pstm = DB.Connect().prepareStatement("UPDATE CONFIG SET VALUE_X = ? WHERE KEY_X = ? ");
         pstm.setInt(1, Lang);
-        pstm.executeQuery();
+        pstm.setString(2, "lang");
+        pstm.executeUpdate();
         pstm.close();
     }
 
-    
-    public static ResourceBundle getResources()  {
+    public static ResourceBundle getResources() {
         ResourceBundle rb = null;
         try {
 

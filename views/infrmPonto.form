@@ -38,11 +38,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="txtData" min="-2" pref="85" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                              <Component id="lblPerc" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="txtData" min="-2" pref="85" max="-2" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="txtFuncionario" min="-2" pref="328" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -105,27 +101,21 @@
           </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                          <Component id="txtFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblSalario" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="btnSearch" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                          <Component id="txtEntrada1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblNome3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                          <Component id="txtEntrada2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblNome1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                      <Component id="txtFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblSalario" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="38" pref="38" max="-2" attributes="0"/>
-                      <Component id="lblPerc" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSearch" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                      <Component id="txtEntrada1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblNome3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                      <Component id="txtEntrada2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblNome1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace type="unrelated" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" pref="43" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="btnNovo" min="-2" max="-2" attributes="0"/>
@@ -176,7 +166,6 @@
         <Property name="horizontalAlignment" type="int" value="0"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDataActionPerformed"/>
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDataKeyTyped"/>
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDataKeyPressed"/>
       </Events>
@@ -231,7 +220,7 @@
                 <Column editable="false" title="Funcionario" type="java.lang.String"/>
                 <Column editable="true" title="H. Base" type="java.lang.Object"/>
                 <Column editable="false" title="H. Trab." type="java.lang.String"/>
-                <Column editable="false" title="H. Extra" type="java.lang.Object"/>
+                <Column editable="false" title="H. Ex." type="java.lang.Object"/>
                 <Column editable="false" title="%" type="java.lang.Object"/>
                 <Column editable="false" title="T. Extra" type="java.lang.Object"/>
                 <Column editable="false" title="T. Dia" type="java.lang.Object"/>
@@ -244,7 +233,7 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="350" minWidth="350" prefWidth="350" resizable="true">
+                <Column maxWidth="280" minWidth="280" prefWidth="280" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -264,17 +253,17 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="40" minWidth="40" prefWidth="40" resizable="true">
+                <Column maxWidth="60" minWidth="60" prefWidth="60" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                <Column maxWidth="100" minWidth="100" prefWidth="100" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="80" minWidth="80" prefWidth="80" resizable="true">
+                <Column maxWidth="130" minWidth="130" prefWidth="130" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -288,17 +277,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="lblPerc">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="DejaVu Sans" size="13" style="1"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="8" green="8" red="fb" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Percentual aplicado para o dia: 50%"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtEntrada1">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">

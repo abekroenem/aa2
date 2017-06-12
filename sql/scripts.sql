@@ -39,3 +39,9 @@ create table config (
 );
 insert into config(key,value) values('lang', 0);
 
+select * from registro_ponto;
+
+select * from funcionario;
+
+truncate table registro_ponto;
+

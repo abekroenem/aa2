@@ -83,7 +83,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         jToolBar2.setRollover(true);
 
         jButton5.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/employee.png"))); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/change_user.png"))); // NOI18N
         jButton5.setText("Trocar Usuario");
         jButton5.setFocusable(false);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);

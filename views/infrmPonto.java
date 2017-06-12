@@ -48,7 +48,6 @@ public class infrmPonto extends javax.swing.JInternalFrame {
         txtEntrada2.setText("");
         txtSaida1.setText("");
         txtSaida2.setText("");
-        lblPerc.setVisible(false);
         txtFuncionario.setEnabled(!dl);
         txtData.setEnabled(!dl);
         txtEntrada1.setEnabled(!dl);
@@ -77,6 +76,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
                     tablemd.addRow(new Object[]{
                         Formats.Data.Format(pnt.getData()),
                         objFunc.getNome(),
+                        objFunc.gethora_dia(),
                         Formats.Hora.Format(pnt.getHoras_Trabalhadas()),
                         Formats.Hora.Format(pnt.getHoras_excedidas()),
                         pnt.getPercent_aplicado(),
@@ -157,7 +157,6 @@ public class infrmPonto extends javax.swing.JInternalFrame {
         btnSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbPonto = new javax.swing.JTable();
-        lblPerc = new javax.swing.JLabel();
         txtEntrada1 = new javax.swing.JFormattedTextField();
         txtEntrada2 = new javax.swing.JFormattedTextField();
         txtSaida1 = new javax.swing.JFormattedTextField();
@@ -191,11 +190,6 @@ public class infrmPonto extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
         txtData.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtData.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDataActionPerformed(evt);
-            }
-        });
         txtData.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtDataKeyTyped(evt);
@@ -230,7 +224,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Data", "Funcionario", "H. Base", "H. Trab.", "H. Extra", "%", "T. Extra", "T. Dia"
+                "Data", "Funcionario", "H. Base", "H. Trab.", "H. Ex.", "%", "T. Extra", "T. Dia"
             }
         ) {
             Class[] types = new Class [] {
@@ -253,9 +247,9 @@ public class infrmPonto extends javax.swing.JInternalFrame {
             tbPonto.getColumnModel().getColumn(0).setMinWidth(80);
             tbPonto.getColumnModel().getColumn(0).setPreferredWidth(80);
             tbPonto.getColumnModel().getColumn(0).setMaxWidth(80);
-            tbPonto.getColumnModel().getColumn(1).setMinWidth(350);
-            tbPonto.getColumnModel().getColumn(1).setPreferredWidth(350);
-            tbPonto.getColumnModel().getColumn(1).setMaxWidth(350);
+            tbPonto.getColumnModel().getColumn(1).setMinWidth(280);
+            tbPonto.getColumnModel().getColumn(1).setPreferredWidth(280);
+            tbPonto.getColumnModel().getColumn(1).setMaxWidth(280);
             tbPonto.getColumnModel().getColumn(2).setMinWidth(60);
             tbPonto.getColumnModel().getColumn(2).setPreferredWidth(60);
             tbPonto.getColumnModel().getColumn(2).setMaxWidth(60);
@@ -265,17 +259,16 @@ public class infrmPonto extends javax.swing.JInternalFrame {
             tbPonto.getColumnModel().getColumn(4).setMinWidth(60);
             tbPonto.getColumnModel().getColumn(4).setPreferredWidth(60);
             tbPonto.getColumnModel().getColumn(4).setMaxWidth(60);
-            tbPonto.getColumnModel().getColumn(5).setMinWidth(40);
-            tbPonto.getColumnModel().getColumn(5).setPreferredWidth(40);
-            tbPonto.getColumnModel().getColumn(5).setMaxWidth(40);
-            tbPonto.getColumnModel().getColumn(7).setMinWidth(80);
-            tbPonto.getColumnModel().getColumn(7).setPreferredWidth(80);
-            tbPonto.getColumnModel().getColumn(7).setMaxWidth(80);
+            tbPonto.getColumnModel().getColumn(5).setMinWidth(60);
+            tbPonto.getColumnModel().getColumn(5).setPreferredWidth(60);
+            tbPonto.getColumnModel().getColumn(5).setMaxWidth(60);
+            tbPonto.getColumnModel().getColumn(6).setMinWidth(100);
+            tbPonto.getColumnModel().getColumn(6).setPreferredWidth(100);
+            tbPonto.getColumnModel().getColumn(6).setMaxWidth(100);
+            tbPonto.getColumnModel().getColumn(7).setMinWidth(130);
+            tbPonto.getColumnModel().getColumn(7).setPreferredWidth(130);
+            tbPonto.getColumnModel().getColumn(7).setMaxWidth(130);
         }
-
-        lblPerc.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
-        lblPerc.setForeground(new java.awt.Color(251, 8, 8));
-        lblPerc.setText("Percentual aplicado para o dia: 50%");
 
         try {
             txtEntrada1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
@@ -350,10 +343,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
                             .addComponent(lblNome, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(4, 4, 4)
-                                .addComponent(lblPerc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -400,21 +390,17 @@ public class infrmPonto extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblSalario))
-                        .addComponent(btnSearch, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtEntrada1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblNome3))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtEntrada2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblNome1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(lblPerc)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblSalario))
+                    .addComponent(btnSearch, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtEntrada1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblNome3))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtEntrada2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblNome1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 43, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnNovo)
@@ -448,10 +434,6 @@ public class infrmPonto extends javax.swing.JInternalFrame {
         defaultLayout(true);
         m_objFunc = null;
     }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void txtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDataActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         // TODO add your handling code here:   
@@ -533,7 +515,6 @@ public class infrmPonto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblNome2;
     private javax.swing.JLabel lblNome3;
     private javax.swing.JLabel lblNome4;
-    private javax.swing.JLabel lblPerc;
     private javax.swing.JLabel lblSalario;
     private javax.swing.JTable tbPonto;
     private javax.swing.JFormattedTextField txtData;

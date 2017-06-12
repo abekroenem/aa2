@@ -85,8 +85,12 @@ public class frmCadUsuario extends javax.swing.JFrame {
     private void InserirUsuario() throws Exception {
         m_UserC = new UsuarioController();
         m_UserC.Add(txtUser.getText(), txtPass.getText(), txtConf.getText(), chkAdmin.isSelected());
+        if (!m_showGrid) {
+            Env.Constants.ObjUser = new UsuarioController().SearchUserByName(txtUser.getText());
+        }
         defaultLayout(true);
         Dialogs.showInfo(USUARIO_INSERIDO_SUCESS);
+
     }
 
     private boolean UsuarioDuplicado() throws Exception {

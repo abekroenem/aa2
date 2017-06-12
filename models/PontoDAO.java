@@ -10,10 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author qwerty
- */
 public class PontoDAO extends GenericDAO {
 
     public PontoDAO() throws SQLException {
@@ -21,13 +17,15 @@ public class PontoDAO extends GenericDAO {
     }
 
     private void preencherObj(Ponto obj, ResultSet rs) throws SQLException {
+
         obj.setId(rs.getInt("id"));
         obj.setData((java.sql.Date) rs.getDate("dia"));
         obj.setId_funcionario(rs.getInt("id_funcionario"));
         obj.setEntrada_a(rs.getInt("entrada_a"));
         obj.setSaida_a(rs.getInt("saida_a"));
         obj.setEntrada_b(rs.getInt("entrada_b"));
-        obj.setSaida_b(rs.getInt("saida_a"));
+        obj.setSaida_b(rs.getInt("saida_b"));
+
     }
 
     @Override
@@ -40,10 +38,12 @@ public class PontoDAO extends GenericDAO {
 
         super.Sql.setDate(1, ((Ponto) obj).getData());
         super.Sql.setInt(2, ((Ponto) obj).getId_funcionario());
+
         super.Sql.setInt(3, ((Ponto) obj).getEntrada_a());
         super.Sql.setInt(4, ((Ponto) obj).getSaida_a());
         super.Sql.setInt(5, ((Ponto) obj).getEntrada_b());
         super.Sql.setInt(6, ((Ponto) obj).getSaida_b());
+
         super.Sql.setInt(7, ((Ponto) obj).getHoras_excedidas());
         super.Sql.setDouble(8, ((Ponto) obj).getPercent_aplicado());
         super.Sql.setDouble(9, ((Ponto) obj).getValor_extra());

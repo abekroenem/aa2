@@ -26,6 +26,7 @@ public class Ponto {
     private Funcionario objFun = null;
 
     public Ponto() {
+
         this.Id = 0;
         this.data = null;
         this.id_funcionario = 0;
@@ -33,6 +34,7 @@ public class Ponto {
         this.saida_a = 0;
         this.entrada_b = 0;
         this.saida_b = 0;
+
     }
 
     public int getId() {
@@ -59,7 +61,7 @@ public class Ponto {
     }
 
     public void setId_funcionario(int id_funcionario) throws SQLException {
-        objFun = new FuncionarioController().getByID(this.id_funcionario);
+        this.objFun = new FuncionarioController().getByID(id_funcionario);
         if (id_funcionario < 1) {
             throw new IllegalArgumentException("Funcionario deve ser informado em um registro de ponto!");
         }
@@ -113,7 +115,14 @@ public class Ponto {
 
     public int getHoras_excedidas() {
         if (objFun != null) {
-            return (this.getHoras_Trabalhadas() - objFun.gethora_dia());
+            int horas_trab = this.getHoras_Trabalhadas();
+            int hora_dia = objFun.gethora_dia() * 60;
+            if (horas_trab <= hora_dia) {
+                return 0;
+            } else {
+                return horas_trab - hora_dia;
+            }
+
         } else {
             return 0;
         }
@@ -136,8 +145,12 @@ public class Ponto {
 
     public double getValor_extra() throws SQLException {
         if (objFun != null) {
-            double min_value = objFun.getValor_hora() * 60;
-            return ((this.getHoras_excedidas() * min_value) * (this.getPercent_aplicado() / 100)) / 60;
+            double min_value = objFun.getValor_hora() / 60;
+            double horas_exec = this.getHoras_excedidas();
+            double valor_tot = (horas_exec * min_value);
+            valor_tot = (valor_tot) * (this.getPercent_aplicado() / 100);
+            valor_tot = valor_tot / 60;
+            return valor_tot;
         } else {
             return 0;
         }
@@ -145,14 +158,19 @@ public class Ponto {
 
     public double getTotal_recebido() throws SQLException {
         if (objFun != null) {
-            return (objFun.gethora_dia() * 60) + this.getValor_extra();
+            double valor_hd = (objFun.gethora_dia() * objFun.getValor_hora());
+            double valor_ext = this.getValor_extra();
+            return valor_hd + valor_ext;
         } else {
             return 0;
         }
     }
 
     public int getHoras_Trabalhadas() {
-        return ((this.saida_a) - (this.entrada_a)) + ((this.saida_b) - (this.entrada_b));
+        int horas_corridas = (this.saida_b) - (this.entrada_a);
+        int intervalo = (this.entrada_b) - (this.saida_a);
+        int horas_trab = horas_corridas - intervalo;
+        return horas_trab;
     }
 
 }

@@ -73,6 +73,7 @@ public class Funcionario {
     }
 
     public double getValor_hora() {
-        return Double.parseDouble(String.format("%.2f", ((this.salario / 30) / (this.hora_dia / 60))).replace(",", "."));
+        double valor_hr = (this.salario / 30) / (this.hora_dia / 60);
+        return Double.parseDouble(String.format("%.2f", valor_hr).replace(",", "."));
     }
 }

@@ -27,10 +27,12 @@ public class PontoController {
         Ponto obj = new Ponto();
         obj.setData(data);
         obj.setId_funcionario(id_funcionario);
+
         obj.setEntrada_a(entrada_a);
         obj.setSaida_a(saida_a);
         obj.setEntrada_b(entrada_b);
-        obj.setSaida_b(saida_a);
+        obj.setSaida_b(saida_b);
+
         pntDAO.addEntity(obj);
     }
 

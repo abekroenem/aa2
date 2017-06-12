@@ -10,6 +10,8 @@ import helpers.Dialogs;
 import helpers.Formats;
 import helpers.Forms;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import jdk.nashorn.internal.objects.Global;
 import models.Funcionario;
@@ -21,7 +23,7 @@ import models.Funcionario;
 public class infrmCadFun extends javax.swing.JInternalFrame {
 
     private FuncionarioController m_FuncC = null;
-    private String CPF_CADASTRADO, FUNCIONARIO_INSERIDO_SUCESS, FUNCINOARIO_EDITADO_SUCESS, BTN_NOVO, BTN_SALVAR;
+    private String DELETAR_FUNC, CPF_CADASTRADO, FUNCIONARIO_INSERIDO_SUCESS, FUNCINOARIO_EDITADO_SUCESS, BTN_NOVO, BTN_SALVAR;
     private Funcionario m_objFunc = null;
     private boolean ersHora = false;
 
@@ -31,6 +33,8 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
         FUNCINOARIO_EDITADO_SUCESS = "Funcionario editado com Sucesso!";
         BTN_NOVO = "Novo";
         BTN_SALVAR = "Salvar";
+
+        DELETAR_FUNC = "Deseja deletar funcionario?";
     }
 
     private void defaultLayout(boolean dl) {
@@ -45,6 +49,7 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
         txtCPF.setEnabled(!dl);
         txtSalario.setEnabled(!dl);
         txtHoraBase.setEnabled(!dl);
+        btnDeletar.setEnabled(false);
         if (dl) {
             loadTable();
         }
@@ -123,8 +128,9 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
         txtCPF = new javax.swing.JFormattedTextField();
         btnNovo = new javax.swing.JButton();
         txtSalario = new javax.swing.JTextField();
+        btnDeletar = new javax.swing.JButton();
 
-        setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        setBorder(new javax.swing.border.SoftBevelBorder(0));
         setClosable(true);
         setTitle("SHX Funcionarios");
 
@@ -252,43 +258,52 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
             }
         });
 
+        btnDeletar.setText("Deletar");
+        btnDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNome)
-                            .addComponent(lblCPF))
-                        .addGap(17, 17, 17))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblSalario)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNome)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                            .addComponent(txtSalario))
-                        .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblNome)
+                                    .addComponent(lblCPF))
+                                .addGap(17, 17, 17))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lblSalario)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNome)
                             .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                                    .addComponent(txtSalario))
+                                .addGap(30, 30, 30)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblHoraBase)
                                     .addComponent(lblValorHora))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblValorHoraT, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-                                    .addComponent(txtHoraBase)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                    .addComponent(txtHoraBase)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22)))
                 .addContainerGap())
             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
@@ -316,9 +331,10 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
-                    .addComponent(btnNovo))
+                    .addComponent(btnNovo)
+                    .addComponent(btnDeletar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE))
         );
 
         pack();
@@ -418,6 +434,7 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
                 lblValorHoraT.setText(String.valueOf(m_objFunc.getValor_hora()) + " R$/h");
                 txtNome.selectAll();
                 txtNome.requestFocus();
+                btnDeletar.setEnabled(true);
 
             }
         } catch (Exception e) {
@@ -431,8 +448,23 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
         m_objFunc = null;
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
+        // TODO add your handling code here:
+        if (Dialogs.showConfirm(DELETAR_FUNC) == 0) {
+            if (m_objFunc != null) {
+                try {
+                    m_FuncC.Delete(m_objFunc.getId(), m_objFunc.getNome());
+                    defaultLayout(true);
+                } catch (Exception ex) {
+                    Dialogs.showError(ex.getMessage());
+                }
+            }
+        }
+    }//GEN-LAST:event_btnDeletarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnNovo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCPF;

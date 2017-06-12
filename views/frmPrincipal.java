@@ -36,12 +36,16 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     public frmPrincipal(String UserName) throws SQLException {
         initComponents();
+        Traduz();
         setUser(UserName);
         rbPTBR.setSelected((Config.getLang() == Constants.PT_BR));
+        rbENUS.setSelected((Config.getLang() == Constants.EN_US));
     }
 
     public void setUser(String UserName) {
-        lblUser.setText("Usuario: " + UserName);
+        ResourceBundle props = null;
+        props = Config.getResources();
+        lblUser.setText(props.getString("cadUser") + ": " + UserName);
     }
 
     /**
@@ -55,12 +59,12 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         desktopPane = new javax.swing.JDesktopPane();
         jToolBar2 = new javax.swing.JToolBar();
-        jButton5 = new javax.swing.JButton();
+        btntrocar = new javax.swing.JButton();
         btn_cad_funcionario = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnponto = new javax.swing.JButton();
+        btnrelex = new javax.swing.JButton();
         iashd = new javax.swing.JLabel();
-        asdasdasd = new javax.swing.JLabel();
+        lbldesc = new javax.swing.JLabel();
         lblUser = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         iashd1 = new javax.swing.JLabel();
@@ -68,18 +72,16 @@ public class frmPrincipal extends javax.swing.JFrame {
         btnCadastro = new javax.swing.JMenu();
         cadUser = new javax.swing.JMenuItem();
         cadFun = new javax.swing.JMenuItem();
-        abaEditMenu = new javax.swing.JMenu();
-        cutMenuItem = new javax.swing.JMenuItem();
-        abaAuditoria = new javax.swing.JMenuItem();
+        abaPonto = new javax.swing.JMenu();
+        regponto = new javax.swing.JMenuItem();
         abaRelatorio = new javax.swing.JMenu();
-        contentMenuItem = new javax.swing.JMenuItem();
-        aboutMenuItem = new javax.swing.JMenuItem();
-        aboutMenuItem1 = new javax.swing.JMenuItem();
+        rel_func = new javax.swing.JMenuItem();
+        rel_ponto = new javax.swing.JMenuItem();
+        rel_users = new javax.swing.JMenuItem();
         rel_holerite = new javax.swing.JMenuItem();
         abaIdioma = new javax.swing.JMenu();
         rbPTBR = new javax.swing.JRadioButtonMenuItem();
         rbENUS = new javax.swing.JRadioButtonMenuItem();
-        abaSobre = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SHX Principal");
@@ -90,18 +92,18 @@ public class frmPrincipal extends javax.swing.JFrame {
         jToolBar2.setBackground(new java.awt.Color(93, 93, 93));
         jToolBar2.setRollover(true);
 
-        jButton5.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/change_user.png"))); // NOI18N
-        jButton5.setText("Trocar Usuario");
-        jButton5.setFocusable(false);
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btntrocar.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
+        btntrocar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/change_user.png"))); // NOI18N
+        btntrocar.setText("Trocar Usuario");
+        btntrocar.setFocusable(false);
+        btntrocar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btntrocar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btntrocar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btntrocarActionPerformed(evt);
             }
         });
-        jToolBar2.add(jButton5);
+        jToolBar2.add(btntrocar);
 
         btn_cad_funcionario.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
         btn_cad_funcionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/employee.png"))); // NOI18N
@@ -116,31 +118,31 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         jToolBar2.add(btn_cad_funcionario);
 
-        jButton1.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/clock.png"))); // NOI18N
-        jButton1.setText("Registrar Ponto");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnponto.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
+        btnponto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/clock.png"))); // NOI18N
+        btnponto.setText("Registrar Ponto");
+        btnponto.setFocusable(false);
+        btnponto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnponto.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnponto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnpontoActionPerformed(evt);
             }
         });
-        jToolBar2.add(jButton1);
+        jToolBar2.add(btnponto);
 
-        jButton3.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/report.png"))); // NOI18N
-        jButton3.setText("Relatorio Horas Extras");
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnrelex.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
+        btnrelex.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/report.png"))); // NOI18N
+        btnrelex.setText("Relatorio Horas Extras");
+        btnrelex.setFocusable(false);
+        btnrelex.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnrelex.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnrelex.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnrelexActionPerformed(evt);
             }
         });
-        jToolBar2.add(jButton3);
+        jToolBar2.add(btnrelex);
 
         desktopPane.add(jToolBar2);
         jToolBar2.setBounds(0, 0, 1440, 90);
@@ -152,12 +154,12 @@ public class frmPrincipal extends javax.swing.JFrame {
         desktopPane.add(iashd);
         iashd.setBounds(1270, 100, 90, 30);
 
-        asdasdasd.setBackground(new java.awt.Color(254, 254, 254));
-        asdasdasd.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
-        asdasdasd.setForeground(new java.awt.Color(254, 254, 254));
-        asdasdasd.setText("Sistema de Controle de Horas Extras");
-        desktopPane.add(asdasdasd);
-        asdasdasd.setBounds(10, 130, 280, 17);
+        lbldesc.setBackground(new java.awt.Color(254, 254, 254));
+        lbldesc.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
+        lbldesc.setForeground(new java.awt.Color(254, 254, 254));
+        lbldesc.setText("Sistema de Controle de Horas Extras");
+        desktopPane.add(lbldesc);
+        lbldesc.setBounds(10, 130, 280, 17);
 
         lblUser.setBackground(new java.awt.Color(254, 254, 254));
         lblUser.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
@@ -201,59 +203,51 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         menuBar.add(btnCadastro);
 
-        abaEditMenu.setBackground(new java.awt.Color(254, 254, 254));
-        abaEditMenu.setForeground(new java.awt.Color(254, 254, 254));
-        abaEditMenu.setMnemonic('e');
-        abaEditMenu.setText("Ponto");
+        abaPonto.setBackground(new java.awt.Color(254, 254, 254));
+        abaPonto.setForeground(new java.awt.Color(254, 254, 254));
+        abaPonto.setMnemonic('e');
+        abaPonto.setText("Ponto");
 
-        cutMenuItem.setMnemonic('t');
-        cutMenuItem.setText("Registrar Ponto");
-        abaEditMenu.add(cutMenuItem);
+        regponto.setMnemonic('t');
+        regponto.setText("Registrar Ponto");
+        abaPonto.add(regponto);
 
-        abaAuditoria.setText("Auditoria");
-        abaAuditoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                abaAuditoriaActionPerformed(evt);
-            }
-        });
-        abaEditMenu.add(abaAuditoria);
-
-        menuBar.add(abaEditMenu);
+        menuBar.add(abaPonto);
 
         abaRelatorio.setBackground(new java.awt.Color(254, 254, 254));
         abaRelatorio.setForeground(new java.awt.Color(254, 254, 254));
         abaRelatorio.setMnemonic('h');
         abaRelatorio.setText("Relatorios");
 
-        contentMenuItem.setMnemonic('c');
-        contentMenuItem.setText("Funcionarios");
-        contentMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        rel_func.setMnemonic('c');
+        rel_func.setText("Funcionarios");
+        rel_func.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                contentMenuItemActionPerformed(evt);
+                rel_funcActionPerformed(evt);
             }
         });
-        abaRelatorio.add(contentMenuItem);
+        abaRelatorio.add(rel_func);
 
-        aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("Folha de Ponto");
-        aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        rel_ponto.setMnemonic('a');
+        rel_ponto.setText("Folha de Ponto");
+        rel_ponto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aboutMenuItemActionPerformed(evt);
+                rel_pontoActionPerformed(evt);
             }
         });
-        abaRelatorio.add(aboutMenuItem);
+        abaRelatorio.add(rel_ponto);
 
-        aboutMenuItem1.setMnemonic('a');
-        aboutMenuItem1.setText("Relatorio de Usuarios");
-        aboutMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        rel_users.setMnemonic('a');
+        rel_users.setText("Relatorio de Usuarios");
+        rel_users.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aboutMenuItem1ActionPerformed(evt);
+                rel_usersActionPerformed(evt);
             }
         });
-        abaRelatorio.add(aboutMenuItem1);
+        abaRelatorio.add(rel_users);
 
         rel_holerite.setMnemonic('a');
-        rel_holerite.setText("Modelo holerite");
+        rel_holerite.setText("Holerite");
         rel_holerite.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rel_holeriteActionPerformed(evt);
@@ -287,11 +281,6 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         menuBar.add(abaIdioma);
 
-        abaSobre.setBackground(new java.awt.Color(254, 254, 254));
-        abaSobre.setForeground(new java.awt.Color(254, 254, 254));
-        abaSobre.setText("Sobre");
-        menuBar.add(abaSobre);
-
         setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -312,7 +301,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnpontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpontoActionPerformed
         if (Env.Constants.ObjUser.getAdmin()) {
 
             infrmPonto objPnt = new infrmPonto(this.desktopPane);
@@ -321,15 +310,15 @@ public class frmPrincipal extends javax.swing.JFrame {
         } else {
             Dialogs.showError("Usuario sem permissao para executar operacao!");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnpontoActionPerformed
 
     private void btn_cad_funcionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cad_funcionarioActionPerformed
         cadFun.doClick();
     }//GEN-LAST:event_btn_cad_funcionarioActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnrelexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrelexActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnrelexActionPerformed
 
     private void rbENUSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbENUSActionPerformed
 
@@ -378,29 +367,25 @@ public class frmPrincipal extends javax.swing.JFrame {
         objCadUser.setVisible(true);
     }//GEN-LAST:event_cadUserActionPerformed
 
-    private void contentMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contentMenuItemActionPerformed
+    private void rel_funcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rel_funcActionPerformed
 
-    }//GEN-LAST:event_contentMenuItemActionPerformed
+    }//GEN-LAST:event_rel_funcActionPerformed
 
-    private void aboutMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItem1ActionPerformed
+    private void rel_usersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rel_usersActionPerformed
 
 // TODO add your handling code here:
-    }//GEN-LAST:event_aboutMenuItem1ActionPerformed
+    }//GEN-LAST:event_rel_usersActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btntrocarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntrocarActionPerformed
         try {
             // TODO add your handling code here:
             new frmLogin(this).setVisible(true);
         } catch (SQLException ex) {
             Dialogs.showError(ex.getMessage());
         }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btntrocarActionPerformed
 
-    private void abaAuditoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaAuditoriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_abaAuditoriaActionPerformed
-
-    private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
+    private void rel_pontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rel_pontoActionPerformed
         // TODO add your handling code here:
         //Pegando-se o arquivo do relatorio
 
@@ -436,7 +421,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         } catch (Exception ex) {
             Dialogs.showError(ex.getMessage());
         }
-    }//GEN-LAST:event_aboutMenuItemActionPerformed
+    }//GEN-LAST:event_rel_pontoActionPerformed
 
     private void rel_holeriteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rel_holeriteActionPerformed
         try {
@@ -479,46 +464,57 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     public void Traduz() {
 
-        ResourceBundle propriedades = ResourceBundle.getBundle("lang/lg");
-        btnCadastro.setText(propriedades.getString("btnCadastro"));
-        abaEditMenu.setText(propriedades.getString("abaEditMenu"));
-        abaRelatorio.setText(propriedades.getString("abaRelatorio"));
-        abaIdioma.setText(propriedades.getString("abaIdioma"));
-        abaSobre.setText(propriedades.getString("abaSobre"));
-        cadUser.setText(propriedades.getString("cadUser"));
-        cadFun.setText(propriedades.getString("cadFun"));
-        abaAuditoria.setText(propriedades.getString("abaAuditoria"));
+        ResourceBundle props = null;
+        props = Config.getResources();
+        btnCadastro.setText(props.getString("btnCadastro"));
+        cadUser.setText(props.getString("cadUser") + "s");
+        cadFun.setText(props.getString("cadFun") + "s");
+        abaPonto.setText(props.getString("ponto"));
+        regponto.setText(props.getString("assinar_ponto"));
+        abaRelatorio.setText(props.getString("abaRelatorio"));
+        rel_func.setText(props.getString("cadFun") + "s");
+        rel_ponto.setText(props.getString("ponto"));
+        rel_users.setText(props.getString("cadUser") + "s");
+        rel_holerite.setText(props.getString("holerite"));
+        abaIdioma.setText(props.getString("abaIdioma"));
+
+        btntrocar.setText(props.getString("trocar_user"));
+        btn_cad_funcionario.setText(props.getString("btn_cad_func"));
+        btnponto.setText(props.getString("assinar_ponto"));
+        btnrelex.setText(props.getString("rel_horas_extras"));
+
+        lbldesc.setText(props.getString("sisdesc"));
+
+        this.setTitle("SHX " + props.getString("maintitle"));
 
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem abaAuditoria;
-    private javax.swing.JMenu abaEditMenu;
     private javax.swing.JMenu abaIdioma;
+    private javax.swing.JMenu abaPonto;
     private javax.swing.JMenu abaRelatorio;
-    private javax.swing.JMenu abaSobre;
-    private javax.swing.JMenuItem aboutMenuItem;
-    private javax.swing.JMenuItem aboutMenuItem1;
-    private javax.swing.JLabel asdasdasd;
     private javax.swing.JMenu btnCadastro;
     private javax.swing.JButton btn_cad_funcionario;
+    private javax.swing.JButton btnponto;
+    private javax.swing.JButton btnrelex;
+    private javax.swing.JButton btntrocar;
     private javax.swing.JMenuItem cadFun;
     private javax.swing.JMenuItem cadUser;
-    private javax.swing.JMenuItem contentMenuItem;
-    private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JLabel iashd;
     private javax.swing.JLabel iashd1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JLabel lblUser;
+    private javax.swing.JLabel lbldesc;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JRadioButtonMenuItem rbENUS;
     private javax.swing.JRadioButtonMenuItem rbPTBR;
+    private javax.swing.JMenuItem regponto;
+    private javax.swing.JMenuItem rel_func;
     private javax.swing.JMenuItem rel_holerite;
+    private javax.swing.JMenuItem rel_ponto;
+    private javax.swing.JMenuItem rel_users;
     // End of variables declaration//GEN-END:variables
 
 }

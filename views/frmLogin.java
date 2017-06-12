@@ -30,21 +30,23 @@ public class frmLogin extends javax.swing.JFrame {
     public void Traduz() throws SQLException {
         ResourceBundle props = null;
         props = Config.getResources();
+        lblusuario.setText(props.getString("usuario"));
+        lblsenha.setText(props.getString("senha"));
+        btnClose.setText(props.getString("btncancelar"));
+        btnLogin.setText(props.getString("btnentrar"));
         NENHUM_USUARIO_CAD = props.getString("user_admin");
-
-        USUARIO_NAO_CADASTRADO = "Usuario informado nao esta cadastrado!";
-
-        SENHA_INCORRETA = "Senha incorreta!";
+        USUARIO_NAO_CADASTRADO = props.getString("usuario_n_cadastrado");
+        SENHA_INCORRETA = props.getString("senha_incorreta");
     }
 
     public frmLogin(frmPrincipal mainForm) throws SQLException {
+        initComponents();
         Traduz();
         this.m_UserC = new UsuarioController();
         defaultUser = m_UserC.isEmpty(); // caso nao existam usuarios cadastrados
         if (defaultUser) {
             Dialogs.showInfo(NENHUM_USUARIO_CAD);
         }
-        initComponents();
         this.mainForm = mainForm;
     }
 
@@ -57,8 +59,8 @@ public class frmLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblusuario = new javax.swing.JLabel();
+        lblsenha = new javax.swing.JLabel();
         txtUser = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
@@ -67,9 +69,9 @@ public class frmLogin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("SHX");
 
-        jLabel1.setText("Usuario:");
+        lblusuario.setText("Usuario:");
 
-        jLabel2.setText("Senha:");
+        lblsenha.setText("Senha:");
 
         txtUser.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -105,20 +107,20 @@ public class frmLogin extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(lblsenha)
+                            .addComponent(lblusuario))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,10 +128,10 @@ public class frmLogin extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(lblusuario))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(lblsenha)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -201,8 +203,8 @@ public class frmLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnLogin;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblsenha;
+    private javax.swing.JLabel lblusuario;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables

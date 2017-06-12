@@ -145,11 +145,15 @@ public class Ponto {
 
     public double getValor_extra() throws SQLException {
         if (objFun != null) {
-            double min_value = objFun.getValor_hora() / 60;
-            double horas_exec = this.getHoras_excedidas();
-            double valor_tot = (horas_exec * min_value);
-            valor_tot = (valor_tot) * (this.getPercent_aplicado() / 100);
-            valor_tot = valor_tot / 60;
+            double valor_tot = 0;
+            if (this.getPercent_aplicado() == 50) {
+                double min_value = objFun.getValor_hora() / 60;
+                double horas_exec = this.getHoras_excedidas();
+                valor_tot = (horas_exec * min_value);
+                valor_tot = (valor_tot) * (this.getPercent_aplicado() / 100);
+                valor_tot = valor_tot / 60;
+            }
+
             return valor_tot;
         } else {
             return 0;
@@ -160,7 +164,13 @@ public class Ponto {
         if (objFun != null) {
             double valor_hd = (objFun.gethora_dia() * objFun.getValor_hora());
             double valor_ext = this.getValor_extra();
-            return valor_hd + valor_ext;
+            if (this.getPercent_aplicado() == 50) {
+                return valor_hd + valor_ext;
+            } else if (this.getPercent_aplicado() == 100) {
+                return valor_hd + valor_hd;
+            } else {
+                return 0;
+            }
         } else {
             return 0;
         }

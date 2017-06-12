@@ -6,9 +6,11 @@
 package views;
 
 import controllers.UsuarioController;
+import helpers.Config;
 import helpers.Dialogs;
 import helpers.Forms;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.swing.table.DefaultTableModel;
 import models.Usuario;
 
@@ -17,34 +19,42 @@ import models.Usuario;
  * @author qwerty
  */
 public class frmCadUsuario extends javax.swing.JFrame {
-
+    
     private boolean m_showGrid = true;
-    private String USUARIO_DUPLICADO, USUARIO_EM_BRANCO, SENHAS_DIFERENTES, SENHA_EM_BRANCO, USUARIO_INSERIDO_SUCESS, BTN_NOVO, BTN_SALVAR;
+    private String USUARIO_DUPLICADO, USUARIO_INSERIDO_SUCESS, BTN_NOVO, BTN_SALVAR;
     private UsuarioController m_UserC;
     private Usuario m_objUser = null;
-
+    
     public void Traduz() {
-        SENHAS_DIFERENTES = "As Senhas devem ser identicas!";
-        USUARIO_EM_BRANCO = "Usuario deve ser informado!";
-        SENHA_EM_BRANCO = "Senhas devem ser informadas!";
-        USUARIO_DUPLICADO = "Usuario ja cadastrado!";
-        USUARIO_INSERIDO_SUCESS = "Usuario inserido com Sucesso!";
-        BTN_NOVO = "Novo";
-        BTN_SALVAR = "Salvar";
+        ResourceBundle props = null;
+        props = Config.getResources();
+        lblusuario.setText(props.getString("usuario"));
+        lblsenha.setText(props.getString("senha"));
+        lblconfirma.setText(props.getString("confirma_senha"));
+        chkAdmin.setText(props.getString("administrador"));
+        if (m_showGrid) {
+            tbUsers.getColumnModel().getColumn(1).setHeaderValue(props.getString("usuario"));
+        }
+        this.setTitle("SHX " + props.getString("cadUser"));
+        USUARIO_DUPLICADO = props.getString("usuario_duplicado");
+        USUARIO_INSERIDO_SUCESS = props.getString("usuario_sucesso");
+        BTN_NOVO = props.getString("btnNovo");
+        BTN_SALVAR = props.getString("btnSalvar");
     }
-
+    
     public frmCadUsuario(boolean showGrid) {
         initComponents();
+        m_showGrid = showGrid;
         Traduz();
         defaultLayout(true);
-        m_showGrid = showGrid;
+        
         if (!showGrid) {
             defaultLayout(false);
             pnTable.setVisible(false);
             setSize(292, 250);
         }
     }
-
+    
     private void defaultLayout(boolean dl) {
         btnCancelar.setEnabled(!dl);
         btnNovo.setText((dl) ? BTN_NOVO : BTN_SALVAR);
@@ -60,7 +70,7 @@ public class frmCadUsuario extends javax.swing.JFrame {
             loadTable();
         }
     }
-
+    
     private void loadTable() {
         if (m_showGrid) {
             try {
@@ -79,9 +89,9 @@ public class frmCadUsuario extends javax.swing.JFrame {
                 Dialogs.showError(ex.getMessage());
             }
         }
-
+        
     }
-
+    
     private void InserirUsuario() throws Exception {
         m_UserC = new UsuarioController();
         m_UserC.Add(txtUser.getText(), txtPass.getText(), txtConf.getText(), chkAdmin.isSelected());
@@ -90,9 +100,9 @@ public class frmCadUsuario extends javax.swing.JFrame {
         }
         defaultLayout(true);
         Dialogs.showInfo(USUARIO_INSERIDO_SUCESS);
-
+        
     }
-
+    
     private boolean UsuarioDuplicado() throws Exception {
         m_UserC = new UsuarioController();
         if (m_objUser == null) {
@@ -108,7 +118,7 @@ public class frmCadUsuario extends javax.swing.JFrame {
             return false;
         }
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -127,9 +137,9 @@ public class frmCadUsuario extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnCancelar = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblconfirma = new javax.swing.JLabel();
+        lblsenha = new javax.swing.JLabel();
+        lblusuario = new javax.swing.JLabel();
         txtUser = new javax.swing.JTextField();
         txtPass = new javax.swing.JPasswordField();
         chkAdmin = new javax.swing.JCheckBox();
@@ -258,11 +268,11 @@ public class frmCadUsuario extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Confirmar Senha:");
+        lblconfirma.setText("Confirmar Senha:");
 
-        jLabel5.setText("Senha:");
+        lblsenha.setText("Senha:");
 
-        jLabel6.setText("Usuario:");
+        lblusuario.setText("Usuario:");
 
         txtUser.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -359,15 +369,15 @@ public class frmCadUsuario extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, pnTable, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 311, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .add(pnTable, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 311, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
             .add(layout.createSequentialGroup()
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jLabel6)
-                            .add(jLabel5)
-                            .add(jLabel4))
+                            .add(lblusuario)
+                            .add(lblsenha)
+                            .add(lblconfirma))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
@@ -396,15 +406,15 @@ public class frmCadUsuario extends javax.swing.JFrame {
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(txtUser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jLabel6))
+                    .add(lblusuario))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(txtPass, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jLabel5))
+                    .add(lblsenha))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(txtConf, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jLabel4))
+                    .add(lblconfirma))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(chkAdmin)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -522,9 +532,6 @@ public class frmCadUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPasswordField jPasswordField3;
     private javax.swing.JPasswordField jPasswordField4;
     private javax.swing.JScrollPane jScrollPane1;
@@ -532,6 +539,9 @@ public class frmCadUsuario extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel lblconfirma;
+    private javax.swing.JLabel lblsenha;
+    private javax.swing.JLabel lblusuario;
     private javax.swing.JPanel pnTable;
     private javax.swing.JTable tbUsers;
     private javax.swing.JPasswordField txtConf;

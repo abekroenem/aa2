@@ -42,6 +42,8 @@ select * from config;
 
 truncate table usuario;
 
+select * from funcionario;
+
 
 CREATE OR REPLACE FUNCTION fn_min_to_hr(mins bigint)
 RETURNS text AS

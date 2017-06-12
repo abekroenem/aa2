@@ -5,10 +5,14 @@
  */
 package views;
 
+import Env.Constants;
 import controllers.UsuarioController;
+import helpers.Config;
 import helpers.Dialogs;
 import helpers.Forms;
 import java.sql.SQLException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.logging.Logger;
 import models.Usuario;
 
@@ -23,11 +27,10 @@ public class frmLogin extends javax.swing.JFrame {
     private frmPrincipal mainForm = null;
     private String USUARIO_NAO_CADASTRADO, NENHUM_USUARIO_CAD, SENHA_INCORRETA;
 
-    public void configurarMSGs() {
-        NENHUM_USUARIO_CAD = "Nenhum usuario foi cadastrado!" + System.getProperty("line.separator")
-                + "Por gentileza, entre com usuario padrao." + System.getProperty("line.separator")
-                + "Usuario: admin" + System.getProperty("line.separator")
-                + "Senha: admin";
+    public void Traduz() throws SQLException {
+        ResourceBundle props = null;
+        props = Config.getResources();
+        NENHUM_USUARIO_CAD = props.getString("user_admin");
 
         USUARIO_NAO_CADASTRADO = "Usuario informado nao esta cadastrado!";
 
@@ -35,7 +38,7 @@ public class frmLogin extends javax.swing.JFrame {
     }
 
     public frmLogin(frmPrincipal mainForm) throws SQLException {
-        configurarMSGs();
+        Traduz();
         this.m_UserC = new UsuarioController();
         defaultUser = m_UserC.isEmpty(); // caso nao existam usuarios cadastrados
         if (defaultUser) {

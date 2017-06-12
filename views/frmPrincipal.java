@@ -17,7 +17,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import models.DB;
@@ -60,7 +59,6 @@ public class frmPrincipal extends javax.swing.JFrame {
         btn_cad_funcionario = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         iashd = new javax.swing.JLabel();
         asdasdasd = new javax.swing.JLabel();
         lblUser = new javax.swing.JLabel();
@@ -143,19 +141,6 @@ public class frmPrincipal extends javax.swing.JFrame {
             }
         });
         jToolBar2.add(jButton3);
-
-        jButton4.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/auditoria.png"))); // NOI18N
-        jButton4.setText("Auditoria");
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jToolBar2.add(jButton4);
 
         desktopPane.add(jToolBar2);
         jToolBar2.setBounds(0, 0, 1440, 90);
@@ -346,28 +331,39 @@ public class frmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
-
     private void rbENUSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbENUSActionPerformed
-        Locale.setDefault(Locale.ENGLISH);
 
-        this.Traduz();
+        try {
+            Locale en = new Locale("en", "US");
 
-        // TODO add your handling code here:
-        // rbPTBR.setSelected(false);
+            Locale.setDefault(en);
+
+            Config.setLang(Constants.EN_US);
+
+            this.Traduz();
+
+            rbPTBR.setSelected(false);
+
+        } catch (SQLException ex) {
+            Dialogs.showError(ex.getMessage());
+        }
     }//GEN-LAST:event_rbENUSActionPerformed
 
     private void rbPTBRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPTBRActionPerformed
 
-        Locale Pt = new Locale("en", "US");
-        // TODO add your handling code here:
-        Locale.setDefault(Pt);
+        try {
+            Locale Pt = new Locale("pt", "BR");
 
-        this.Traduz();
+            Locale.setDefault(Pt);
 
-        //  rbENUS.setSelected(false);
+            Config.setLang(Constants.PT_BR);
+
+            this.Traduz();
+
+            rbENUS.setSelected(false);
+        } catch (SQLException ex) {
+            Dialogs.showError(ex.getMessage());
+        }
     }//GEN-LAST:event_rbPTBRActionPerformed
 
     private void cadFunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadFunActionPerformed
@@ -515,7 +511,6 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel iashd1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JToolBar jToolBar2;

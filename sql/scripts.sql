@@ -33,11 +33,15 @@ create table registro_ponto (
     total_recebido decimal(10,2) --valor cheio recebido no dia com horas extras
 );
 
+
 create table config (
-    key varchar(10),
-    value Int
+    key_x varchar(10),
+    value_x Int
 );
-insert into config(key,value) values('lang', 0);
+insert into config(key_x,value_x) values('lang', 0);
+select * from config;
+
+truncate table usuario;
 
 
 CREATE OR REPLACE FUNCTION fn_min_to_hr(mins bigint)

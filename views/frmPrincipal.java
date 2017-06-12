@@ -33,6 +33,8 @@ import net.sf.jasperreports.swing.JRViewer;
  * @author qwerty
  */
 public class frmPrincipal extends javax.swing.JFrame {
+    
+    private String user_adm;
 
     public frmPrincipal(String UserName) throws SQLException {
         initComponents();
@@ -308,7 +310,7 @@ public class frmPrincipal extends javax.swing.JFrame {
             Forms.showInternal(desktopPane, objPnt);
 
         } else {
-            Dialogs.showError("Usuario sem permissao para executar operacao!");
+            Dialogs.showError(user_adm);
         }
     }//GEN-LAST:event_btnpontoActionPerformed
 
@@ -489,6 +491,8 @@ public class frmPrincipal extends javax.swing.JFrame {
         lbldesc.setText(props.getString("sisdesc"));
 
         this.setTitle("SHX " + props.getString("maintitle"));
+        
+        user_adm = props.getString("user_adm");
 
     }
 

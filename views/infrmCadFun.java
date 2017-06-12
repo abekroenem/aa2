@@ -46,6 +46,7 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
         lblValorHora.setText(rbl.getString("valor_hora"));
 
         btnDeletar.setText(rbl.getString("btndeletar"));
+        btnCancelar.setText(rbl.getString("btncancelar"));
 
         tbFunc.getColumnModel().getColumn(1).setHeaderValue(rbl.getString("cadFun"));
         tbFunc.getColumnModel().getColumn(2).setHeaderValue(rbl.getString("cpf"));

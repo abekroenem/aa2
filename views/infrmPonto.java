@@ -7,10 +7,12 @@ package views;
 
 import controllers.FuncionarioController;
 import controllers.PontoController;
+import helpers.Config;
 import helpers.Dialogs;
 import helpers.Formats;
 import helpers.Forms;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.swing.JDesktopPane;
 import javax.swing.table.DefaultTableModel;
 import models.Funcionario;
@@ -23,18 +25,42 @@ import models.Ponto;
 public class infrmPonto extends javax.swing.JInternalFrame {
 
     private PontoController m_PontoC = null;
-    private String PONTO_REGISTRADO, PONTO_EDITADO, PONTO_JA_CADASTRADO, BTN_NOVO, BTN_SALVAR;
+    private String PONTO_REGISTRADO, PONTO_EDITADO, PONTO_JA_CADASTRADO, BTN_NOVO, BTN_SALVAR, DELETAR_PNT;
     private Ponto m_objPonto = null;
     public Funcionario m_objFunc = null;
     private boolean ersHora = false;
     private JDesktopPane inDesktop = null;
 
     public void Traduz() {
+        ResourceBundle rbl = null;
+        rbl = Config.getResources();
+
         PONTO_JA_CADASTRADO = "Ponto ja cadastrado para o funcionario";
-        PONTO_REGISTRADO = "Funcionario inserido com Sucesso!";
-        PONTO_EDITADO = "Funcionario editado com Sucesso!";
-        BTN_NOVO = "Novo";
-        BTN_SALVAR = "Salvar";
+        PONTO_REGISTRADO = "Ponto inserido com Sucesso!";
+        PONTO_EDITADO = "Ponto editado com Sucesso!";
+        DELETAR_PNT = rbl.getString("deletar_pnt");
+
+        BTN_NOVO = rbl.getString("btnNovo");
+        BTN_SALVAR = rbl.getString("btnSalvar");
+
+        btnDeletar.setText(rbl.getString("btndeletar"));
+        btnCancelar.setText(rbl.getString("btncancelar"));
+
+        lblFunc.setText(rbl.getString("cadFun"));
+        lblData.setText(rbl.getString("data"));
+        lblEA.setText(rbl.getString("entrada"));
+        lblSA.setText(rbl.getString("saida"));
+        lblEB.setText(rbl.getString("entrada"));
+        lblSB.setText(rbl.getString("saida"));
+
+        tbPonto.getColumnModel().getColumn(1).setHeaderValue(rbl.getString("data"));
+        tbPonto.getColumnModel().getColumn(2).setHeaderValue(rbl.getString("cadFun"));
+        tbPonto.getColumnModel().getColumn(3).setHeaderValue(rbl.getString("h_base"));
+        tbPonto.getColumnModel().getColumn(4).setHeaderValue(rbl.getString("h_trab"));
+        tbPonto.getColumnModel().getColumn(5).setHeaderValue(rbl.getString("h_ex"));
+        tbPonto.getColumnModel().getColumn(7).setHeaderValue(rbl.getString("t_extra"));
+        tbPonto.getColumnModel().getColumn(8).setHeaderValue(rbl.getString("t_dia"));
+
     }
 
     private void defaultLayout(boolean dl) {
@@ -54,6 +80,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
         txtEntrada2.setEnabled(!dl);
         txtSaida1.setEnabled(!dl);
         txtSaida2.setEnabled(!dl);
+        btnDeletar.setEnabled(false);
 
         if (dl) {
             loadTable();
@@ -74,9 +101,10 @@ public class infrmPonto extends javax.swing.JInternalFrame {
                     Funcionario objFunc = ctlFnc.getByID(pnt.getId_funcionario());
 
                     tablemd.addRow(new Object[]{
+                        pnt.getId(),
                         Formats.Data.Format(pnt.getData()),
                         objFunc.getNome(),
-                        objFunc.gethora_dia(),
+                        Formats.Hora.Format(objFunc.gethora_dia() * 60),
                         Formats.Hora.Format(pnt.getHoras_Trabalhadas()),
                         Formats.Hora.Format(pnt.getHoras_excedidas()),
                         pnt.getPercent_aplicado(),
@@ -146,14 +174,14 @@ public class infrmPonto extends javax.swing.JInternalFrame {
 
         btnCancelar = new javax.swing.JButton();
         btnNovo = new javax.swing.JButton();
-        lblNome = new javax.swing.JLabel();
-        lblSalario = new javax.swing.JLabel();
+        lblData = new javax.swing.JLabel();
+        lblFunc = new javax.swing.JLabel();
         txtData = new javax.swing.JFormattedTextField();
         txtFuncionario = new javax.swing.JTextField();
-        lblNome1 = new javax.swing.JLabel();
-        lblNome2 = new javax.swing.JLabel();
-        lblNome3 = new javax.swing.JLabel();
-        lblNome4 = new javax.swing.JLabel();
+        lblEB = new javax.swing.JLabel();
+        lblSB = new javax.swing.JLabel();
+        lblEA = new javax.swing.JLabel();
+        lblSA = new javax.swing.JLabel();
         btnSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbPonto = new javax.swing.JTable();
@@ -161,8 +189,9 @@ public class infrmPonto extends javax.swing.JInternalFrame {
         txtEntrada2 = new javax.swing.JFormattedTextField();
         txtSaida1 = new javax.swing.JFormattedTextField();
         txtSaida2 = new javax.swing.JFormattedTextField();
+        btnDeletar = new javax.swing.JButton();
 
-        setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        setBorder(new javax.swing.border.SoftBevelBorder(0));
         setClosable(true);
         setTitle("SHX Funcionarios");
 
@@ -180,9 +209,9 @@ public class infrmPonto extends javax.swing.JInternalFrame {
             }
         });
 
-        lblNome.setText("Data");
+        lblData.setText("Data");
 
-        lblSalario.setText("Funcionario");
+        lblFunc.setText("Funcionario");
 
         try {
             txtData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/2017")));
@@ -201,13 +230,13 @@ public class infrmPonto extends javax.swing.JInternalFrame {
 
         txtFuncionario.setEditable(false);
 
-        lblNome1.setText("Entrada");
+        lblEB.setText("Entrada");
 
-        lblNome2.setText("Saida");
+        lblSB.setText("Saida");
 
-        lblNome3.setText("Entrada");
+        lblEA.setText("Entrada");
 
-        lblNome4.setText("Saida");
+        lblSA.setText("Saida");
 
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search.png"))); // NOI18N
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -218,20 +247,20 @@ public class infrmPonto extends javax.swing.JInternalFrame {
 
         tbPonto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Data", "Funcionario", "H. Base", "H. Trab.", "H. Ex.", "%", "T. Extra", "T. Dia"
+                "ID", "Data", "Funcionario", "H. Base", "H. Trab.", "H. Ex.", "%", "T. Extra", "T. Dia"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, false, false, false, false
+                true, false, false, true, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -242,17 +271,22 @@ public class infrmPonto extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbPonto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbPontoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbPonto);
         if (tbPonto.getColumnModel().getColumnCount() > 0) {
-            tbPonto.getColumnModel().getColumn(0).setMinWidth(80);
-            tbPonto.getColumnModel().getColumn(0).setPreferredWidth(80);
-            tbPonto.getColumnModel().getColumn(0).setMaxWidth(80);
-            tbPonto.getColumnModel().getColumn(1).setMinWidth(280);
-            tbPonto.getColumnModel().getColumn(1).setPreferredWidth(280);
-            tbPonto.getColumnModel().getColumn(1).setMaxWidth(280);
-            tbPonto.getColumnModel().getColumn(2).setMinWidth(60);
-            tbPonto.getColumnModel().getColumn(2).setPreferredWidth(60);
-            tbPonto.getColumnModel().getColumn(2).setMaxWidth(60);
+            tbPonto.getColumnModel().getColumn(0).setMinWidth(30);
+            tbPonto.getColumnModel().getColumn(0).setPreferredWidth(30);
+            tbPonto.getColumnModel().getColumn(0).setMaxWidth(30);
+            tbPonto.getColumnModel().getColumn(1).setMinWidth(80);
+            tbPonto.getColumnModel().getColumn(1).setPreferredWidth(80);
+            tbPonto.getColumnModel().getColumn(1).setMaxWidth(80);
+            tbPonto.getColumnModel().getColumn(2).setMinWidth(250);
+            tbPonto.getColumnModel().getColumn(2).setPreferredWidth(250);
+            tbPonto.getColumnModel().getColumn(2).setMaxWidth(250);
             tbPonto.getColumnModel().getColumn(3).setMinWidth(60);
             tbPonto.getColumnModel().getColumn(3).setPreferredWidth(60);
             tbPonto.getColumnModel().getColumn(3).setMaxWidth(60);
@@ -262,12 +296,15 @@ public class infrmPonto extends javax.swing.JInternalFrame {
             tbPonto.getColumnModel().getColumn(5).setMinWidth(60);
             tbPonto.getColumnModel().getColumn(5).setPreferredWidth(60);
             tbPonto.getColumnModel().getColumn(5).setMaxWidth(60);
-            tbPonto.getColumnModel().getColumn(6).setMinWidth(100);
-            tbPonto.getColumnModel().getColumn(6).setPreferredWidth(100);
-            tbPonto.getColumnModel().getColumn(6).setMaxWidth(100);
-            tbPonto.getColumnModel().getColumn(7).setMinWidth(130);
-            tbPonto.getColumnModel().getColumn(7).setPreferredWidth(130);
-            tbPonto.getColumnModel().getColumn(7).setMaxWidth(130);
+            tbPonto.getColumnModel().getColumn(6).setMinWidth(60);
+            tbPonto.getColumnModel().getColumn(6).setPreferredWidth(60);
+            tbPonto.getColumnModel().getColumn(6).setMaxWidth(60);
+            tbPonto.getColumnModel().getColumn(7).setMinWidth(80);
+            tbPonto.getColumnModel().getColumn(7).setPreferredWidth(80);
+            tbPonto.getColumnModel().getColumn(7).setMaxWidth(80);
+            tbPonto.getColumnModel().getColumn(8).setMinWidth(130);
+            tbPonto.getColumnModel().getColumn(8).setPreferredWidth(130);
+            tbPonto.getColumnModel().getColumn(8).setMaxWidth(130);
         }
 
         try {
@@ -330,17 +367,25 @@ public class infrmPonto extends javax.swing.JInternalFrame {
             }
         });
 
+        btnDeletar.setText("Deletar");
+        btnDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jScrollPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSalario, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblNome, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(lblFunc, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblData, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -348,67 +393,68 @@ public class infrmPonto extends javax.swing.JInternalFrame {
                                 .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(190, 190, 190)
+                        .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblNome3)
-                            .addComponent(lblNome4))
+                            .addComponent(lblEA)
+                            .addComponent(lblSA))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtEntrada1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtSaida1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(19, 19, 19))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(111, 111, 111)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNome2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblNome1, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtEntrada2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSaida2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(19, 19, 19)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblSB, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblEB, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtEntrada2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSaida2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
-            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblNome))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtSaida1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblNome4))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtSaida2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblNome2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblData))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtSaida1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblSA))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtSaida2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblSB))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblFunc))
+                        .addComponent(btnSearch, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtEntrada1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblEA))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtEntrada2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblEB))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnNovo, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblSalario))
-                    .addComponent(btnSearch, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtEntrada1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblNome3))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtEntrada2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblNome1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 43, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnNovo)
-                        .addGap(9, 9, 9)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnCancelar)
-                        .addGap(279, 279, 279))))
+                        .addComponent(btnDeletar)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -505,17 +551,60 @@ public class infrmPonto extends javax.swing.JInternalFrame {
         Forms.goNextField(evt.getKeyCode(), btnNovo);
     }//GEN-LAST:event_txtSaida2KeyPressed
 
+    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
+        // TODO add your handling code here:
+
+        if (Dialogs.showConfirm(DELETAR_PNT) == 0) {
+            if (m_objPonto != null) {
+                try {
+                    m_PontoC.Delete(m_objPonto.getId(), m_objPonto.getData(), m_objPonto.getId_funcionario());
+                    defaultLayout(true);
+                } catch (Exception ex) {
+                    Dialogs.showError(ex.getMessage());
+                }
+            }
+        }
+    }//GEN-LAST:event_btnDeletarActionPerformed
+
+    private void tbPontoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPontoMouseClicked
+        // TODO add your handling code here:
+        try {
+            m_objPonto = m_PontoC.getByID(((Integer) tbPonto.getModel().getValueAt(tbPonto.getSelectedRow(), 0)));
+            if (m_objFunc != null) {
+                defaultLayout(false);
+                m_objFunc = new FuncionarioController().getByID(m_objPonto.getId_funcionario());
+                txtFuncionario.setText(m_objFunc.getNome());
+                txtData.setText(Formats.Data.Format(m_objPonto.getData()));
+
+                txtEntrada1.setText(Formats.Hora.Format(m_objPonto.getEntrada_a()));
+                txtSaida1.setText(Formats.Hora.Format(m_objPonto.getSaida_a()));
+                txtEntrada2.setText(Formats.Hora.Format(m_objPonto.getEntrada_b()));
+                txtSaida1.setText(Formats.Hora.Format(m_objPonto.getSaida_b()));
+
+                txtData.selectAll();
+                txtData.requestFocus();
+                btnDeletar.setEnabled(true);
+
+            }
+        } catch (Exception e) {
+            Dialogs.showError(e.getMessage());
+        }
+
+
+    }//GEN-LAST:event_tbPontoMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSearch;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblNome;
-    private javax.swing.JLabel lblNome1;
-    private javax.swing.JLabel lblNome2;
-    private javax.swing.JLabel lblNome3;
-    private javax.swing.JLabel lblNome4;
-    private javax.swing.JLabel lblSalario;
+    private javax.swing.JLabel lblData;
+    private javax.swing.JLabel lblEA;
+    private javax.swing.JLabel lblEB;
+    private javax.swing.JLabel lblFunc;
+    private javax.swing.JLabel lblSA;
+    private javax.swing.JLabel lblSB;
     private javax.swing.JTable tbPonto;
     private javax.swing.JFormattedTextField txtData;
     private javax.swing.JFormattedTextField txtEntrada1;

@@ -44,6 +44,8 @@ select * from config;
 
 truncate table usuario;
 
+truncate table registro_ponto;
+
 select * from funcionario;
 
 

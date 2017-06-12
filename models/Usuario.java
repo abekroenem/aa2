@@ -5,7 +5,9 @@
  */
 package models;
 
+import helpers.Config;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
 /**
  *
@@ -18,7 +20,20 @@ public class Usuario {
     String Password;
     boolean isAdmin;
 
+    private String user_nm, pass_u, pass_dif;
+
+    private void Traduz() {
+        ResourceBundle rbl = null;
+        rbl = Config.getResources();
+        
+        user_nm = rbl.getString("user_nm");
+        pass_u = rbl.getString("pass_u");
+        pass_dif = rbl.getString("pass_dif");
+
+    }
+
     public Usuario() {
+        Traduz();
         this.Id = 0;
         this.Name = "";
         this.Password = "";
@@ -47,7 +62,7 @@ public class Usuario {
 
     public void setName(String Name) throws IllegalArgumentException {
         if (Name.isEmpty()) {
-            throw new IllegalArgumentException("Nome do usuario deve ser informado!");
+            throw new IllegalArgumentException(user_nm);
         } else {
             this.Name = Name.toUpperCase();
         }
@@ -59,7 +74,7 @@ public class Usuario {
 
     public void setPassword(String Password) throws IllegalArgumentException {
         if (Password.isEmpty()) {
-            throw new IllegalArgumentException("Senha do usuario deve ser informada!");
+            throw new IllegalArgumentException(pass_u);
         } else {
             this.Password = Password;
         }
@@ -68,7 +83,7 @@ public class Usuario {
 
     public void ConfirmaSenha(String passwordConfirma) throws Exception {
         if (!this.Password.equals(passwordConfirma)) {
-            throw new Exception("Senhas devem ser identicas!");
+            throw new Exception(pass_dif);
         }
 
     }

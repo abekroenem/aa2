@@ -368,7 +368,38 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_cadUserActionPerformed
 
     private void rel_funcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rel_funcActionPerformed
+ try {
+            InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Relatorio_Todos_Funcionarios.jasper");
 
+            //Caso seja necessário relatório parametrizado
+            Map parametros = new HashMap();
+
+            //usando uma conexão
+            JasperPrint print = JasperFillManager.fillReport(inputStream, parametros, DB.Connect());
+
+            JRViewer viewer = new JRViewer(print);
+
+            //Criar o jFrame
+            JFrame frameRelatorio = new JFrame("Janela de relatorio");
+
+            //adiciona o JRViewer no JFram
+            frameRelatorio.add(viewer, BorderLayout.CENTER);
+
+            //configura o tamanho padrão da Jframe
+            frameRelatorio.setSize(500, 500);
+
+            //Maximiza o JFrame para ocupar a tela toda.
+            frameRelatorio.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+            //configura a operação padrao quando o jframe for fechado.
+            frameRelatorio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+            //exibi em tela Jframe
+            frameRelatorio.setVisible(true);
+
+        } catch (Exception ex) {
+            Dialogs.showError(ex.getMessage());
+        }
     }//GEN-LAST:event_rel_funcActionPerformed
 
     private void rel_usersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rel_usersActionPerformed
@@ -386,8 +417,6 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btntrocarActionPerformed
 
     private void rel_pontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rel_pontoActionPerformed
-        // TODO add your handling code here:
-        //Pegando-se o arquivo do relatorio
 
         try {
             InputStream inputStream = getClass().getResourceAsStream("../Relatorio/relatorio_usuarios.jasper");

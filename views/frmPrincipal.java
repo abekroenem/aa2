@@ -67,6 +67,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         abaRelatorio = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
+        aboutMenuItem1 = new javax.swing.JMenuItem();
         abaIdioma = new javax.swing.JMenu();
         rbPTBR = new javax.swing.JRadioButtonMenuItem();
         rbENUS = new javax.swing.JRadioButtonMenuItem();
@@ -224,6 +225,15 @@ public class frmPrincipal extends javax.swing.JFrame {
         aboutMenuItem.setText("Folha de Ponto");
         abaRelatorio.add(aboutMenuItem);
 
+        aboutMenuItem1.setMnemonic('a');
+        aboutMenuItem1.setText("Relatorio de Usuarios");
+        aboutMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutMenuItem1ActionPerformed(evt);
+            }
+        });
+        abaRelatorio.add(aboutMenuItem1);
+
         menuBar.add(abaRelatorio);
 
         abaIdioma.setBackground(new java.awt.Color(254, 254, 254));
@@ -325,10 +335,8 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_cadUserActionPerformed
 
     private void contentMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contentMenuItemActionPerformed
-         try {
+        try {
             //Pegando-se a conexão do banco
-                       
-           
             //Pegando-se o arquivo do relatorio
             InputStream inputStream = getClass().getResourceAsStream("../Relatorio/relatorio_funcionario.jasper");
 
@@ -359,19 +367,50 @@ public class frmPrincipal extends javax.swing.JFrame {
             frameRelatorio.setVisible(true);
 
         } catch (Exception ex) {
-             Dialogs.showError(ex.getMessage());
+            Dialogs.showError(ex.getMessage());
         }
-        
-
-
-
-
-
-
-
 
 // TODO add your handling code here:
     }//GEN-LAST:event_contentMenuItemActionPerformed
+
+    private void aboutMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItem1ActionPerformed
+        try {
+            //Pegando-se a conexão do banco
+            //Pegando-se o arquivo do relatorio
+            InputStream inputStream = getClass().getResourceAsStream("../Relatorio/relatorio_usuarios.jasper");
+
+            //Caso seja necessário relatório parametrizado
+            Map parametros = new HashMap();
+
+            //usando uma conexão
+            JasperPrint print = JasperFillManager.fillReport(inputStream, parametros, DB.Connect());
+
+            JRViewer viewer = new JRViewer(print);
+
+            //Criar o jFrame
+            JFrame frameRelatorio = new JFrame("Janela de relatorio");
+
+            //adiciona o JRViewer no JFram
+            frameRelatorio.add(viewer, BorderLayout.CENTER);
+
+            //configura o tamanho padrão da Jframe
+            frameRelatorio.setSize(500, 500);
+
+            //Maximiza o JFrame para ocupar a tela toda.
+            frameRelatorio.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+            //configura a operação padrao quando o jframe for fechado.
+            frameRelatorio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+            //exibi em tela Jframe
+            frameRelatorio.setVisible(true);
+
+        } catch (Exception ex) {
+            Dialogs.showError(ex.getMessage());
+        }
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_aboutMenuItem1ActionPerformed
 
     public void Traduz() {
 
@@ -382,7 +421,6 @@ public class frmPrincipal extends javax.swing.JFrame {
         abaIdioma.setText(propriedades.getString("Language"));
         abaSobre.setText(propriedades.getString("About"));
 
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -391,6 +429,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu abaRelatorio;
     private javax.swing.JMenu abaSobre;
     private javax.swing.JMenuItem aboutMenuItem;
+    private javax.swing.JMenuItem aboutMenuItem1;
     private javax.swing.JLabel asdasdasd;
     private javax.swing.JMenu btnCadastro;
     private javax.swing.JMenuItem cadFun;

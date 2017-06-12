@@ -8,8 +8,9 @@ package views;
 import controllers.FuncionarioController;
 import helpers.Dialogs;
 import helpers.Formats;
+import java.sql.SQLException;
 import java.util.List;
-import javax.swing.JDesktopPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import models.Funcionario;
 
@@ -19,11 +20,9 @@ import models.Funcionario;
  */
 public class infrmConsFunc extends javax.swing.JInternalFrame {
 
-    private FuncionarioController m_FuncC = null;
     private String CPF_CADASTRADO, FUNCIONARIO_INSERIDO_SUCESS, FUNCINOARIO_EDITADO_SUCESS, BTN_NOVO, BTN_SALVAR;
-    private Funcionario m_objFunc = null;
-    private boolean ersHora = false;
-    private JDesktopPane inDeskop = null;
+    private infrmPonto out_Ponto;
+    private FuncionarioController m_FuncC;
 
     public void Traduz() {
         CPF_CADASTRADO = "CPF ja cadastrado em outro funcionario!";
@@ -35,8 +34,14 @@ public class infrmConsFunc extends javax.swing.JInternalFrame {
 
     private void loadTable() {
         try {
+
             m_FuncC = new FuncionarioController();
-            List<Funcionario> lstFor = m_FuncC.getAll();
+            List<Funcionario> lstFor = null;
+            if (txtFuncionario.getText().equals("")) {
+                lstFor = m_FuncC.getAll();
+            } else {
+                lstFor = m_FuncC.SearchFuncionarioByName(txtFuncionario.getText());
+            }
             DefaultTableModel tablemd = (DefaultTableModel) tbFunc.getModel();
             tablemd.getDataVector().removeAllElements();
             if (lstFor.size() > 0) {
@@ -51,9 +56,9 @@ public class infrmConsFunc extends javax.swing.JInternalFrame {
         }
     }
 
-    public infrmConsFunc(JDesktopPane inDesktop) {
+    public infrmConsFunc(infrmPonto out_frmPonto) {
         initComponents();
-        this.inDeskop = inDeskop;
+        this.out_Ponto = out_frmPonto;
         Traduz();
         loadTable();
     }
@@ -79,15 +84,9 @@ public class infrmConsFunc extends javax.swing.JInternalFrame {
 
         lblSalario.setText("Funcionario");
 
-        txtFuncionario.setEditable(false);
-        txtFuncionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFuncionarioActionPerformed(evt);
-            }
-        });
         txtFuncionario.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtFuncionarioKeyPressed(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFuncionarioKeyReleased(evt);
             }
         });
 
@@ -115,6 +114,11 @@ public class infrmConsFunc extends javax.swing.JInternalFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbFunc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbFuncMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tbFunc);
@@ -152,13 +156,23 @@ public class infrmConsFunc extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFuncionarioActionPerformed
+    private void tbFuncMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbFuncMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtFuncionarioActionPerformed
+        try {
+            if (evt.getClickCount() > 1) {
+                this.out_Ponto.m_objFunc = new FuncionarioController().getByID(((Integer) tbFunc.getModel().getValueAt(tbFunc.getSelectedRow(), 0)));
+                this.out_Ponto.setFuncionario(this.out_Ponto.m_objFunc.getNome());
+                this.dispose();
+            }
+        } catch (SQLException ex) {
+            Dialogs.showInfo(ex.getMessage());
+        }
+    }//GEN-LAST:event_tbFuncMouseClicked
 
-    private void txtFuncionarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFuncionarioKeyPressed
-
-    }//GEN-LAST:event_txtFuncionarioKeyPressed
+    private void txtFuncionarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFuncionarioKeyReleased
+        // TODO add your handling code here:
+        loadTable();
+    }//GEN-LAST:event_txtFuncionarioKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;

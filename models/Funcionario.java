@@ -62,7 +62,7 @@ public class Funcionario {
     }
 
     public int gethora_dia() {
-        return hora_dia * 60;
+        return hora_dia / 60;
     }
 
     public void sethora_dia(int hora_dia) throws IllegalArgumentException {

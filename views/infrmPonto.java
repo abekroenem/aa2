@@ -25,7 +25,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
     private PontoController m_PontoC = null;
     private String PONTO_REGISTRADO, PONTO_EDITADO, PONTO_JA_CADASTRADO, BTN_NOVO, BTN_SALVAR;
     private Ponto m_objPonto = null;
-    private Funcionario m_objFunc = null;
+    public Funcionario m_objFunc = null;
     private boolean ersHora = false;
     private JDesktopPane inDesktop = null;
 
@@ -74,15 +74,14 @@ public class infrmPonto extends javax.swing.JInternalFrame {
                     FuncionarioController ctlFnc = new FuncionarioController();
                     Funcionario objFunc = ctlFnc.getByID(pnt.getId_funcionario());
 
-                    tbPonto.addRow(new Object[]{
+                    tablemd.addRow(new Object[]{
                         Formats.Data.Format(pnt.getData()),
                         objFunc.getNome(),
                         Formats.Hora.Format(pnt.getHoras_Trabalhadas()),
                         Formats.Hora.Format(pnt.getHoras_excedidas()),
                         pnt.getPercent_aplicado(),
                         Formats.Valor.Format(pnt.getValor_extra()),
-                        Formats.valor.Format(pnt.getTotal_recebido())});
-
+                        Formats.Valor.Format(pnt.getTotal_recebido())});
                 }
                 tbPonto.clearSelection();
             }
@@ -94,17 +93,18 @@ public class infrmPonto extends javax.swing.JInternalFrame {
 
     private void InserirPonto() throws Exception {
         m_PontoC = new PontoController();
+
+        int id_fnc = (m_objFunc == null) ? 0 : m_objFunc.getId();
+
         m_PontoC.Add(
                 Formats.Data.Unformat(txtData.getText()),
-                m_objFunc.getId(),
+                id_fnc,
                 Formats.Hora.Unformat(txtEntrada1.getText()),
                 Formats.Hora.Unformat(txtSaida1.getText()),
                 Formats.Hora.Unformat(txtEntrada2.getText()),
-                Formats.Hora.Unformat(txtSaida2.getText()),,
-                Integer.valueOf((txtHoraBase.getText().isEmpty() ? "0" : txtHoraBase.getText()))
-        );
+                Formats.Hora.Unformat(txtSaida2.getText()));
         defaultLayout(true);
-        Dialogs.showInfo(FUNCIONARIO_INSERIDO_SUCESS);  */
+        Dialogs.showInfo(PONTO_REGISTRADO);
     }
 
     private boolean PontoDuplicado() throws Exception {
@@ -112,16 +112,20 @@ public class infrmPonto extends javax.swing.JInternalFrame {
         if (m_objPonto == null) {
             Ponto objPnt = m_PontoC.SearchUserByFunDay(Formats.Data.Unformat(txtData.getText()), HIDE_ON_CLOSE);
             if (objPnt != null) {
-                Dialogs.showWarning(CPF_CADASTRADO);
+                Dialogs.showWarning(PONTO_JA_CADASTRADO);
                 return true;
             }
             return (objPnt != null);
-        } else if (m_PontoC.DuplicatedUser(m_objPonto.getId(), Formats.Data.Unformat(txtData.getText()), m_objPonto.getId_Funcionario())) {
-            Dialogs.showWarning(CPF_CADASTRADO);
+        } else if (m_PontoC.DuplicatedPonto(m_objPonto.getId(), Formats.Data.Unformat(txtData.getText()), m_objPonto.getId_funcionario())) {
+            Dialogs.showWarning(PONTO_JA_CADASTRADO);
             return true;
         } else {
             return false;
         }
+    }
+
+    public void setFuncionario(String func) {
+        txtFuncionario.setText(func);
     }
 
     public infrmPonto(JDesktopPane inDesktop) {
@@ -410,13 +414,15 @@ public class infrmPonto extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addComponent(lblPerc)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnNovo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(9, 9, 9)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnCancelar)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnCancelar)
+                        .addGap(279, 279, 279))))
         );
 
         pack();
@@ -428,7 +434,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
 
-        infrmConsFunc objConsF = new infrmConsFunc(this.inDesktop);
+        infrmConsFunc objConsF = new infrmConsFunc(this);
         Forms.showInternal(this.inDesktop, objConsF);
 
     }//GEN-LAST:event_btnSearchActionPerformed
@@ -450,20 +456,25 @@ public class infrmPonto extends javax.swing.JInternalFrame {
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         // TODO add your handling code here:   
         try {
-            if (btnSearch.getText().equals(BTN_SALVAR)) {
-                if (m_objFunc == null) {
-                    if (!FuncionarioDuplicado()) {
-                        InserirFuncionario();
+            if (btnNovo.getText().equals(BTN_SALVAR)) {
+                if (m_objPonto == null) {
+                    if (!PontoDuplicado()) {
+                        InserirPonto();
                     }
-                    /*  } else if (!FuncionarioDuplicado()) {
-                    m_FuncC.Edit(m_objFunc.getId(), txtFuncionario.getText(), txtData.getText(),
-                            Double.parseDouble((txtSalario.getText().isEmpty()) ? "0" : txtSalario.getText()),
-                            Integer.valueOf((txtHoraBase.getText().isEmpty() ? "0" : txtHoraBase.getText())));
-                    Dialogs.showInfo(FUNCINOARIO_EDITADO_SUCESS);
+                } else if (!PontoDuplicado()) {
+                    m_PontoC.Edit(
+                            m_objPonto.getId(),
+                            Formats.Data.Unformat(txtData.getText()),
+                            m_objFunc.getId(),
+                            Formats.Hora.Unformat(txtEntrada1.getText()),
+                            Formats.Hora.Unformat(txtSaida1.getText()),
+                            Formats.Hora.Unformat(txtEntrada2.getText()),
+                            Formats.Hora.Unformat(txtSaida2.getText()));
+                    Dialogs.showInfo(PONTO_EDITADO);
                     m_objFunc = null;
-                    defaultLayout(true);*/
+                    defaultLayout(true);
                 }
-            } else if (btnSearch.getText().equals(BTN_NOVO)) {
+            } else if (btnNovo.getText().equals(BTN_NOVO)) {
                 defaultLayout(false);
                 txtFuncionario.requestFocus();
             }
@@ -489,22 +500,27 @@ public class infrmPonto extends javax.swing.JInternalFrame {
 
     private void txtEntrada2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEntrada2KeyPressed
         // TODO add your handling code here:
+        Forms.goNextField(evt.getKeyCode(), txtSaida2);
     }//GEN-LAST:event_txtEntrada2KeyPressed
 
     private void txtSaida1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSaida1KeyTyped
         // TODO add your handling code here:
+        Forms.OnlyNumbers(evt);
     }//GEN-LAST:event_txtSaida1KeyTyped
 
     private void txtSaida1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSaida1KeyPressed
         // TODO add your handling code here:
+        Forms.goNextField(evt.getKeyCode(), txtEntrada2);
     }//GEN-LAST:event_txtSaida1KeyPressed
 
     private void txtSaida2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSaida2KeyTyped
         // TODO add your handling code here:
+        Forms.OnlyNumbers(evt);
     }//GEN-LAST:event_txtSaida2KeyTyped
 
     private void txtSaida2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSaida2KeyPressed
         // TODO add your handling code here:
+        Forms.goNextField(evt.getKeyCode(), btnNovo);
     }//GEN-LAST:event_txtSaida2KeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

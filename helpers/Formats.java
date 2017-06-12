@@ -55,28 +55,33 @@ public class Formats {
 
         }
 
-        public static class Data {
+    }
 
-            public static String Format(java.sql.Date DataBanco) {
-                return sdf.format(DataBanco);
-            }
+    public static class Data {
 
-            public static java.sql.Date Unformat(String DataCampo) throws ParseException {
+        public static String Format(java.sql.Date DataBanco) {
+            return sdf.format(DataBanco);
+        }
+
+        public static java.sql.Date Unformat(String DataCampo) throws ParseException {
+            if (!(DataCampo.replaceAll("/", "").replaceAll(" ", "").equals("2017"))) {
                 java.util.Date data = sdf.parse(DataCampo);
 
                 return (new java.sql.Date(data.getTime()));
-
-            }
-
-        }
-
-        public static class Valor {
-
-            public static String Format(double Valor_Format) {
-                return String.format("R$ %.2f", Valor_Format);
+            } else {
+                return null;
             }
 
         }
 
     }
+
+    public static class Valor {
+
+        public static String Format(double Valor_Format) {
+            return String.format("R$ %.2f", Valor_Format);
+        }
+
+    }
+
 }

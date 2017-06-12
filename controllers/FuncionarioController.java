@@ -54,7 +54,11 @@ public class FuncionarioController {
     }
 
     public Funcionario SearchFuncionarioByCPF(String CPF) throws SQLException {
-        return (Funcionario) funcDAO.SearchEntity(CPF);
+        return (Funcionario) funcDAO.SearchEntityByCPF(CPF);
+    }
+
+    public List<Funcionario> SearchFuncionarioByName(String Name) throws SQLException {
+        return funcDAO.SearchEntityByName(Name);
     }
 
     public boolean DuplicatedFuncionario(int ID, String CPF) throws Exception {

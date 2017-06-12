@@ -39,10 +39,3 @@ create table config (
 );
 insert into config(key,value) values('lang', 0);
 
-:)
-
-select * from config;
-
-select * from funcionario;
-
-truncate table usuario;

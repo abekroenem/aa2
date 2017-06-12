@@ -9,18 +9,12 @@ import Env.Constants;
 import java.sql.SQLException;
 import helpers.Config;
 import helpers.Dialogs;
+import helpers.Dialogs;
 import helpers.Forms;
-import java.awt.BorderLayout;
-import java.io.InputStream;
-import java.sql.Connection;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
-import models.DB;
 
 /*import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -34,8 +28,12 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     public frmPrincipal(String UserName) throws SQLException {
         initComponents();
-        lblUser.setText("Usuario: " + UserName);
+        setUser(UserName);
         rbPTBR.setSelected((Config.getLang() == Constants.PT_BR));
+    }
+
+    public void setUser(String UserName) {
+        lblUser.setText("Usuario: " + UserName);
     }
 
     /**
@@ -49,6 +47,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         desktopPane = new javax.swing.JDesktopPane();
         jToolBar2 = new javax.swing.JToolBar();
+        jButton5 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -81,6 +80,19 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         jToolBar2.setBackground(new java.awt.Color(93, 93, 93));
         jToolBar2.setRollover(true);
+
+        jButton5.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/employee.png"))); // NOI18N
+        jButton5.setText("Trocar Usuario");
+        jButton5.setFocusable(false);
+        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(jButton5);
 
         jButton2.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/employee.png"))); // NOI18N
@@ -277,8 +289,14 @@ public class frmPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        infrmPonto objPnt = new infrmPonto(this.desktopPane);
-        Forms.showInternal(desktopPane, objPnt);
+        if (Env.Constants.ObjUser.getAdmin()) {
+
+            infrmPonto objPnt = new infrmPonto(this.desktopPane);
+            Forms.showInternal(desktopPane, objPnt);
+
+        } else {
+            Dialogs.showError("Usuario sem permissao para executar operacao!");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -367,6 +385,15 @@ public class frmPrincipal extends javax.swing.JFrame {
 // TODO add your handling code here:
     }//GEN-LAST:event_contentMenuItemActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        try {
+            // TODO add your handling code here:
+            new frmLogin(this).setVisible(true);
+        } catch (SQLException ex) {
+            Dialogs.showError(ex.getMessage());
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     public void Traduz() {
 
         ResourceBundle propriedades = ResourceBundle.getBundle("lang/lg");
@@ -397,6 +424,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JToolBar jToolBar2;

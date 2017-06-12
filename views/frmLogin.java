@@ -20,6 +20,7 @@ public class frmLogin extends javax.swing.JFrame {
 
     private UsuarioController m_UserC;
     private boolean defaultUser = false;
+    private frmPrincipal mainForm = null;
     private String USUARIO_NAO_CADASTRADO, NENHUM_USUARIO_CAD, SENHA_INCORRETA;
 
     public void configurarMSGs() {
@@ -33,7 +34,7 @@ public class frmLogin extends javax.swing.JFrame {
         SENHA_INCORRETA = "Senha incorreta!";
     }
 
-    public frmLogin() throws SQLException {
+    public frmLogin(frmPrincipal mainForm) throws SQLException {
         configurarMSGs();
         this.m_UserC = new UsuarioController();
         defaultUser = m_UserC.isEmpty(); // caso nao existam usuarios cadastrados
@@ -41,6 +42,7 @@ public class frmLogin extends javax.swing.JFrame {
             Dialogs.showInfo(NENHUM_USUARIO_CAD);
         }
         initComponents();
+        this.mainForm = mainForm;
     }
 
     /**
@@ -163,7 +165,11 @@ public class frmLogin extends javax.swing.JFrame {
                     } else {
                         this.dispose();
                         Env.Constants.ObjUser = obUser;
-                        new frmPrincipal(obUser.getName()).setVisible(true);
+                        if (mainForm == null) {
+                            new frmPrincipal(obUser.getName()).setVisible(true);
+                        } else {
+                            mainForm.setUser(obUser.getName());
+                        }
                     }
                 } else {
                     Dialogs.showWarning(USUARIO_NAO_CADASTRADO);

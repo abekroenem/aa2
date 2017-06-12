@@ -107,10 +107,10 @@ public class FuncionarioDAO extends GenericDAO {
 
     }
 
-    public Object SearchEntity(String CFP) throws SQLException {
+    public Object SearchEntityByCPF(String Value) throws SQLException {
         String sql = "SELECT * FROM FUNCIONARIO WHERE CPF = ?";
         super.Sql = super.Conn.prepareStatement(sql);
-        Sql.setString(1, CFP);
+        Sql.setString(1, Value);
         ResultSet rs = super.Sql.executeQuery();
         Funcionario obj = null;
         if (rs.next()) {
@@ -122,6 +122,27 @@ public class FuncionarioDAO extends GenericDAO {
             }
         }
         return obj;
+    }
+
+    public <T> List<T> SearchEntityByName(String Value) throws SQLException {
+        List<Funcionario> listFunc = new ArrayList();
+        String sql = "SELECT * FROM FUNCIONARIO WHERE NOME LIKE \'" + Value.toUpperCase() + "%\'";
+         super.Sql = super.Conn.prepareStatement(sql);
+        ResultSet rs = super.Sql.executeQuery();
+        Funcionario obj = null;
+        while (rs.next()) {
+            try {
+                obj = new Funcionario();
+                preencherObj(obj, rs);
+                listFunc.add(obj);
+            } catch (Exception ex) {
+                Dialogs.showError(ex.getMessage());
+            }
+        }
+
+        rs.close();
+        super.Sql.close();
+        return (List<T>) listFunc;
     }
 
     public boolean DuplicatedEntity(int Id, String CPF) throws SQLException {

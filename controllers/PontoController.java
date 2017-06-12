@@ -23,8 +23,7 @@ public class PontoController {
 
     }
 
-    public void Add(java.sql.Date data, int id_funcionario, int entrada_a, int saida_a, int entrada_b, int saida_b,
-            double percent_aplicado) throws Exception {
+    public void Add(java.sql.Date data, int id_funcionario, int entrada_a, int saida_a, int entrada_b, int saida_b) throws Exception {
         Ponto obj = new Ponto();
         obj.setData(data);
         obj.setId_funcionario(id_funcionario);
@@ -35,8 +34,7 @@ public class PontoController {
         pntDAO.addEntity(obj);
     }
 
-    public void Edit(int Id, java.sql.Date data, int id_funcionario, int entrada_a, int saida_a, int entrada_b, int saida_b,
-            double percent_aplicado) throws Exception {
+    public void Edit(int Id, java.sql.Date data, int id_funcionario, int entrada_a, int saida_a, int entrada_b, int saida_b) throws Exception {
         Ponto obj = new Ponto();
         obj.setId(Id);
         obj.setData(data);
@@ -69,7 +67,7 @@ public class PontoController {
         return (Ponto) pntDAO.SearchEntity(data, id_funcionario);
     }
 
-    public boolean DuplicatedUser(int ID, java.sql.Date data, int id_funcionario) throws SQLException {
+    public boolean DuplicatedPonto(int ID, java.sql.Date data, int id_funcionario) throws SQLException {
         return pntDAO.DuplicatedEntity(ID, data, id_funcionario);
     }
 

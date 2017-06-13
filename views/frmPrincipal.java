@@ -241,6 +241,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         regponto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pontoS.png"))); // NOI18N
         regponto.setMnemonic('t');
         regponto.setText("Registrar Ponto");
+        regponto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regpontoActionPerformed(evt);
+            }
+        });
         abaPonto.add(regponto);
 
         menuBar.add(abaPonto);
@@ -356,12 +361,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnpontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpontoActionPerformed
-        if (Env.Constants.ObjUser.getAdmin()) {
-            infrmPonto objPnt = new infrmPonto(this.desktopPane);
-            Forms.showInternal(desktopPane, objPnt);
-        } else {
-            Dialogs.showError(user_adm);
-        }
+        regponto.doClick();
     }//GEN-LAST:event_btnpontoActionPerformed
 
     private void btn_cad_funcionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cad_funcionarioActionPerformed
@@ -470,7 +470,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         if (Env.Constants.ObjUser.getAdmin()) {
 
             try {
-                InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Relatorio_Todos_Funcionarios.jasper");
+                InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Relatorio_Todos_Usuarios.jasper");
 
                 //Caso seja necessário relatório parametrizado
                 Map parametros = new HashMap();
@@ -610,7 +610,7 @@ public class frmPrincipal extends javax.swing.JFrame {
             try {
                 //Pegando-se a conexão do banco
                 //Pegando-se o arquivo do relatorio
-                InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Relatorio_recebidoPorFuncionario.jasper");
+                InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Total_Recebido_Por_Funcionario.jasper");
 
                 //Caso seja necessário relatório parametrizado
                 Map parametros = new HashMap();
@@ -701,6 +701,16 @@ public class frmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         btnPags.doClick();
     }//GEN-LAST:event_btnrel_payActionPerformed
+
+    private void regpontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regpontoActionPerformed
+        // TODO add your handling code here:
+        if (Env.Constants.ObjUser.getAdmin()) {
+            infrmPonto objPnt = new infrmPonto(this.desktopPane);
+            Forms.showInternal(desktopPane, objPnt);
+        } else {
+            Dialogs.showError(user_adm);
+        }
+    }//GEN-LAST:event_regpontoActionPerformed
 
     public void Traduz() {
 

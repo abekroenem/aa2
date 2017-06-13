@@ -11,7 +11,7 @@ fn_min_to_hr(rp.entrada_b) as entrada_b,
 fn_min_to_hr(rp.saida_b) as saida_b
 from registro_ponto rp
 join funcionario f on f.id = rp.id_funcionario 
-where rp.id_funcionario = 0
+where rp.id_funcionario = 1
 order by  rp.dia;]]>
 	</queryString>
 	<field name="dia" class="java.lang.String"/>

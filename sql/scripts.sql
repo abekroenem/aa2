@@ -60,8 +60,6 @@ $BODY$
 LANGUAGE sql VOLATILE;
 
 -- Relatorio principal (total de horas extras pagas)
-
-
 select
 to_char(rp.dia, 'dd/MM/yyyy'),
 f.nome,
@@ -77,7 +75,6 @@ join funcionario f on f.id = rp.id_funcionario
 order by rp.dia
 
 -- Folha de ponto
-
 select to_char(rp.dia,'dd/MM/yyyy') as dia, f.nome,
 fn_min_to_hr(rp.entrada_a) as entrada_a,
 fn_min_to_hr(rp.saida_a) as saida_a,
@@ -88,9 +85,7 @@ join funcionario f on f.id = rp.id_funcionario
 where rp.id_funcionario = 0
 order by  rp.dia;
 
-
 -- Total recebido por funcionario 
-
 select f.nome, 
 fn_min_to_hr(sum(((rp.saida_b-rp.entrada_a)-(rp.entrada_b-rp.saida_a)) + rp.horas_excedidas)) as horas_trabalhadas,
 sum(rp.valor_extra) as horas_extras, 

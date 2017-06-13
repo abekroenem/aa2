@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Total_Recebido_Por_Funcionario" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e2271295-3e5a-4721-b813-7e5f6d1efba5">
+	<property name="ireport.zoom" value="1.7715610000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select f.nome, 
+fn_min_to_hr(sum(((rp.saida_b-rp.entrada_a)-(rp.entrada_b-rp.saida_a)) + rp.horas_excedidas)) as horas_trabalhadas,
+sum(rp.valor_extra) as horas_extras, 
+sum(rp.total_recebido) as total_do_dia 
+from registro_ponto rp
+join funcionario f on f.id = rp.id_funcionario
+group by f.nome, rp.id_funcionario;]]>
+	</queryString>
+	<field name="nome" class="java.lang.String"/>
+	<field name="horas_trabalhadas" class="java.lang.String"/>
+	<field name="horas_extras" class="java.math.BigDecimal"/>
+	<field name="total_do_dia" class="java.math.BigDecimal"/>
+	<group name="Group1">
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Group2">
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Group3">
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Group4">
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="ffa9d843-6cba-46bc-8817-15e4a5761b79"/>
+				<staticText>
+					<reportElement x="20" y="0" width="555" height="43" forecolor="#FFFFFF" uuid="7c534085-ab43-4948-b3f7-d481de1899de"/>
+					<textElement>
+						<font size="30" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total recebido por Funcionario]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="306" y="63" width="269" height="20" forecolor="#FFFFFF" uuid="3769960c-a4ce-46ff-9164-4d836a7ca99e"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Sistema de Controle de Horas Extras]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<staticText>
+				<reportElement x="0" y="0" width="266" height="20" uuid="7991d86d-8b4b-4cfc-8b5a-c0f10fd8deda"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[NOME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="266" y="1" width="96" height="20" uuid="81d65b1d-b916-470b-ae5f-380edb21b4f2"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[HORAS_TRABALHADAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="374" y="1" width="89" height="20" uuid="10078fd9-13ef-4b74-ab27-46918c6dcb72"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[HORAS_EXTRAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="0" width="82" height="20" uuid="725f511c-543d-408f-9ac5-562d8865ca83"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[TOTAL_DO_DIA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="73">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="929b4cf5-d389-40f4-a4a5-399669be048e"/>
+			</line>
+			<textField>
+				<reportElement x="0" y="19" width="266" height="20" uuid="59ff69c4-2729-4cb8-a35c-999cb5c456c1"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="266" y="19" width="96" height="20" uuid="4e6beff0-a89e-4a80-892d-f3396ed62f73"/>
+				<textFieldExpression><![CDATA[$F{horas_trabalhadas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="470" y="20" width="82" height="20" uuid="78364344-0a50-4ef6-9d67-af09e42921a5"/>
+				<textFieldExpression><![CDATA[$F{total_do_dia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="374" y="20" width="89" height="20" uuid="845a8915-b239-44d8-ab8f-523ea1dd71f4"/>
+				<textFieldExpression><![CDATA[$F{horas_extras}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="27b33497-b84f-4010-997f-045c1935d47d"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="66a65fab-cee2-4ad2-b773-f51d691d86fe"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="0c45612c-9e80-4df7-a7d4-d792499b8325"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

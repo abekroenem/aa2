@@ -4,11 +4,12 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
-		<![CDATA[SELECT * FROM USUARIOS]]>
+		<![CDATA[SELECT * FROM USUARIO]]>
 	</queryString>
 	<field name="id" class="java.lang.Integer"/>
-	<field name="name" class="java.lang.String"/>
-	<field name="password" class="java.lang.String"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="senha" class="java.lang.String"/>
+	<field name="isadmin" class="java.lang.Boolean"/>
 	<group name="Group1">
 		<groupFooter>
 			<band/>
@@ -62,16 +63,20 @@
 				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="d7abb7b8-0e32-425e-b621-06246bd12aa1"/>
 			</line>
 			<staticText>
-				<reportElement x="0" y="0" width="185" height="20" uuid="674a8a6d-262d-42a0-9edd-c4a17f4abcee"/>
+				<reportElement x="0" y="0" width="138" height="20" uuid="8d1001a0-4b45-40f7-87a9-cbc7958543db"/>
 				<text><![CDATA[id]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="185" y="0" width="185" height="20" uuid="fa2de894-a0ee-4a34-abd7-479b26dac044"/>
-				<text><![CDATA[name]]></text>
+				<reportElement x="138" y="0" width="138" height="20" uuid="f6ba15ba-5ef2-4012-909c-ff048eb23d12"/>
+				<text><![CDATA[nome]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="370" y="0" width="185" height="20" uuid="a1ff935e-f215-4655-9f87-3773c105e20c"/>
-				<text><![CDATA[password]]></text>
+				<reportElement x="276" y="0" width="138" height="20" uuid="34c8480b-d20f-405e-9a56-1e88d1d22580"/>
+				<text><![CDATA[senha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="414" y="0" width="138" height="20" uuid="c3932eb6-436a-4cf0-9512-d2652da639e3"/>
+				<text><![CDATA[isadmin]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -81,16 +86,20 @@
 				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="9907ca1d-10de-4c9a-b324-baeeb3e335b4"/>
 			</line>
 			<textField>
-				<reportElement x="0" y="0" width="185" height="20" uuid="7123a324-6a1b-45e4-921b-319ee560ff57"/>
+				<reportElement x="0" y="0" width="138" height="20" uuid="707891d4-cb27-415a-9479-46b9cc1271c9"/>
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="185" y="0" width="185" height="20" uuid="239217d8-91b1-470a-8ede-d26c6a86ea96"/>
-				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+				<reportElement x="138" y="0" width="138" height="20" uuid="32ad5e7e-873f-4328-8a9e-e0e09880f974"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="370" y="0" width="185" height="20" uuid="773febbb-637e-4d88-b383-2dae074f8cf9"/>
-				<textFieldExpression><![CDATA[$F{password}]]></textFieldExpression>
+				<reportElement x="276" y="0" width="138" height="20" uuid="1b61690e-4be0-4c40-9045-0d3282248300"/>
+				<textFieldExpression><![CDATA[$F{senha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="414" y="0" width="138" height="20" uuid="7e73ab86-ea05-4c17-989f-3fa5c7367556"/>
+				<textFieldExpression><![CDATA[$F{isadmin}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

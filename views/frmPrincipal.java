@@ -22,10 +22,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import models.DB;
-import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.swing.JRViewer;
+
 
 /*import net.sf.jasperreports.engine.JasperFillManager;
  import net.sf.jasperreports.engine.JasperPrint;
@@ -393,11 +393,11 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_cadUserActionPerformed
 
     private void rel_funcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rel_funcActionPerformed
-        
-                try {
+
+            try {
             //Pegando-se a conexão do banco
-                    
-         
+                        
+     
             //Pegando-se o arquivo do relatorio
             InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Relatorio_Todos_Funcionarios.jasper");
 
@@ -426,13 +426,11 @@ public class frmPrincipal extends javax.swing.JFrame {
 
             //exibi em tela Jframe
             frameRelatorio.setVisible(true);
-
-        } catch (JRException ex) {
+          } catch (Exception ex) {
             Dialogs.showError(ex.getMessage());
-        } catch (SQLException ex) {
-            Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
+        
+        
     }//GEN-LAST:event_rel_funcActionPerformed
 
     private void rel_usersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rel_usersActionPerformed

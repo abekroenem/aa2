@@ -2,6 +2,7 @@ drop table usuario;
 drop table funcionario;
 drop table registro_ponto;
 drop table config;
+drop table jornada;
 
 
 create table usuario (
@@ -38,6 +39,7 @@ create table config (
     key_x varchar(10),
     value_x Int
 );
+
 insert into config(key_x,value_x) values('lang', 0);
 select * from config;
 
@@ -46,6 +48,7 @@ truncate table funcionario;
 truncate table registro_ponto;
 
 select * from funcionario;
+select * from usuario;
 
 
 CREATE FUNCTION fn_min_to_hr(mins bigint)

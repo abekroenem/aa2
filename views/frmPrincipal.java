@@ -394,7 +394,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         
                 try {
             //Pegando-se a conexão do banco
-                      
+                    
          
             //Pegando-se o arquivo do relatorio
             InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Relatorio_Todos_Funcionarios.jasper");

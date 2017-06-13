@@ -81,7 +81,8 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
             tablemd.getDataVector().removeAllElements();
             if (lstFor.size() > 0) {
                 for (Funcionario forn : lstFor) {
-                    tablemd.addRow(new Object[]{forn.getId(), forn.getNome(), Formats.CPF.Format(forn.getCPF()), forn.getSalario(), forn.getValor_hora()});
+                    tablemd.addRow(new Object[]{forn.getId(), forn.getNome(), Formats.CPF.Format(forn.getCPF()),
+                        Formats.Valor.Format(forn.getSalario()), Formats.Valor.Format(forn.getValor_hora())});
                 }
                 tbFunc.clearSelection();
             }
@@ -206,7 +207,7 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 true, false, true, true, false
@@ -239,9 +240,9 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
             tbFunc.getColumnModel().getColumn(3).setMinWidth(90);
             tbFunc.getColumnModel().getColumn(3).setPreferredWidth(90);
             tbFunc.getColumnModel().getColumn(3).setMaxWidth(90);
-            tbFunc.getColumnModel().getColumn(4).setMinWidth(65);
-            tbFunc.getColumnModel().getColumn(4).setPreferredWidth(65);
-            tbFunc.getColumnModel().getColumn(4).setMaxWidth(65);
+            tbFunc.getColumnModel().getColumn(4).setMinWidth(60);
+            tbFunc.getColumnModel().getColumn(4).setPreferredWidth(60);
+            tbFunc.getColumnModel().getColumn(4).setMaxWidth(60);
         }
 
         try {

@@ -84,4 +84,13 @@ public class Formats {
 
     }
 
+    public static class Percent {
+
+        public static String Format(double Valor_Format) {
+            return String.format("%.0f", Valor_Format) + " %";
+
+        }
+
+    }
+
 }

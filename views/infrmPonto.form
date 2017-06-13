@@ -244,7 +244,7 @@
                 <Column editable="true" title="ID" type="java.lang.Integer"/>
                 <Column editable="false" title="Data" type="java.lang.String"/>
                 <Column editable="false" title="Funcionario" type="java.lang.String"/>
-                <Column editable="true" title="H. Base" type="java.lang.Object"/>
+                <Column editable="true" title="H. Base" type="java.lang.String"/>
                 <Column editable="false" title="H. Trab." type="java.lang.String"/>
                 <Column editable="false" title="H. Ex." type="java.lang.Object"/>
                 <Column editable="false" title="%" type="java.lang.Object"/>

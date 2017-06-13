@@ -165,8 +165,7 @@ public class Ponto {
                 double min_value = objFun.getValor_hora() / 60;
                 double horas_exec = this.getHoras_excedidas();
                 valor_tot = (horas_exec * min_value);
-                valor_tot = (valor_tot) * (this.getPercent_aplicado() / 100);
-                valor_tot = valor_tot / 60;
+                valor_tot = valor_tot + (valor_tot) * (this.getPercent_aplicado() / 100);
             }
 
             return valor_tot;

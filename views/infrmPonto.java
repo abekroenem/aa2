@@ -107,7 +107,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
                         Formats.Hora.Format(objFunc.gethora_dia() * 60),
                         Formats.Hora.Format(pnt.getHoras_Trabalhadas()),
                         Formats.Hora.Format(pnt.getHoras_excedidas()),
-                        pnt.getPercent_aplicado(),
+                        Formats.Percent.Format(pnt.getPercent_aplicado()),
                         Formats.Valor.Format(pnt.getValor_extra()),
                         Formats.Valor.Format(pnt.getTotal_recebido())});
                 }
@@ -260,7 +260,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
                 true, false, false, true, false, false, false, false, false

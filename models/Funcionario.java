@@ -73,7 +73,7 @@ public class Funcionario {
 
     public void setSalario(double salario) throws IllegalArgumentException {
         if (salario < Double.valueOf(Constants.SALARIO_MINIMO)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(salario_func);
         }
         this.salario = salario;
     }

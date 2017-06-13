@@ -42,7 +42,7 @@ insert into config(key_x,value_x) values('lang', 0);
 select * from config;
 
 truncate table usuario;
-
+truncate table funcionario;
 truncate table registro_ponto;
 
 select * from funcionario;

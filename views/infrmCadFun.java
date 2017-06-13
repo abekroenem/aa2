@@ -468,7 +468,8 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
         // TODO add your handling code here:
-        if (Dialogs.showConfirm(DELETAR_FUNC) == 0) {
+        int x = Dialogs.showConfirm(DELETAR_FUNC);
+        if (x == 0) {
             if (m_objFunc != null) {
                 try {
                     m_FuncC.Delete(m_objFunc.getId(), m_objFunc.getNome());

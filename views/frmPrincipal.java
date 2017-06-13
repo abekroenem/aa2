@@ -13,13 +13,16 @@ import helpers.Dialogs;
 import helpers.Forms;
 import java.awt.BorderLayout;
 import java.io.InputStream;
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import models.DB;
+import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.swing.JRViewer;
@@ -388,7 +391,12 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_cadUserActionPerformed
 
     private void rel_funcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rel_funcActionPerformed
-        try {
+        
+                try {
+            //Pegando-se a conexão do banco
+                      
+         
+            //Pegando-se o arquivo do relatorio
             InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Relatorio_Todos_Funcionarios.jasper");
 
             //Caso seja necessário relatório parametrizado
@@ -417,14 +425,17 @@ public class frmPrincipal extends javax.swing.JFrame {
             //exibi em tela Jframe
             frameRelatorio.setVisible(true);
 
-        } catch (Exception ex) {
+        } catch (JRException ex) {
             Dialogs.showError(ex.getMessage());
+        } catch (SQLException ex) {
+            Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
+            
     }//GEN-LAST:event_rel_funcActionPerformed
 
     private void rel_usersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rel_usersActionPerformed
-        
-         try {
+
+        try {
             InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Relatorio_Todos_Usuarios.jasper");
 
             //Caso seja necessário relatório parametrizado
@@ -456,7 +467,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         } catch (Exception ex) {
             Dialogs.showError(ex.getMessage());
         }
-            
+
 // TODO add your handling code here:
     }//GEN-LAST:event_rel_usersActionPerformed
 
@@ -506,7 +517,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_rel_pontoActionPerformed
 
     private void rel_holerite1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rel_holerite1ActionPerformed
-        
+
         try {
             //Pegando-se a conexão do banco
             //Pegando-se o arquivo do relatorio
@@ -542,14 +553,12 @@ public class frmPrincipal extends javax.swing.JFrame {
             Dialogs.showError(ex.getMessage());
         }
 
-
-
 // TODO add your handling code here:
     }//GEN-LAST:event_rel_holerite1ActionPerformed
 
     private void rel_totalRecebidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rel_totalRecebidoActionPerformed
 
-         try {
+        try {
             //Pegando-se a conexão do banco
             //Pegando-se o arquivo do relatorio
             InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Relatorio_recebidoPorFuncionario.jasper");
@@ -584,15 +593,14 @@ public class frmPrincipal extends javax.swing.JFrame {
             Dialogs.showError(ex.getMessage());
         }
 
-
-    // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_rel_totalRecebidoActionPerformed
 
     private void rel_holeriteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rel_holeriteActionPerformed
         try {
             //Pegando-se a conexão do banco
             //Pegando-se o arquivo do relatorio
-           InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Relatorio_Principal.jasper");
+            InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Relatorio_Principal.jasper");
 
             //Caso seja necessário relatório parametrizado
             Map parametros = new HashMap();

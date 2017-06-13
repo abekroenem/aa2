@@ -4,12 +4,11 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
-		<![CDATA[select * from usuario;]]>
+		<![CDATA[SELECT * FROM USUARIOS]]>
 	</queryString>
 	<field name="id" class="java.lang.Integer"/>
-	<field name="nome" class="java.lang.String"/>
-	<field name="senha" class="java.lang.String"/>
-	<field name="isadmin" class="java.lang.Boolean"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="password" class="java.lang.String"/>
 	<group name="Group1">
 		<groupFooter>
 			<band/>
@@ -63,32 +62,16 @@
 				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="d7abb7b8-0e32-425e-b621-06246bd12aa1"/>
 			</line>
 			<staticText>
-				<reportElement x="0" y="0" width="138" height="20" uuid="05283541-d8b0-452c-8c9b-f38330b672c1"/>
-				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[COD_USUARIO]]></text>
+				<reportElement x="0" y="0" width="185" height="20" uuid="674a8a6d-262d-42a0-9edd-c4a17f4abcee"/>
+				<text><![CDATA[id]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="138" y="0" width="138" height="20" uuid="6d5dbed2-bed1-41d8-8ef5-1e4ab6d31542"/>
-				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[NOME]]></text>
+				<reportElement x="185" y="0" width="185" height="20" uuid="fa2de894-a0ee-4a34-abd7-479b26dac044"/>
+				<text><![CDATA[name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="276" y="0" width="138" height="20" uuid="05ded60e-578a-4b67-b4ae-0ddbf2f68933"/>
-				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[SENHA]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="414" y="0" width="138" height="20" uuid="f3f017cd-f121-4e4a-8ee8-584226d59941"/>
-				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[ACESSO_ADM]]></text>
+				<reportElement x="370" y="0" width="185" height="20" uuid="a1ff935e-f215-4655-9f87-3773c105e20c"/>
+				<text><![CDATA[password]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -98,20 +81,16 @@
 				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="9907ca1d-10de-4c9a-b324-baeeb3e335b4"/>
 			</line>
 			<textField>
-				<reportElement x="0" y="0" width="138" height="20" uuid="6cd116b1-3bc7-4002-835a-a8c3725af45c"/>
+				<reportElement x="0" y="0" width="185" height="20" uuid="7123a324-6a1b-45e4-921b-319ee560ff57"/>
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="138" y="0" width="138" height="20" uuid="98ed4d6f-0e13-4257-88f7-f0a45b0d2448"/>
-				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+				<reportElement x="185" y="0" width="185" height="20" uuid="239217d8-91b1-470a-8ede-d26c6a86ea96"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="276" y="0" width="138" height="20" uuid="1aeeb7eb-8ae0-4807-81d2-45c8ac9374f1"/>
-				<textFieldExpression><![CDATA[$F{senha}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="414" y="0" width="138" height="20" uuid="72a5b40d-9a7c-48a6-b49f-ce34b27d918a"/>
-				<textFieldExpression><![CDATA[$F{isadmin}]]></textFieldExpression>
+				<reportElement x="370" y="0" width="185" height="20" uuid="773febbb-637e-4d88-b383-2dae074f8cf9"/>
+				<textFieldExpression><![CDATA[$F{password}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

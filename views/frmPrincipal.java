@@ -470,7 +470,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         if (Env.Constants.ObjUser.getAdmin()) {
 
             try {
-                InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Relatorio_Todos_Funcionarios.jasper");
+                InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Relatorio_Todos_Usuarios.jasper");
 
                 //Caso seja necessário relatório parametrizado
                 Map parametros = new HashMap();
@@ -610,7 +610,7 @@ public class frmPrincipal extends javax.swing.JFrame {
             try {
                 //Pegando-se a conexão do banco
                 //Pegando-se o arquivo do relatorio
-                InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Relatorio_recebidoPorFuncionario.jasper");
+                InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Total_Recebido_Por_Funcionario.jasper");
 
                 //Caso seja necessário relatório parametrizado
                 Map parametros = new HashMap();

@@ -9,9 +9,9 @@ import java.util.List;
  */
 public abstract class GenericDAO {
 
-    protected java.sql.Connection Conn; 
+    protected java.sql.Connection Conn;
     protected java.sql.PreparedStatement Sql;
-    
+
     public GenericDAO() throws SQLException {
         this.Conn = DB.Connect();
     }

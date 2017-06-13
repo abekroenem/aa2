@@ -2,7 +2,6 @@ drop table usuario;
 drop table funcionario;
 drop table registro_ponto;
 drop table config;
-drop function fn_min_to_hr(bigint);
 
 
 create table usuario (
@@ -43,13 +42,13 @@ insert into config(key_x,value_x) values('lang', 0);
 select * from config;
 
 truncate table usuario;
-
+truncate table funcionario;
 truncate table registro_ponto;
 
 select * from funcionario;
 
 
-CREATE OR REPLACE FUNCTION fn_min_to_hr(mins bigint)
+CREATE FUNCTION fn_min_to_hr(mins bigint)
 RETURNS text AS
 $BODY$ 
 select overlay(to_char(cast(date_part('hours',interval '1 minute' * mins) * 1.0 + 

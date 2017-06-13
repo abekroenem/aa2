@@ -7,6 +7,7 @@ package models;
 
 import controllers.FuncionarioController;
 import helpers.Config;
+import helpers.Formats;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Calendar;
@@ -39,6 +40,15 @@ public class Ponto {
         sa = rbl.getString("sa");
         eb = rbl.getString("eb");
         sb = rbl.getString("sb");
+
+    }
+
+    private boolean isSunday() {
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(this.getData());
+        int dayofwk = cal.get(Calendar.DAY_OF_WEEK);
+        return (dayofwk == Calendar.SUNDAY);
 
     }
 
@@ -133,7 +143,7 @@ public class Ponto {
     public int getHoras_excedidas() {
         if (objFun != null) {
             int horas_trab = this.getHoras_Trabalhadas();
-            int hora_dia = objFun.gethora_dia() * 60;
+            int hora_dia = objFun.gethora_dia() * 60; // hora do dia em minutos
             if (horas_trab <= hora_dia) {
                 return 0;
             } else {
@@ -146,10 +156,7 @@ public class Ponto {
     }
 
     public double getPercent_aplicado() throws SQLException {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(this.getData());
-        int dayofwk = cal.get(Calendar.DAY_OF_WEEK);
-        if (dayofwk == Calendar.SUNDAY) {
+        if (this.isSunday()) {
             return 100;
         } else if (this.getHoras_excedidas() != 0) {
             return 50;
@@ -162,11 +169,10 @@ public class Ponto {
         if (objFun != null) {
             double valor_tot = 0;
             if (this.getPercent_aplicado() == 50) {
-                double min_value = objFun.getValor_hora() / 60;
-                double horas_exec = this.getHoras_excedidas();
-                valor_tot = (horas_exec * min_value);
-                valor_tot = (valor_tot) * (this.getPercent_aplicado() / 100);
-                valor_tot = valor_tot / 60;
+                double min_value = objFun.getValor_hora();
+                double horas_exec = Formats.Decimal.Format(this.getHoras_excedidas() / 60);
+                valor_tot = Formats.Decimal.Format(horas_exec * min_value);
+                valor_tot = Formats.Decimal.Format(valor_tot + Formats.Decimal.Format((valor_tot * Formats.Decimal.Format((this.getPercent_aplicado() / 100)))));
             }
 
             return valor_tot;
@@ -176,24 +182,35 @@ public class Ponto {
     }
 
     public double getTotal_recebido() throws SQLException {
+        double tot_receb = 0.0;
+
         if (objFun != null) {
-            double valor_hd = 0.0;
-            if (objFun.gethora_dia() < this.getHoras_Trabalhadas()) {
-                valor_hd = (objFun.gethora_dia() * objFun.getValor_hora());
+
+            double hr_dia = Formats.Decimal.Format(objFun.gethora_dia() * 60); // em minutos
+
+            double hr_trab = this.getHoras_Trabalhadas();
+
+            if (this.isSunday()) {
+
+                tot_receb = Formats.Decimal.Format((Formats.Decimal.Format(hr_trab / 60) * Formats.Decimal.Format(objFun.getValor_hora()) * 2));
+
+            } else if (hr_trab > hr_dia) { // fez hora extra
+
+                tot_receb = Formats.Decimal.Format(Formats.Decimal.Format(hr_dia / 60) * objFun.getValor_hora());
+
+                double valor_ext = this.getValor_extra();
+
+                if (valor_ext != 0) {
+                    tot_receb = Formats.Decimal.Format(tot_receb + valor_ext);
+                }
             } else {
-                valor_hd = this.getHoras_Trabalhadas();
-            }
-            double valor_ext = this.getValor_extra();
-            if (this.getPercent_aplicado() == 50) {
-                return valor_hd + valor_ext;
-            } else if (this.getPercent_aplicado() == 100) {
-                return valor_hd + valor_hd;
-            } else {
-                return valor_hd;
+                tot_receb = Formats.Decimal.Format(Formats.Decimal.Format(hr_trab / 60) * objFun.getValor_hora());
             }
         } else {
-            return 0;
+            tot_receb = 0;
         }
+
+        return tot_receb;
     }
 
     public int getHoras_Trabalhadas() {

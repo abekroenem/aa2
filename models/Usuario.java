@@ -25,7 +25,7 @@ public class Usuario {
     private void Traduz() {
         ResourceBundle rbl = null;
         rbl = Config.getResources();
-        
+
         user_nm = rbl.getString("user_nm");
         pass_u = rbl.getString("pass_u");
         pass_dif = rbl.getString("pass_dif");

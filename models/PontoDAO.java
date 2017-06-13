@@ -55,7 +55,7 @@ public class PontoDAO extends GenericDAO {
 
     @Override
     public void removeEntity(Object obj) throws SQLException {
-        String sql = "DELETE FROM PONTO WHERE ID=? AND ID_FUNCIONARIO=? AND DIA = ?";
+        String sql = "DELETE FROM REGISTRO_PONTO WHERE ID=? AND ID_FUNCIONARIO=? AND DIA = ?";
         super.Sql = super.Conn.prepareStatement(sql);
         super.Sql.setInt(1, ((Ponto) obj).getId());
         super.Sql.setInt(2, ((Ponto) obj).getId_funcionario());

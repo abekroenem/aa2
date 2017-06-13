@@ -462,6 +462,7 @@ public class frmPrincipal extends javax.swing.JFrame {
             Dialogs.showError(user_adm);
         }
 
+
     }//GEN-LAST:event_rel_funcActionPerformed
 
     private void rel_usersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rel_usersActionPerformed
@@ -618,7 +619,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                 JasperPrint print = JasperFillManager.fillReport(inputStream, parametros, DB.Connect());
 
                 JRViewer viewer = new JRViewer(print);
-                
+
                 //Criar o jFrame
                 JFrame frameRelatorio = new JFrame("Janela de relatorio");
 

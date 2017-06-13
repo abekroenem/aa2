@@ -2,7 +2,6 @@ drop table usuario;
 drop table funcionario;
 drop table registro_ponto;
 drop table config;
-drop function fn_min_to_hr(bigint);
 
 
 create table usuario (

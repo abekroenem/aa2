@@ -26,7 +26,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="cadUser">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/img/userSmall.png"/>
+                  <Image iconType="3" name="/img/userS.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Usuarios"/>
               </Properties>
@@ -81,12 +81,18 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fe" green="fe" red="fe" type="rgb"/>
             </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/img/reps.png"/>
+            </Property>
             <Property name="mnemonic" type="int" value="104"/>
             <Property name="text" type="java.lang.String" value="Relatorios"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="rel_func">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/userR.png"/>
+                </Property>
                 <Property name="mnemonic" type="int" value="99"/>
                 <Property name="text" type="java.lang.String" value="Funcionarios"/>
               </Properties>
@@ -96,6 +102,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="rel_ponto">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/clock-flat.png"/>
+                </Property>
                 <Property name="mnemonic" type="int" value="97"/>
                 <Property name="text" type="java.lang.String" value="Folha de Ponto"/>
               </Properties>
@@ -105,6 +114,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="rel_users">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/emp.png"/>
+                </Property>
                 <Property name="mnemonic" type="int" value="97"/>
                 <Property name="text" type="java.lang.String" value="Usuarios"/>
               </Properties>
@@ -114,6 +126,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="rel_holerite">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/holerite.png"/>
+                </Property>
                 <Property name="mnemonic" type="int" value="97"/>
                 <Property name="text" type="java.lang.String" value="Holerite"/>
               </Properties>
@@ -123,8 +138,11 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="rel_holerite1">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/hrEx.png"/>
+                </Property>
                 <Property name="mnemonic" type="int" value="97"/>
-                <Property name="text" type="java.lang.String" value="Relatorio Principal"/>
+                <Property name="text" type="java.lang.String" value="Relatorio Horas Extras"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rel_holerite1ActionPerformed"/>
@@ -132,6 +150,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="rel_totalRecebido">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/money-flat.png"/>
+                </Property>
                 <Property name="mnemonic" type="int" value="97"/>
                 <Property name="text" type="java.lang.String" value="Total recebido por funcionario "/>
               </Properties>
@@ -226,7 +247,7 @@
     <Container class="javax.swing.JDesktopPane" name="desktopPane">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="42" green="42" red="42" type="rgb"/>
+          <Color blue="7" green="0" red="32" type="rgb"/>
         </Property>
       </Properties>
 
@@ -306,7 +327,7 @@
                   <Font name="DejaVu Sans" size="13" style="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/img/report.png"/>
+                  <Image iconType="3" name="/img/hrExb.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Relatorio Horas Extras"/>
                 <Property name="focusable" type="boolean" value="false"/>
@@ -330,7 +351,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fe" green="fe" red="fe" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="v1.0.4"/>
+            <Property name="text" type="java.lang.String" value="v1.0.5"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

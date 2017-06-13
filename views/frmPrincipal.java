@@ -9,20 +9,15 @@ import Env.Constants;
 import java.sql.SQLException;
 import helpers.Config;
 import helpers.Dialogs;
-import helpers.Dialogs;
 import helpers.Forms;
 import java.awt.BorderLayout;
 import java.io.InputStream;
-import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import models.DB;
-import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.swing.JRViewer;
@@ -36,10 +31,10 @@ import net.sf.jasperreports.swing.JRViewer;
  * @author qwerty
  */
 public class frmPrincipal extends javax.swing.JFrame {
-    
+
     private String user_adm;
 
-    public frmPrincipal(String UserName) throws SQLException {
+    public frmPrincipal(String UserName) throws Exception {
         initComponents();
         Traduz();
         setUser(UserName);
@@ -94,7 +89,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         setTitle("SHX Principal");
         setResizable(false);
 
-        desktopPane.setBackground(new java.awt.Color(66, 66, 66));
+        desktopPane.setBackground(new java.awt.Color(50, 0, 7));
 
         jToolBar2.setBackground(new java.awt.Color(93, 93, 93));
         jToolBar2.setRollover(true);
@@ -139,7 +134,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         jToolBar2.add(btnponto);
 
         btnrelex.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
-        btnrelex.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/report.png"))); // NOI18N
+        btnrelex.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/hrExb.png"))); // NOI18N
         btnrelex.setText("Relatorio Horas Extras");
         btnrelex.setFocusable(false);
         btnrelex.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -157,7 +152,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         iashd.setBackground(new java.awt.Color(254, 254, 254));
         iashd.setFont(new java.awt.Font("DejaVu Sans", 1, 24)); // NOI18N
         iashd.setForeground(new java.awt.Color(254, 254, 254));
-        iashd.setText("v1.0.4");
+        iashd.setText("v1.0.5");
         desktopPane.add(iashd);
         iashd.setBounds(1270, 100, 90, 30);
 
@@ -193,7 +188,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         btnCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cadastrosBar.png"))); // NOI18N
         btnCadastro.setText("Cadastros");
 
-        cadUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/userSmall.png"))); // NOI18N
+        cadUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/userS.png"))); // NOI18N
         cadUser.setText("Usuarios");
         cadUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,9 +223,11 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         abaRelatorio.setBackground(new java.awt.Color(254, 254, 254));
         abaRelatorio.setForeground(new java.awt.Color(254, 254, 254));
+        abaRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/reps.png"))); // NOI18N
         abaRelatorio.setMnemonic('h');
         abaRelatorio.setText("Relatorios");
 
+        rel_func.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/userR.png"))); // NOI18N
         rel_func.setMnemonic('c');
         rel_func.setText("Funcionarios");
         rel_func.addActionListener(new java.awt.event.ActionListener() {
@@ -240,6 +237,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         abaRelatorio.add(rel_func);
 
+        rel_ponto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/clock-flat.png"))); // NOI18N
         rel_ponto.setMnemonic('a');
         rel_ponto.setText("Folha de Ponto");
         rel_ponto.addActionListener(new java.awt.event.ActionListener() {
@@ -249,6 +247,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         abaRelatorio.add(rel_ponto);
 
+        rel_users.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/emp.png"))); // NOI18N
         rel_users.setMnemonic('a');
         rel_users.setText("Usuarios");
         rel_users.addActionListener(new java.awt.event.ActionListener() {
@@ -258,6 +257,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         abaRelatorio.add(rel_users);
 
+        rel_holerite.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/holerite.png"))); // NOI18N
         rel_holerite.setMnemonic('a');
         rel_holerite.setText("Holerite");
         rel_holerite.addActionListener(new java.awt.event.ActionListener() {
@@ -267,8 +267,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         abaRelatorio.add(rel_holerite);
 
+        rel_holerite1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/hrEx.png"))); // NOI18N
         rel_holerite1.setMnemonic('a');
-        rel_holerite1.setText("Relatorio Principal");
+        rel_holerite1.setText("Relatorio Horas Extras");
         rel_holerite1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rel_holerite1ActionPerformed(evt);
@@ -276,6 +277,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         abaRelatorio.add(rel_holerite1);
 
+        rel_totalRecebido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/money-flat.png"))); // NOI18N
         rel_totalRecebido.setMnemonic('a');
         rel_totalRecebido.setText("Total recebido por funcionario ");
         rel_totalRecebido.addActionListener(new java.awt.event.ActionListener() {
@@ -399,11 +401,10 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_cadUserActionPerformed
 
     private void rel_funcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rel_funcActionPerformed
-        
-                try {
+
+        try {
             //Pegando-se a conexão do banco
-                    
-         
+
             //Pegando-se o arquivo do relatorio
             InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Relatorio_Todos_Funcionarios.jasper");
 
@@ -433,18 +434,16 @@ public class frmPrincipal extends javax.swing.JFrame {
             //exibi em tela Jframe
             frameRelatorio.setVisible(true);
 
-        } catch (JRException ex) {
+        } catch (Exception ex) {
             Dialogs.showError(ex.getMessage());
-        } catch (SQLException ex) {
-            Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
+
     }//GEN-LAST:event_rel_funcActionPerformed
 
     private void rel_usersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rel_usersActionPerformed
 
         try {
-            InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Relatorio_Todos_Usuarios.jasper");
+            InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Relatorio_Todos_Funcionarios.jasper");
 
             //Caso seja necessário relatório parametrizado
             Map parametros = new HashMap();
@@ -670,7 +669,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         lbldesc.setText(props.getString("sisdesc"));
 
         this.setTitle("SHX " + props.getString("maintitle"));
-        
+
         user_adm = props.getString("user_adm");
 
     }

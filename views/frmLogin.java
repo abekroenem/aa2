@@ -5,15 +5,12 @@
  */
 package views;
 
-import Env.Constants;
 import controllers.UsuarioController;
 import helpers.Config;
 import helpers.Dialogs;
 import helpers.Forms;
 import java.sql.SQLException;
-import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
 import models.Usuario;
 
 /**

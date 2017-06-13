@@ -92,5 +92,14 @@ public class Formats {
         }
 
     }
+    
+    public static class Decimal {
+        
+        public static double Format(double value) {
+            return Double.parseDouble(String.format("%.2f", value).replace(",", "."));
+        
+        }
+    
+    }
 
 }

@@ -104,7 +104,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
                         pnt.getId(),
                         Formats.Data.Format(pnt.getData()),
                         objFunc.getNome(),
-                        Formats.Hora.Format(objFunc.gethora_dia() * 60),
+                        Formats.Hora.Format(objFunc.gethora_dia() * 60), // valor vem do banco em horas
                         Formats.Hora.Format(pnt.getHoras_Trabalhadas()),
                         Formats.Hora.Format(pnt.getHoras_excedidas()),
                         Formats.Percent.Format(pnt.getPercent_aplicado()),
@@ -600,7 +600,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             m_objPonto = m_PontoC.getByID(((Integer) tbPonto.getModel().getValueAt(tbPonto.getSelectedRow(), 0)));
-            if (m_objFunc != null) {
+            if (m_objPonto != null) {
                 defaultLayout(false);
                 m_objFunc = new FuncionarioController().getByID(m_objPonto.getId_funcionario());
                 txtFuncionario.setText(m_objFunc.getNome());
@@ -609,7 +609,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
                 txtEntrada1.setText(Formats.Hora.Format(m_objPonto.getEntrada_a()));
                 txtSaida1.setText(Formats.Hora.Format(m_objPonto.getSaida_a()));
                 txtEntrada2.setText(Formats.Hora.Format(m_objPonto.getEntrada_b()));
-                txtSaida1.setText(Formats.Hora.Format(m_objPonto.getSaida_b()));
+                txtSaida2.setText(Formats.Hora.Format(m_objPonto.getSaida_b()));
 
                 txtData.selectAll();
                 txtData.requestFocus();

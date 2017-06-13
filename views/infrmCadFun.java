@@ -81,8 +81,11 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
             tablemd.getDataVector().removeAllElements();
             if (lstFor.size() > 0) {
                 for (Funcionario forn : lstFor) {
-                    tablemd.addRow(new Object[]{forn.getId(), forn.getNome(), Formats.CPF.Format(forn.getCPF()),
-                        Formats.Valor.Format(forn.getSalario()), Formats.Valor.Format(forn.getValor_hora())});
+                    tablemd.addRow(new Object[]{forn.getId(),
+                        forn.getNome(),
+                        Formats.CPF.Format(forn.getCPF()),
+                        Formats.Valor.Format(forn.getSalario()),
+                        Formats.Valor.Format(forn.getValor_hora())});
                 }
                 tbFunc.clearSelection();
             }
@@ -450,7 +453,7 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
                 txtCPF.setText(m_objFunc.getCPF());
                 txtSalario.setText(String.valueOf(m_objFunc.getSalario()));
                 txtHoraBase.setText(String.valueOf(m_objFunc.gethora_dia()));
-                lblValorHoraT.setText(String.valueOf(m_objFunc.getValor_hora()) + " R$/h");
+                lblValorHoraT.setText(Formats.Valor.Format(m_objFunc.getValor_hora()));
                 txtNome.selectAll();
                 txtNome.requestFocus();
                 btnDeletar.setEnabled(true);

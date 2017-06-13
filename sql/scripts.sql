@@ -49,7 +49,7 @@ truncate table registro_ponto;
 select * from funcionario;
 
 
-CREATE OR REPLACE FUNCTION fn_min_to_hr(mins bigint)
+CREATE FUNCTION fn_min_to_hr(mins bigint)
 RETURNS text AS
 $BODY$ 
 select overlay(to_char(cast(date_part('hours',interval '1 minute' * mins) * 1.0 + 

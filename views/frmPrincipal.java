@@ -61,8 +61,8 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         desktopPane = new javax.swing.JDesktopPane();
         jToolBar2 = new javax.swing.JToolBar();
-        btntrocar = new javax.swing.JButton();
         btn_cad_funcionario = new javax.swing.JButton();
+        btntrocar = new javax.swing.JButton();
         btnponto = new javax.swing.JButton();
         btnrelex = new javax.swing.JButton();
         iashd = new javax.swing.JLabel();
@@ -94,21 +94,8 @@ public class frmPrincipal extends javax.swing.JFrame {
         jToolBar2.setBackground(new java.awt.Color(93, 93, 93));
         jToolBar2.setRollover(true);
 
-        btntrocar.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
-        btntrocar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/change_user.png"))); // NOI18N
-        btntrocar.setText("Trocar Usuario");
-        btntrocar.setFocusable(false);
-        btntrocar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btntrocar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btntrocar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btntrocarActionPerformed(evt);
-            }
-        });
-        jToolBar2.add(btntrocar);
-
         btn_cad_funcionario.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
-        btn_cad_funcionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/employee.png"))); // NOI18N
+        btn_cad_funcionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/funcB.png"))); // NOI18N
         btn_cad_funcionario.setText("Cadastrar Funcionario");
         btn_cad_funcionario.setFocusable(false);
         btn_cad_funcionario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -120,8 +107,21 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         jToolBar2.add(btn_cad_funcionario);
 
+        btntrocar.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
+        btntrocar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cgUs.png"))); // NOI18N
+        btntrocar.setText("Trocar Usuario");
+        btntrocar.setFocusable(false);
+        btntrocar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btntrocar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btntrocar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btntrocarActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(btntrocar);
+
         btnponto.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
-        btnponto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/clock.png"))); // NOI18N
+        btnponto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pontoB.png"))); // NOI18N
         btnponto.setText("Registrar Ponto");
         btnponto.setFocusable(false);
         btnponto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -185,8 +185,10 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         btnCadastro.setBackground(new java.awt.Color(254, 254, 254));
         btnCadastro.setForeground(new java.awt.Color(254, 254, 254));
+        btnCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cadastrosBar.png"))); // NOI18N
         btnCadastro.setText("Cadastros");
 
+        cadUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/userSmall.png"))); // NOI18N
         cadUser.setText("Usuarios");
         cadUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,6 +197,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         btnCadastro.add(cadUser);
 
+        cadFun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/funcS.png"))); // NOI18N
         cadFun.setText("Funcionarios");
         cadFun.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -207,9 +210,11 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         abaPonto.setBackground(new java.awt.Color(254, 254, 254));
         abaPonto.setForeground(new java.awt.Color(254, 254, 254));
+        abaPonto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pontoBar.png"))); // NOI18N
         abaPonto.setMnemonic('e');
         abaPonto.setText("Ponto");
 
+        regponto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pontoS.png"))); // NOI18N
         regponto.setMnemonic('t');
         regponto.setText("Registrar Ponto");
         abaPonto.add(regponto);
@@ -261,10 +266,11 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         abaIdioma.setBackground(new java.awt.Color(254, 254, 254));
         abaIdioma.setForeground(new java.awt.Color(254, 254, 254));
+        abaIdioma.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/flag.png"))); // NOI18N
         abaIdioma.setText("Idioma");
 
         rbPTBR.setText("Portugues pt-br");
-        rbPTBR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pt_br.png"))); // NOI18N
+        rbPTBR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ptbr.png"))); // NOI18N
         rbPTBR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbPTBRActionPerformed(evt);
@@ -273,7 +279,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         abaIdioma.add(rbPTBR);
 
         rbENUS.setText("Ingles en-us");
-        rbENUS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/en_us.png"))); // NOI18N
+        rbENUS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/enus.png"))); // NOI18N
         rbENUS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbENUSActionPerformed(evt);
@@ -295,7 +301,7 @@ public class frmPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE)
+                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

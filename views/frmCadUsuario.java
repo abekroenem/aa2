@@ -19,12 +19,12 @@ import models.Usuario;
  * @author qwerty
  */
 public class frmCadUsuario extends javax.swing.JFrame {
-    
+
     private boolean m_showGrid = true;
     private String USUARIO_DUPLICADO, USUARIO_INSERIDO_SUCESS, BTN_NOVO, BTN_SALVAR;
     private UsuarioController m_UserC;
     private Usuario m_objUser = null;
-    
+
     public void Traduz() {
         ResourceBundle props = null;
         props = Config.getResources();
@@ -40,21 +40,23 @@ public class frmCadUsuario extends javax.swing.JFrame {
         USUARIO_INSERIDO_SUCESS = props.getString("usuario_sucesso");
         BTN_NOVO = props.getString("btnNovo");
         BTN_SALVAR = props.getString("btnSalvar");
+
+        btnCancelar.setText(props.getString("btncancelar"));
     }
-    
+
     public frmCadUsuario(boolean showGrid) {
         initComponents();
         m_showGrid = showGrid;
         Traduz();
         defaultLayout(true);
-        
+
         if (!showGrid) {
             defaultLayout(false);
             pnTable.setVisible(false);
             setSize(292, 250);
         }
     }
-    
+
     private void defaultLayout(boolean dl) {
         btnCancelar.setEnabled(!dl);
         btnNovo.setText((dl) ? BTN_NOVO : BTN_SALVAR);
@@ -70,7 +72,7 @@ public class frmCadUsuario extends javax.swing.JFrame {
             loadTable();
         }
     }
-    
+
     private void loadTable() {
         if (m_showGrid) {
             try {
@@ -89,9 +91,9 @@ public class frmCadUsuario extends javax.swing.JFrame {
                 Dialogs.showError(ex.getMessage());
             }
         }
-        
+
     }
-    
+
     private void InserirUsuario() throws Exception {
         m_UserC = new UsuarioController();
         m_UserC.Add(txtUser.getText(), txtPass.getText(), txtConf.getText(), chkAdmin.isSelected());
@@ -100,9 +102,9 @@ public class frmCadUsuario extends javax.swing.JFrame {
         }
         defaultLayout(true);
         Dialogs.showInfo(USUARIO_INSERIDO_SUCESS);
-        
+
     }
-    
+
     private boolean UsuarioDuplicado() throws Exception {
         m_UserC = new UsuarioController();
         if (m_objUser == null) {
@@ -118,7 +120,7 @@ public class frmCadUsuario extends javax.swing.JFrame {
             return false;
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

@@ -6,7 +6,9 @@
 package models;
 
 import Env.Constants;
+import helpers.Config;
 import helpers.Formats;
+import java.util.ResourceBundle;
 
 /**
  *
@@ -20,13 +22,28 @@ public class Funcionario {
     private int hora_dia;
     private String CPF;
 
+    private String cpf_informado, nome_func, salario_func, hora_func;
+
+    private void Traduz() {
+        ResourceBundle rbl = null;
+        rbl = Config.getResources();
+        cpf_informado = rbl.getString("cpf_func");
+        nome_func = rbl.getString("nome_func");
+        salario_func = rbl.getString("salario_func");
+        hora_func = rbl.getString("hora_func");
+    }
+
+    public Funcionario() {
+        Traduz();
+    }
+
     public String getCPF() {
         return CPF;
     }
 
     public void setCPF(String CPF) throws IllegalArgumentException {
         if (CPF.isEmpty()) {
-            throw new IllegalArgumentException("CPF do Funcionario deve ser informado!");
+            throw new IllegalArgumentException(cpf_informado);
         }
         this.CPF = Formats.CPF.Unformat(CPF);
     }
@@ -45,7 +62,7 @@ public class Funcionario {
 
     public void setNome(String Nome) throws IllegalArgumentException {
         if (Nome.isEmpty()) {
-            throw new IllegalArgumentException("Nome do Funcionario deve ser preencido!");
+            throw new IllegalArgumentException(nome_func);
         }
         this.Nome = Nome.toUpperCase();
     }
@@ -56,7 +73,7 @@ public class Funcionario {
 
     public void setSalario(double salario) throws IllegalArgumentException {
         if (salario < Double.valueOf(Constants.SALARIO_MINIMO)) {
-            throw new IllegalArgumentException("Salario do Funcionario deve ser maior ou igual ao piso salarial de 937,00!");
+            throw new IllegalArgumentException();
         }
         this.salario = salario;
     }
@@ -67,7 +84,7 @@ public class Funcionario {
 
     public void sethora_dia(int hora_dia) throws IllegalArgumentException {
         if (hora_dia < 4) {
-            throw new IllegalArgumentException("Funcionario deve ter pelo menos 4h como hora base para um dia de trabalho!");
+            throw new IllegalArgumentException(hora_func);
         }
         this.hora_dia = hora_dia * 60;
     }

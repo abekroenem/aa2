@@ -6,9 +6,11 @@
 package models;
 
 import controllers.FuncionarioController;
+import helpers.Config;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.ResourceBundle;
 
 /**
  *
@@ -24,9 +26,24 @@ public class Ponto {
     int entrada_b;
     int saida_b;
     private Funcionario objFun = null;
+    private String dia_pnt, func_pnt, ea, sa, eb, sb;
+
+    private void Traduz() {
+
+        ResourceBundle rbl = null;
+        rbl = Config.getResources();
+
+        dia_pnt = rbl.getString("dia_pnt");
+        func_pnt = rbl.getString("func_pnt");
+        ea = rbl.getString("ea");
+        sa = rbl.getString("sa");
+        eb = rbl.getString("eb");
+        sb = rbl.getString("sb");
+
+    }
 
     public Ponto() {
-
+        Traduz();
         this.Id = 0;
         this.data = null;
         this.id_funcionario = 0;
@@ -51,7 +68,7 @@ public class Ponto {
 
     public void setData(java.sql.Date data) {
         if (data == null) {
-            throw new IllegalArgumentException("Dia do registro de ponto deve ser informado!");
+            throw new IllegalArgumentException(dia_pnt);
         }
         this.data = data;
     }
@@ -63,7 +80,7 @@ public class Ponto {
     public void setId_funcionario(int id_funcionario) throws SQLException {
         this.objFun = new FuncionarioController().getByID(id_funcionario);
         if (id_funcionario < 1) {
-            throw new IllegalArgumentException("Funcionario deve ser informado em um registro de ponto!");
+            throw new IllegalArgumentException(func_pnt);
         }
         this.id_funcionario = id_funcionario;
     }
@@ -74,7 +91,7 @@ public class Ponto {
 
     public void setEntrada_a(int entrada_a) {
         if (entrada_a < 1) {
-            throw new IllegalArgumentException("Primeira entrada do dia deve ser informada!");
+            throw new IllegalArgumentException(ea);
         }
         this.entrada_a = entrada_a;
     }
@@ -85,7 +102,7 @@ public class Ponto {
 
     public void setSaida_a(int saida_a) {
         if (saida_a < 1) {
-            throw new IllegalArgumentException("Primeira saida do dia deve ser informada!");
+            throw new IllegalArgumentException(sa);
         }
         this.saida_a = saida_a;
     }
@@ -96,7 +113,7 @@ public class Ponto {
 
     public void setEntrada_b(int entrada_b) {
         if (entrada_b < 1) {
-            throw new IllegalArgumentException("Segunda entrada do dia deve ser informada!");
+            throw new IllegalArgumentException(eb);
         }
 
         this.entrada_b = entrada_b;
@@ -108,7 +125,7 @@ public class Ponto {
 
     public void setSaida_b(int saida_b) {
         if (saida_b < 1) {
-            throw new IllegalArgumentException("Segunda saida do dia deve ser informada!");
+            throw new IllegalArgumentException(sb);
         }
         this.saida_b = saida_b;
     }
@@ -132,12 +149,10 @@ public class Ponto {
         Calendar cal = Calendar.getInstance();
         cal.setTime(this.getData());
         int dayofwk = cal.get(Calendar.DAY_OF_WEEK);
-        if (this.getHoras_excedidas() != 0) {
-            if (dayofwk == Calendar.SUNDAY) {
-                return 100;
-            } else {
-                return 50;
-            }
+        if (dayofwk == Calendar.SUNDAY) {
+            return 100;
+        } else if (this.getHoras_excedidas() != 0) {
+            return 50;
         } else {
             return 0;
         }
@@ -162,14 +177,19 @@ public class Ponto {
 
     public double getTotal_recebido() throws SQLException {
         if (objFun != null) {
-            double valor_hd = (objFun.gethora_dia() * objFun.getValor_hora());
+            double valor_hd = 0.0;
+            if (objFun.gethora_dia() < this.getHoras_Trabalhadas()) {
+                valor_hd = (objFun.gethora_dia() * objFun.getValor_hora());
+            } else {
+                valor_hd = this.getHoras_Trabalhadas();
+            }
             double valor_ext = this.getValor_extra();
             if (this.getPercent_aplicado() == 50) {
                 return valor_hd + valor_ext;
             } else if (this.getPercent_aplicado() == 100) {
                 return valor_hd + valor_hd;
             } else {
-                return 0;
+                return valor_hd;
             }
         } else {
             return 0;

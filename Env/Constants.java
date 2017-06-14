@@ -21,18 +21,23 @@ public class Constants {
 
     public static int getJornada(int hora) {
         int jorn = 0;
+        System.out.println(String.valueOf(hora));
         switch (hora) {
             case 8:
                 jorn = 220;
+                break;
             case 7:
                 jorn = 210;
+                break;
             case 6:
                 jorn = 180;
+                break;
             case 5:
                 jorn = 150;
+                break;
             case 4:
                 jorn = 120;
-
+                break;
         }
 
         return jorn;

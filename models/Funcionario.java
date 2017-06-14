@@ -90,7 +90,7 @@ public class Funcionario {
     }
     
     public double getValor_hora() {
-        double valor_hr = (this.salario / 30) / this.gethora_dia();
+        double valor_hr = this.salario / Env.Constants.getJornada(this.gethora_dia());
         return Formats.Decimal.Format(valor_hr);
     }
 }

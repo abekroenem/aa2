@@ -470,9 +470,11 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if (cbJornada.getSelectedIndex() > 0) {
             hora_base = getHoraCombo(cbJornada.getSelectedIndex());
-
             double salario = Double.parseDouble((txtSalario.getText().isEmpty()) ? "0" : txtSalario.getText());
             salario = Formats.Decimal.Format((salario / Env.Constants.getJornada(hora_base)));
+            System.out.println(String.valueOf(hora_base));
+            System.out.println(String.valueOf(Env.Constants.getJornada(hora_base)));
+            System.out.println(String.valueOf(salario));
             if ((salario > 0) && (salario != Global.Infinity)) {
                 lblValorHoraT.setText(String.format("%.2f R$/h", salario));
             } else {

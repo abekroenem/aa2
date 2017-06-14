@@ -25,7 +25,7 @@ public class DB {
             Conn = DriverManager.getConnection(url, props);
         }
         return Conn;
-        
+
     }
 
 }

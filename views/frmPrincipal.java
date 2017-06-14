@@ -522,23 +522,25 @@ public class frmPrincipal extends javax.swing.JFrame {
         if (Env.Constants.ObjUser.getAdmin()) {
 
             try {
+                infrmProgress objFrm = new infrmProgress();
+                Forms.showInternal(desktopPane, objFrm);
+                objFrm.setVisible(true);
+                objFrm.doProgress(10);
                 InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Relatorio_Folha_de_Ponto.jasper");
 
                 //Caso seja necessário relatório parametrizado
+                objFrm.doProgress(20);
                 Map parametros = new HashMap();
-<<<<<<< HEAD
-                
-                parametros.put("id_func", 1);
-
-=======
                 parametros.put("idfun", 1);
->>>>>>> d335a2202b54edd4d04710d0db18aeb732d7d051
-                //usando uma conexão
-                JasperPrint print = JasperFillManager.fillReport(inputStream, parametros, DB.Connect());
 
+                //usando uma conexão
+                objFrm.doProgress(50);
+                JasperPrint print = JasperFillManager.fillReport(inputStream, parametros, DB.Connect());
+                objFrm.dispose();
                 JRViewer viewer = new JRViewer(print);
 
                 //Criar o jFrame
+                objFrm.doProgress(80);
                 JFrame frameRelatorio = new JFrame("Janela de relatorio Folha de Ponto");
 
                 //adiciona o JRViewer no JFram
@@ -554,6 +556,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                 frameRelatorio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
                 //exibi em tela Jframe
+                objFrm.doProgress(100);
                 frameRelatorio.setVisible(true);
 
             } catch (Exception ex) {

@@ -699,7 +699,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         user_adm = props.getString("user_adm");
         rel_funcCaps = props.getString("cadFun") + "s " + props.getString("abaRelatorio");
-        rel_folhaCaps = props.getString("folhaponto") + props.getString("abaRelatorio");
+        rel_folhaCaps = props.getString("folhaponto");
         rel_userCap = props.getString("cadUser") + "s " + props.getString("abaRelatorio");
 
         select_func = props.getString("selecione_func");

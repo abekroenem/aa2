@@ -6,6 +6,7 @@
 package models;
 
 import controllers.FuncionarioController;
+import helpers.Checks;
 import helpers.Config;
 import helpers.Formats;
 import java.sql.Date;
@@ -40,15 +41,6 @@ public class Ponto {
         sa = rbl.getString("sa");
         eb = rbl.getString("eb");
         sb = rbl.getString("sb");
-
-    }
-
-    private boolean isSunday() {
-
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(this.getData());
-        int dayofwk = cal.get(Calendar.DAY_OF_WEEK);
-        return (dayofwk == Calendar.SUNDAY);
 
     }
 
@@ -122,7 +114,7 @@ public class Ponto {
     }
 
     public void setEntrada_b(int entrada_b) {
-        if (entrada_b < 1) {
+        if ((entrada_b < 1) && (!Checks.Date.isSaturday(this.getData()))) {
             throw new IllegalArgumentException(eb);
         }
 
@@ -134,7 +126,7 @@ public class Ponto {
     }
 
     public void setSaida_b(int saida_b) {
-        if (saida_b < 1) {
+        if ((saida_b < 1) && (!Checks.Date.isSaturday(this.getData()))) {
             throw new IllegalArgumentException(sb);
         }
         this.saida_b = saida_b;
@@ -143,11 +135,15 @@ public class Ponto {
     public int getHoras_excedidas() {
         if (objFun != null) {
             int horas_trab = this.getHoras_Trabalhadas();
-            int hora_dia = objFun.gethora_dia() * 60; // hora do dia em minutos
-            if (horas_trab <= hora_dia) {
-                return 0;
+            if (Checks.Date.isSaturday(this.data) && (this.getHoras_Trabalhadas() > 240)) {
+                return horas_trab - 240;
             } else {
-                return horas_trab - hora_dia;
+                int hora_dia = objFun.gethora_dia() * 60; // hora do dia em minutos
+                if (horas_trab <= hora_dia) {
+                    return 0;
+                } else {
+                    return horas_trab - hora_dia;
+                }
             }
 
         } else {
@@ -156,7 +152,7 @@ public class Ponto {
     }
 
     public double getPercent_aplicado() throws SQLException {
-        if (this.isSunday()) {
+        if (Checks.Date.isSaturday(this.data)) {
             return 100;
         } else if (this.getHoras_excedidas() != 0) {
             return 50;
@@ -190,7 +186,7 @@ public class Ponto {
 
             double hr_trab = this.getHoras_Trabalhadas();
 
-            if (this.isSunday()) {
+            if (Checks.Date.isSaturday(this.data)) {
 
                 tot_receb = Formats.Decimal.Format((Formats.Decimal.Format(hr_trab / 60) * Formats.Decimal.Format(objFun.getValor_hora()) * 2));
 

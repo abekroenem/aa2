@@ -30,6 +30,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
     public Funcionario m_objFunc = null;
     private boolean ersHora = false;
     private JDesktopPane inDesktop = null;
+    private boolean fillPercLabel = false;
 
     public void Traduz() {
         ResourceBundle rbl = null;
@@ -81,6 +82,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
         txtSaida1.setEnabled(!dl);
         txtSaida2.setEnabled(!dl);
         btnDeletar.setEnabled(false);
+        lblPerc.setVisible(false);
 
         if (dl) {
             loadTable();
@@ -190,6 +192,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
         txtSaida2 = new javax.swing.JFormattedTextField();
         btnDeletar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        lblPerc = new javax.swing.JLabel();
 
         setBorder(new javax.swing.border.SoftBevelBorder(0));
         setClosable(true);
@@ -219,6 +222,11 @@ public class infrmPonto extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
         txtData.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtData.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDataFocusLost(evt);
+            }
+        });
         txtData.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtDataKeyTyped(evt);
@@ -387,6 +395,8 @@ public class infrmPonto extends javax.swing.JInternalFrame {
             .addGap(0, 62, Short.MAX_VALUE)
         );
 
+        lblPerc.setText("Dom: 100% sobre hora trabalhada");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -394,13 +404,6 @@ public class infrmPonto extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(190, 190, 190)
-                        .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGap(12, 12, 12)
@@ -435,14 +438,26 @@ public class infrmPonto extends javax.swing.JInternalFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtSaida2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGap(12, 12, 12))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 804, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 804, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(190, 190, 190)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblPerc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(37, 37, 37))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)))
+                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 3, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -463,7 +478,9 @@ public class infrmPonto extends javax.swing.JInternalFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(3, 3, 3)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(lblPerc))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(5, 5, 5)
                                                 .addComponent(lblData))))
@@ -479,8 +496,9 @@ public class infrmPonto extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnDeletar)
-                            .addComponent(btnCancelar)
-                            .addComponent(btnNovo))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnNovo)
+                                .addComponent(btnCancelar)))
                         .addGap(13, 13, 13)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -621,6 +639,13 @@ public class infrmPonto extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_tbPontoMouseClicked
 
+    private void txtDataFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDataFocusLost
+        // TODO add your handling code here:
+        if (txtData.getText().replaceAll("/", "").length() == 8) {
+            
+        }
+    }//GEN-LAST:event_txtDataFocusLost
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnDeletar;
@@ -632,6 +657,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblEA;
     private javax.swing.JLabel lblEB;
     private javax.swing.JLabel lblFunc;
+    private javax.swing.JLabel lblPerc;
     private javax.swing.JLabel lblSA;
     private javax.swing.JLabel lblSB;
     private javax.swing.JTable tbPonto;

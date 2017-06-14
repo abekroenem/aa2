@@ -526,6 +526,8 @@ public class frmPrincipal extends javax.swing.JFrame {
 
                 //Caso seja necessário relatório parametrizado
                 Map parametros = new HashMap();
+                
+                parametros.put("id_func", 1);
 
                 //usando uma conexão
                 JasperPrint print = JasperFillManager.fillReport(inputStream, parametros, DB.Connect());

@@ -8,6 +8,7 @@ package helpers;
 import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JDesktopPane;
 import javax.swing.JFormattedTextField;
 import javax.swing.JInternalFrame;
@@ -53,6 +54,8 @@ public class Forms {
                 ((JCheckBox) Field).requestFocus();
             } else if (Field.getClass() == JButton.class) {
                 ((JButton) Field).doClick();
+            } else if (Field.getClass() == JComboBox.class) {
+                ((JComboBox) Field).requestFocus();
             }
         }
     }

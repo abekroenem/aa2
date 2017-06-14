@@ -85,7 +85,6 @@ public class infrmPonto extends javax.swing.JInternalFrame {
         if (dl) {
             loadTable();
         }
-
     }
 
     private void loadTable() {

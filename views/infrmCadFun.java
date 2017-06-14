@@ -13,7 +13,6 @@ import helpers.Forms;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.swing.table.DefaultTableModel;
-import jdk.nashorn.internal.objects.Global;
 import models.Funcionario;
 
 /**
@@ -25,7 +24,8 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
     private FuncionarioController m_FuncC = null;
     private String DELETAR_FUNC, CPF_CADASTRADO, FUNCIONARIO_INSERIDO_SUCESS, FUNCINOARIO_EDITADO_SUCESS, BTN_NOVO, BTN_SALVAR;
     private Funcionario m_objFunc = null;
-    private boolean ersHora = false;
+    private final boolean ersHora = false;
+    private int hora_base = 0;
 
     public void Traduz() {
 
@@ -61,12 +61,11 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
         txtNome.setText("");
         txtCPF.setText("");
         txtSalario.setText("");
-        txtHoraBase.setText("");
         lblValorHoraT.setText("0,00 R$/h");
         txtNome.setEnabled(!dl);
         txtCPF.setEnabled(!dl);
         txtSalario.setEnabled(!dl);
-        txtHoraBase.setEnabled(!dl);
+        cbJornada.setEnabled(!dl);
         btnDeletar.setEnabled(false);
         if (dl) {
             loadTable();
@@ -99,7 +98,7 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
         m_FuncC = new FuncionarioController();
         m_FuncC.Add(txtNome.getText(), txtCPF.getText(),
                 Double.parseDouble((txtSalario.getText().isEmpty()) ? "0" : txtSalario.getText()),
-                Integer.valueOf((txtHoraBase.getText().isEmpty() ? "0" : txtHoraBase.getText())));
+                hora_base);
         defaultLayout(true);
         Dialogs.showInfo(FUNCIONARIO_INSERIDO_SUCESS);
     }
@@ -142,7 +141,6 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
         lblSalario = new javax.swing.JLabel();
         lblValorHora = new javax.swing.JLabel();
         lblHoraBase = new javax.swing.JLabel();
-        txtHoraBase = new javax.swing.JTextField();
         lblValorHoraT = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -151,6 +149,7 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
         btnNovo = new javax.swing.JButton();
         txtSalario = new javax.swing.JTextField();
         btnDeletar = new javax.swing.JButton();
+        cbJornada = new javax.swing.JComboBox<>();
 
         setBorder(new javax.swing.border.SoftBevelBorder(0));
         setClosable(true);
@@ -160,11 +159,6 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
 
         lblCPF.setText("CPF");
 
-        txtNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNomeActionPerformed(evt);
-            }
-        });
         txtNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtNomeKeyPressed(evt);
@@ -175,17 +169,7 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
 
         lblValorHora.setText("Valor Hora");
 
-        lblHoraBase.setText("Hora Base");
-
-        txtHoraBase.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtHoraBase.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtHoraBaseKeyTyped(evt);
-            }
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtHoraBaseKeyPressed(evt);
-            }
-        });
+        lblHoraBase.setText("Jornada");
 
         lblValorHoraT.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
         lblValorHoraT.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -234,18 +218,18 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
             tbFunc.getColumnModel().getColumn(0).setMinWidth(35);
             tbFunc.getColumnModel().getColumn(0).setPreferredWidth(35);
             tbFunc.getColumnModel().getColumn(0).setMaxWidth(35);
-            tbFunc.getColumnModel().getColumn(1).setMinWidth(150);
-            tbFunc.getColumnModel().getColumn(1).setPreferredWidth(150);
-            tbFunc.getColumnModel().getColumn(1).setMaxWidth(150);
+            tbFunc.getColumnModel().getColumn(1).setMinWidth(180);
+            tbFunc.getColumnModel().getColumn(1).setPreferredWidth(180);
+            tbFunc.getColumnModel().getColumn(1).setMaxWidth(180);
             tbFunc.getColumnModel().getColumn(2).setMinWidth(110);
             tbFunc.getColumnModel().getColumn(2).setPreferredWidth(110);
             tbFunc.getColumnModel().getColumn(2).setMaxWidth(110);
             tbFunc.getColumnModel().getColumn(3).setMinWidth(90);
             tbFunc.getColumnModel().getColumn(3).setPreferredWidth(90);
             tbFunc.getColumnModel().getColumn(3).setMaxWidth(90);
-            tbFunc.getColumnModel().getColumn(4).setMinWidth(60);
-            tbFunc.getColumnModel().getColumn(4).setPreferredWidth(60);
-            tbFunc.getColumnModel().getColumn(4).setMaxWidth(60);
+            tbFunc.getColumnModel().getColumn(4).setMinWidth(70);
+            tbFunc.getColumnModel().getColumn(4).setPreferredWidth(70);
+            tbFunc.getColumnModel().getColumn(4).setMaxWidth(70);
         }
 
         try {
@@ -287,47 +271,49 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
             }
         });
 
+        cbJornada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblNome)
-                                    .addComponent(lblCPF))
-                                .addGap(17, 17, 17))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblSalario)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNome)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                                    .addComponent(txtSalario))
-                                .addGap(30, 30, 30)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblHoraBase)
-                                    .addComponent(lblValorHora))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblValorHoraT, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-                                    .addComponent(txtHoraBase)))))
+                            .addComponent(lblNome)
+                            .addComponent(lblCPF))
+                        .addGap(17, 17, 17))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblSalario)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(txtNome)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                            .addComponent(txtSalario))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblHoraBase)
+                            .addComponent(lblValorHora))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(lblValorHoraT, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(cbJornada, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap())
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -337,34 +323,33 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNome))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCPF)
-                    .addComponent(txtHoraBase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblHoraBase)
-                    .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCPF)
+                            .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblHoraBase)
+                            .addComponent(cbJornada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblValorHoraT)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblSalario))))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(lblValorHora)
-                        .addComponent(lblValorHoraT))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblSalario)))
+                        .addGap(10, 10, 10)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
                     .addComponent(btnNovo)
                     .addComponent(btnDeletar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNomeActionPerformed
 
     private void txtNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyPressed
         Forms.goNextField(evt.getKeyCode(), txtCPF);
@@ -388,7 +373,7 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
                 } else if (!FuncionarioDuplicado()) {
                     m_FuncC.Edit(m_objFunc.getId(), txtNome.getText(), txtCPF.getText(),
                             Double.parseDouble((txtSalario.getText().isEmpty()) ? "0" : txtSalario.getText()),
-                            Integer.valueOf((txtHoraBase.getText().isEmpty() ? "0" : txtHoraBase.getText())));
+                            hora_base);
                     Dialogs.showInfo(FUNCINOARIO_EDITADO_SUCESS);
                     m_objFunc = null;
                     defaultLayout(true);
@@ -407,41 +392,9 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtCPFKeyPressed
 
     private void txtSalarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSalarioKeyPressed
-        Forms.goNextField(evt.getKeyCode(), txtHoraBase);
+        Forms.goNextField(evt.getKeyCode(), cbJornada);
 
     }//GEN-LAST:event_txtSalarioKeyPressed
-
-    private void txtHoraBaseKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHoraBaseKeyPressed
-        Forms.goNextField(evt.getKeyCode(), btnNovo);
-        ersHora = (evt.getKeyCode() == 8);
-    }//GEN-LAST:event_txtHoraBaseKeyPressed
-
-    private void txtHoraBaseKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHoraBaseKeyTyped
-        int xKey = Character.getNumericValue(evt.getKeyChar());
-
-        if (ersHora) {
-            double salario = Double.parseDouble((txtSalario.getText().isEmpty()) ? "0" : txtSalario.getText());
-            String hrBase = txtHoraBase.getText().substring(0, txtHoraBase.getText().length());
-            xKey = (hrBase.isEmpty()) ? 0 : Integer.valueOf(hrBase);
-            salario = (salario / 30) / xKey;
-            if ((salario > 0) && (salario != Global.Infinity)) {
-                lblValorHoraT.setText(String.format("%.2f R$/h", salario));
-            } else {
-                lblValorHoraT.setText("0,00 R$/h");
-            }
-        } else if (!ersHora) {
-            if (Forms.OnlyNumbers(evt)) {
-                double salario = Double.parseDouble((txtSalario.getText().isEmpty()) ? "0" : txtSalario.getText());
-                xKey = (txtHoraBase.getText().isEmpty()) ? xKey : Integer.parseInt(txtHoraBase.getText() + String.valueOf(xKey));
-                salario = (salario / 30) / xKey;
-                if ((salario > 0) && (salario != Global.Infinity)) {
-                    lblValorHoraT.setText(String.format("%.2f R$/h", salario));
-                } else {
-                    lblValorHoraT.setText("0,00 R$/h");
-                }
-            }
-        }
-    }//GEN-LAST:event_txtHoraBaseKeyTyped
 
     private void tbFuncMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbFuncMouseClicked
         // TODO add your handling code here:
@@ -452,7 +405,7 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
                 txtNome.setText(m_objFunc.getNome());
                 txtCPF.setText(m_objFunc.getCPF());
                 txtSalario.setText(String.valueOf(m_objFunc.getSalario()));
-                txtHoraBase.setText(String.valueOf(m_objFunc.gethora_dia()));
+                hora_base = m_objFunc.gethora_dia();
                 lblValorHoraT.setText(Formats.Valor.Format(m_objFunc.getValor_hora()));
                 txtNome.selectAll();
                 txtNome.requestFocus();
@@ -489,6 +442,7 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnNovo;
+    private javax.swing.JComboBox<String> cbJornada;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblHoraBase;
@@ -498,7 +452,6 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblValorHoraT;
     private javax.swing.JTable tbFunc;
     private javax.swing.JFormattedTextField txtCPF;
-    private javax.swing.JTextField txtHoraBase;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtSalario;
     // End of variables declaration//GEN-END:variables

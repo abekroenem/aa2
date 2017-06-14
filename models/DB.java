@@ -5,15 +5,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-/**
- * @author qwerty
- */
 public class DB {
 
     private static Connection Conn;
 
     public static String hostname = "localhost:5432";
-    public static String database = "database";
+    public static String database = "aa2";
 
     public static Connection Connect() throws SQLException {
 
@@ -21,11 +18,12 @@ public class DB {
 
             String url = "jdbc:postgresql://" + hostname + "/" + database;
             Properties props = new Properties();
-            props.setProperty("user", "postgres");
-            props.setProperty("password", "123456");
+            props.setProperty("user", "abe");
+            props.setProperty("password", "1234");
             Conn = DriverManager.getConnection(url, props);
         }
         return Conn;
+        
     }
 
 }

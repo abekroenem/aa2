@@ -526,14 +526,14 @@ public class frmPrincipal extends javax.swing.JFrame {
 
                 //Caso seja necessário relatório parametrizado
                 Map parametros = new HashMap();
-
+                parametros.put("idfun", 1);
                 //usando uma conexão
                 JasperPrint print = JasperFillManager.fillReport(inputStream, parametros, DB.Connect());
 
                 JRViewer viewer = new JRViewer(print);
 
                 //Criar o jFrame
-                JFrame frameRelatorio = new JFrame("Janela de relatorio");
+                JFrame frameRelatorio = new JFrame("Janela de relatorio Folha de Ponto");
 
                 //adiciona o JRViewer no JFram
                 frameRelatorio.add(viewer, BorderLayout.CENTER);

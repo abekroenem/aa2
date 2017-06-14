@@ -13,7 +13,6 @@ import helpers.Forms;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.swing.table.DefaultTableModel;
-import jdk.nashorn.internal.objects.Global;
 import models.Funcionario;
 
 /**
@@ -25,7 +24,8 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
     private FuncionarioController m_FuncC = null;
     private String DELETAR_FUNC, CPF_CADASTRADO, FUNCIONARIO_INSERIDO_SUCESS, FUNCINOARIO_EDITADO_SUCESS, BTN_NOVO, BTN_SALVAR;
     private Funcionario m_objFunc = null;
-    private boolean ersHora = false;
+    private final boolean ersHora = false;
+    private int hora_base = 0;
 
     public void Traduz() {
 
@@ -98,7 +98,7 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
         m_FuncC = new FuncionarioController();
         m_FuncC.Add(txtNome.getText(), txtCPF.getText(),
                 Double.parseDouble((txtSalario.getText().isEmpty()) ? "0" : txtSalario.getText()),
-                Integer.valueOf((txtHoraBase.getText().isEmpty() ? "0" : txtHoraBase.getText())));
+                hora_base);
         defaultLayout(true);
         Dialogs.showInfo(FUNCIONARIO_INSERIDO_SUCESS);
     }
@@ -159,11 +159,6 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
 
         lblCPF.setText("CPF");
 
-        txtNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNomeActionPerformed(evt);
-            }
-        });
         txtNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtNomeKeyPressed(evt);
@@ -356,10 +351,6 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNomeActionPerformed
-
     private void txtNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyPressed
         Forms.goNextField(evt.getKeyCode(), txtCPF);
     }//GEN-LAST:event_txtNomeKeyPressed
@@ -382,7 +373,7 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
                 } else if (!FuncionarioDuplicado()) {
                     m_FuncC.Edit(m_objFunc.getId(), txtNome.getText(), txtCPF.getText(),
                             Double.parseDouble((txtSalario.getText().isEmpty()) ? "0" : txtSalario.getText()),
-                            Integer.valueOf((txtHoraBase.getText().isEmpty() ? "0" : txtHoraBase.getText())));
+                            hora_base);
                     Dialogs.showInfo(FUNCINOARIO_EDITADO_SUCESS);
                     m_objFunc = null;
                     defaultLayout(true);
@@ -401,7 +392,7 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtCPFKeyPressed
 
     private void txtSalarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSalarioKeyPressed
-        Forms.goNextField(evt.getKeyCode(), txtHoraBase);
+        Forms.goNextField(evt.getKeyCode(), cbJornada);
 
     }//GEN-LAST:event_txtSalarioKeyPressed
 
@@ -414,7 +405,7 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
                 txtNome.setText(m_objFunc.getNome());
                 txtCPF.setText(m_objFunc.getCPF());
                 txtSalario.setText(String.valueOf(m_objFunc.getSalario()));
-                txtHoraBase.setText(String.valueOf(m_objFunc.gethora_dia()));
+                hora_base = m_objFunc.gethora_dia();
                 lblValorHoraT.setText(Formats.Valor.Format(m_objFunc.getValor_hora()));
                 txtNome.selectAll();
                 txtNome.requestFocus();

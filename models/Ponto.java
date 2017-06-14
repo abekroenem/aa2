@@ -137,6 +137,8 @@ public class Ponto {
             int horas_trab = this.getHoras_Trabalhadas();
             if (Checks.Date.isSaturday(this.data) && (this.getHoras_Trabalhadas() > 240)) {
                 return horas_trab - 240;
+            } else if (Checks.Date.isSunday(this.data)) {
+                return horas_trab;
             } else {
                 int hora_dia = objFun.gethora_dia() * 60; // hora do dia em minutos
                 if (horas_trab <= hora_dia) {
@@ -152,7 +154,7 @@ public class Ponto {
     }
 
     public double getPercent_aplicado() throws SQLException {
-        if (Checks.Date.isSaturday(this.data)) {
+        if (Checks.Date.isSunday(this.data)) {
             return 100;
         } else if (this.getHoras_excedidas() != 0) {
             return 50;

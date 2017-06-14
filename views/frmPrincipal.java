@@ -28,7 +28,7 @@ import net.sf.jasperreports.swing.JRViewer;
  */
 public class frmPrincipal extends javax.swing.JFrame {
 
-    private String user_adm;
+    private String user_adm, select_func, rel_funcCaps, rel_userCap, rel_pagsCap, rel_folhaCaps, rel_usersCaps, rel_overCaps;
 
     public frmPrincipal(String UserName) throws Exception {
         initComponents();
@@ -42,6 +42,44 @@ public class frmPrincipal extends javax.swing.JFrame {
         ResourceBundle props = null;
         props = Config.getResources();
         lblUser.setText(props.getString("cadUser") + ": " + UserName);
+    }
+
+    public void relFolhaPonto(int codFun) {
+
+        try {
+            InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Relatorio_Folha_de_Ponto.jasper");
+
+            //Caso seja necessário relatório parametrizado
+            Map parametros = new HashMap();
+            parametros.put("idfun", codFun);
+
+            //usando uma conexão
+            JasperPrint print = JasperFillManager.fillReport(inputStream, parametros, DB.Connect());
+
+            JRViewer viewer = new JRViewer(print);
+
+            //Criar o jFrame
+            JFrame frameRelatorio = new JFrame(rel_folhaCaps);
+
+            //adiciona o JRViewer no JFram
+            frameRelatorio.add(viewer, BorderLayout.CENTER);
+
+            //configura o tamanho padrão da Jframe
+            frameRelatorio.setSize(500, 500);
+
+            //Maximiza o JFrame para ocupar a tela toda.
+            frameRelatorio.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+            //configura a operação padrao quando o jframe for fechado.
+            frameRelatorio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+            //exibi em tela Jframe
+            frameRelatorio.setVisible(true);
+
+        } catch (Exception ex) {
+            Dialogs.showError(ex.getMessage());
+        }
+
     }
 
     /**
@@ -76,7 +114,6 @@ public class frmPrincipal extends javax.swing.JFrame {
         rel_func = new javax.swing.JMenuItem();
         rel_ponto = new javax.swing.JMenuItem();
         rel_users = new javax.swing.JMenuItem();
-        rel_holerite = new javax.swing.JMenuItem();
         btnHEx = new javax.swing.JMenuItem();
         btnPags = new javax.swing.JMenuItem();
         abaIdioma = new javax.swing.JMenu();
@@ -286,16 +323,6 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         abaRelatorio.add(rel_users);
 
-        rel_holerite.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/holerite.png"))); // NOI18N
-        rel_holerite.setMnemonic('a');
-        rel_holerite.setText("Holerite");
-        rel_holerite.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rel_holeriteActionPerformed(evt);
-            }
-        });
-        abaRelatorio.add(rel_holerite);
-
         btnHEx.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/hrEx.png"))); // NOI18N
         btnHEx.setMnemonic('a');
         btnHEx.setText("Horas Extras");
@@ -438,7 +465,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                 JRViewer viewer = new JRViewer(print);
 
                 //Criar o jFrame
-                JFrame frameRelatorio = new JFrame("Janela de relatorio");
+                JFrame frameRelatorio = new JFrame(rel_funcCaps);
 
                 //adiciona o JRViewer no JFram
                 frameRelatorio.add(viewer, BorderLayout.CENTER);
@@ -481,7 +508,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                 JRViewer viewer = new JRViewer(print);
 
                 //Criar o jFrame
-                JFrame frameRelatorio = new JFrame("Janela de relatorio");
+                JFrame frameRelatorio = new JFrame(rel_userCap);
 
                 //adiciona o JRViewer no JFram
                 frameRelatorio.add(viewer, BorderLayout.CENTER);
@@ -521,47 +548,9 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         if (Env.Constants.ObjUser.getAdmin()) {
 
-            try {
-                infrmProgress objFrm = new infrmProgress();
-                Forms.showInternal(desktopPane, objFrm);
-                objFrm.setVisible(true);
-                objFrm.doProgress(10);
-                InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Relatorio_Folha_de_Ponto.jasper");
-
-                //Caso seja necessário relatório parametrizado
-                objFrm.doProgress(20);
-                Map parametros = new HashMap();
-                parametros.put("idfun", 1);
-
-                //usando uma conexão
-                objFrm.doProgress(50);
-                JasperPrint print = JasperFillManager.fillReport(inputStream, parametros, DB.Connect());
-                objFrm.dispose();
-                JRViewer viewer = new JRViewer(print);
-
-                //Criar o jFrame
-                objFrm.doProgress(80);
-                JFrame frameRelatorio = new JFrame("Janela de relatorio Folha de Ponto");
-
-                //adiciona o JRViewer no JFram
-                frameRelatorio.add(viewer, BorderLayout.CENTER);
-
-                //configura o tamanho padrão da Jframe
-                frameRelatorio.setSize(500, 500);
-
-                //Maximiza o JFrame para ocupar a tela toda.
-                frameRelatorio.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
-                //configura a operação padrao quando o jframe for fechado.
-                frameRelatorio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-                //exibi em tela Jframe
-                objFrm.doProgress(100);
-                frameRelatorio.setVisible(true);
-
-            } catch (Exception ex) {
-                Dialogs.showError(ex.getMessage());
-            }
+            Dialogs.showInfo(select_func);
+            infrmConsFunc objConsF = new infrmConsFunc(this);
+            Forms.showInternal(this.desktopPane, objConsF);
         } else {
             Dialogs.showError(user_adm);
         }
@@ -585,7 +574,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                 JRViewer viewer = new JRViewer(print);
 
                 //Criar o jFrame
-                JFrame frameRelatorio = new JFrame("Janela de relatorio");
+                JFrame frameRelatorio = new JFrame(rel_overCaps);
 
                 //adiciona o JRViewer no JFram
                 frameRelatorio.add(viewer, BorderLayout.CENTER);
@@ -630,7 +619,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                 JRViewer viewer = new JRViewer(print);
 
                 //Criar o jFrame
-                JFrame frameRelatorio = new JFrame("Janela de relatorio");
+                JFrame frameRelatorio = new JFrame(rel_pagsCap);
 
                 //adiciona o JRViewer no JFram
                 frameRelatorio.add(viewer, BorderLayout.CENTER);
@@ -656,50 +645,6 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btnPagsActionPerformed
-
-    private void rel_holeriteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rel_holeriteActionPerformed
-        if (Env.Constants.ObjUser.getAdmin()) {
-
-            try {
-                //Pegando-se a conexão do banco
-                //Pegando-se o arquivo do relatorio
-                InputStream inputStream = getClass().getResourceAsStream("../Relatorio/Relatorio_Principal.jasper");
-
-                //Caso seja necessário relatório parametrizado
-                Map parametros = new HashMap();
-
-                //usando uma conexão
-                JasperPrint print = JasperFillManager.fillReport(inputStream, parametros, DB.Connect());
-
-                JRViewer viewer = new JRViewer(print);
-
-                //Criar o jFrame
-                JFrame frameRelatorio = new JFrame("Janela de relatorio");
-
-                //adiciona o JRViewer no JFram
-                frameRelatorio.add(viewer, BorderLayout.CENTER);
-
-                //configura o tamanho padrão da Jframe
-                frameRelatorio.setSize(500, 500);
-
-                //Maximiza o JFrame para ocupar a tela toda.
-                frameRelatorio.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
-                //configura a operação padrao quando o jframe for fechado.
-                frameRelatorio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-                //exibi em tela Jframe
-                frameRelatorio.setVisible(true);
-
-            } catch (Exception ex) {
-                Dialogs.showError(ex.getMessage());
-            }
-        } else {
-            Dialogs.showError(user_adm);
-        }
-
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rel_holeriteActionPerformed
 
     private void btnfpontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfpontoActionPerformed
         // TODO add your handling code here:
@@ -730,11 +675,10 @@ public class frmPrincipal extends javax.swing.JFrame {
         cadFun.setText(props.getString("cadFun") + "s");
         abaPonto.setText(props.getString("ponto"));
         regponto.setText(props.getString("assinar_ponto"));
-        abaRelatorio.setText(props.getString("abaRelatorio"));
+        abaRelatorio.setText(props.getString("abaRelatorio") + "s");
         rel_func.setText(props.getString("cadFun") + "s");
         rel_ponto.setText(props.getString("folhaponto"));
         rel_users.setText(props.getString("cadUser") + "s");
-        rel_holerite.setText(props.getString("holerite"));
         abaIdioma.setText(props.getString("abaIdioma"));
 
         btntrocar.setText(props.getString("trocar_user"));
@@ -754,7 +698,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         this.setTitle("SHX " + props.getString("maintitle"));
 
         user_adm = props.getString("user_adm");
+        rel_funcCaps = props.getString("cadFun") + "s " + props.getString("abaRelatorio");
+        rel_folhaCaps = props.getString("folhaponto") + props.getString("abaRelatorio");
+        rel_userCap = props.getString("cadUser") + "s " + props.getString("abaRelatorio");
 
+        select_func = props.getString("selecione_func");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -784,7 +732,6 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JRadioButtonMenuItem rbPTBR;
     private javax.swing.JMenuItem regponto;
     private javax.swing.JMenuItem rel_func;
-    private javax.swing.JMenuItem rel_holerite;
     private javax.swing.JMenuItem rel_ponto;
     private javax.swing.JMenuItem rel_users;
     // End of variables declaration//GEN-END:variables

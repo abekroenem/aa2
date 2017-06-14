@@ -25,7 +25,7 @@ import models.Ponto;
 public class infrmPonto extends javax.swing.JInternalFrame {
 
     private PontoController m_PontoC = null;
-    private String PONTO_REGISTRADO, PONTO_EDITADO, PONTO_JA_CADASTRADO, BTN_NOVO, BTN_SALVAR, DELETAR_PNT;
+    private String PONTO_REGISTRADO, PONTO_EDITADO, PONTO_JA_CADASTRADO, BTN_NOVO, BTN_SALVAR, DELETAR_PNT, wk_day, st_day, sn_day;
     private Ponto m_objPonto = null;
     public Funcionario m_objFunc = null;
     private boolean ersHora = false;
@@ -61,6 +61,10 @@ public class infrmPonto extends javax.swing.JInternalFrame {
         tbPonto.getColumnModel().getColumn(5).setHeaderValue(rbl.getString("h_ex"));
         tbPonto.getColumnModel().getColumn(7).setHeaderValue(rbl.getString("t_extra"));
         tbPonto.getColumnModel().getColumn(8).setHeaderValue(rbl.getString("t_dia"));
+
+        wk_day = rbl.getString("wk_day");
+        st_day = rbl.getString("st_day");
+        sn_day = rbl.getString("sn_day");
 
     }
 
@@ -642,7 +646,19 @@ public class infrmPonto extends javax.swing.JInternalFrame {
     private void txtDataFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDataFocusLost
         // TODO add your handling code here:
         if (txtData.getText().replaceAll("/", "").length() == 8) {
-            
+            java.sql.Date dt = Formats.Data.Unformat(txtData.getText());
+            lblEA.setText(lblEA.getText() + "*");
+            lblEA.setForeground(Color.red);
+            lblEB.setText(lblEB.getText() + "*");
+            lblEB.setForeground(Color.red);
+
+            if (Checks.Date.isWeekDay(dt)) {
+                lblPerc.setText(wk_day);
+
+            } else if (Checks.Date.isSaturday(Date)         {
+            } else if (Checks.Date.isSunday(Date)         {
+            }
+
         }
     }//GEN-LAST:event_txtDataFocusLost
 

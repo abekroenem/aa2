@@ -114,7 +114,7 @@ public class Ponto {
     }
 
     public void setEntrada_b(int entrada_b) {
-        if ((entrada_b < 1) && (!Checks.Date.isSaturday(this.getData()))) {
+        if ((entrada_b < 1) && (Checks.Date.isWeekDay(this.getData()))) {
             throw new IllegalArgumentException(eb);
         }
 
@@ -126,7 +126,7 @@ public class Ponto {
     }
 
     public void setSaida_b(int saida_b) {
-        if ((saida_b < 1) && (!Checks.Date.isSaturday(this.getData()))) {
+        if ((saida_b < 1) && (Checks.Date.isWeekDay(this.getData()))) {
             throw new IllegalArgumentException(sb);
         }
         this.saida_b = saida_b;
@@ -135,10 +135,10 @@ public class Ponto {
     public int getHoras_excedidas() {
         if (objFun != null) {
             int horas_trab = this.getHoras_Trabalhadas();
-            if (Checks.Date.isSaturday(this.data) && (this.getHoras_Trabalhadas() > 240)) {
+            if (Checks.Date.isSaturday(this.data) && (horas_trab > 240)) {
                 return horas_trab - 240;
             } else if (Checks.Date.isSunday(this.data)) {
-                return horas_trab;
+                return 0;
             } else {
                 int hora_dia = objFun.gethora_dia() * 60; // hora do dia em minutos
                 if (horas_trab <= hora_dia) {
@@ -184,26 +184,20 @@ public class Ponto {
 
         if (objFun != null) {
 
-            double hr_dia = Formats.Decimal.Format(objFun.gethora_dia() * 60); // em minutos
+            double hr_trab = this.getHoras_Trabalhadas() / 60;
 
-            double hr_trab = this.getHoras_Trabalhadas();
+            double vlr_hora = this.objFun.getValor_hora();
 
-            if (Checks.Date.isSaturday(this.data)) {
+            double valor_ext = this.getValor_extra();
 
-                tot_receb = Formats.Decimal.Format((Formats.Decimal.Format(hr_trab / 60) * Formats.Decimal.Format(objFun.getValor_hora()) * 2));
+            tot_receb = Formats.Decimal.Format(hr_trab * vlr_hora);
 
-            } else if (hr_trab > hr_dia) { // fez hora extra
-
-                tot_receb = Formats.Decimal.Format(Formats.Decimal.Format(hr_dia / 60) * objFun.getValor_hora());
-
-                double valor_ext = this.getValor_extra();
-
-                if (valor_ext != 0) {
-                    tot_receb = Formats.Decimal.Format(tot_receb + valor_ext);
-                }
+            if (Checks.Date.isSunday(this.data)) {
+                tot_receb = Formats.Decimal.Format(tot_receb * 2);
             } else {
-                tot_receb = Formats.Decimal.Format(Formats.Decimal.Format(hr_trab / 60) * objFun.getValor_hora());
+                tot_receb = Formats.Decimal.Format(tot_receb + valor_ext);
             }
+
         } else {
             tot_receb = 0;
         }
@@ -212,10 +206,30 @@ public class Ponto {
     }
 
     public int getHoras_Trabalhadas() {
-        int horas_corridas = (this.saida_b) - (this.entrada_a);
-        int intervalo = (this.entrada_b) - (this.saida_a);
-        int horas_trab = horas_corridas - intervalo;
+
+        int horas_corridas = 0;
+        int intervalo = 0;
+        int horas_trab = 0;
+
+        if (Checks.Date.isWeekDay(this.data)) {
+            horas_corridas = (this.saida_b) - (this.entrada_a);
+            intervalo = (this.entrada_b) - (this.saida_a);
+            horas_trab = horas_corridas - intervalo;
+
+        } else if ((Checks.Date.isSaturday(this.data)) || (Checks.Date.isSunday(this.data))) {
+            if ((this.entrada_b != 0) && (this.saida_b != 0)) {
+                horas_corridas = (this.saida_b) - (this.entrada_a);
+                intervalo = (this.entrada_b) - (this.saida_a);
+                horas_trab = horas_corridas - intervalo;
+            } else {
+                horas_corridas = (this.saida_a) - (this.entrada_a);
+                horas_trab = horas_corridas;
+            }
+
+        }
+
         return horas_trab;
+
     }
 
 }

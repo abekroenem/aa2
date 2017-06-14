@@ -31,7 +31,7 @@ public class Checks {
             return (dayofwk == Calendar.SATURDAY);
         }
 
-        public boolean isWeekDay(java.util.Date data) {
+        public static boolean isWeekDay(java.util.Date data) {
             return (!isSunday(data)) && (!isSaturday(data));
         }
 

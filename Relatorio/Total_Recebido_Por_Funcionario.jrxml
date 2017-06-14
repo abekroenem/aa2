@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Total_Recebido_Por_Funcionario" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e2271295-3e5a-4721-b813-7e5f6d1efba5">
-	<property name="ireport.zoom" value="1.2100000000000017"/>
+	<property name="ireport.zoom" value="1.9487171000000034"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
@@ -46,18 +46,13 @@ group by f.nome, rp.id_funcionario;]]>
 			<band/>
 		</groupFooter>
 	</group>
-	<group name="Group3">
-		<groupFooter>
-			<band height="19"/>
-		</groupFooter>
-	</group>
 	<background>
 		<band/>
 	</background>
 	<title>
 		<band height="83">
 			<frame>
-				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="ffa9d843-6cba-46bc-8817-15e4a5761b79"/>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#73117D" uuid="ffa9d843-6cba-46bc-8817-15e4a5761b79"/>
 				<staticText>
 					<reportElement x="20" y="0" width="555" height="43" forecolor="#FFFFFF" uuid="7c534085-ab43-4948-b3f7-d481de1899de"/>
 					<textElement>
@@ -80,36 +75,36 @@ group by f.nome, rp.id_funcionario;]]>
 			<line>
 				<reportElement x="0" y="3" width="555" height="1" uuid="58a939d0-bbf9-474d-a147-befd9816df8e"/>
 			</line>
-			<staticText>
-				<reportElement x="258" y="7" width="105" height="16" uuid="7d085125-0a05-4be4-8f6c-930f9c884b9d"/>
-				<textElement textAlignment="Center">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[HORAS TRABALHADAS]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="363" y="7" width="89" height="16" uuid="8c304562-eefb-4c93-a526-4905c8193929"/>
-				<textElement textAlignment="Center">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[HORAS EXTRAS]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="452" y="7" width="103" height="16" uuid="3804c2c8-ce82-4dcc-a762-79f23f14df7a"/>
-				<textElement textAlignment="Center">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[TOTAL DO DIA]]></text>
-			</staticText>
 			<line>
 				<reportElement x="0" y="23" width="555" height="1" uuid="04d070f9-eeb7-4fdf-965e-640e205214df"/>
 			</line>
 			<staticText>
-				<reportElement x="0" y="7" width="258" height="16" uuid="96ad5b3c-1d51-456c-9c12-3560ecf819a7"/>
-				<textElement>
-					<font isBold="true"/>
+				<reportElement mode="Opaque" x="0" y="4" width="258" height="19" forecolor="#006699" backcolor="#E6E6E6" uuid="c0ec9052-3f3e-48d6-95dd-e3223a430f32"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[NOME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="258" y="4" width="85" height="19" forecolor="#006699" backcolor="#E6E6E6" uuid="c781041e-82e0-4c38-a4db-f4f672145acf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HORAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="343" y="4" width="109" height="19" forecolor="#006699" backcolor="#E6E6E6" uuid="00c73034-ed67-4a93-ba41-e605551c0beb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HORAS EXTRAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="452" y="4" width="103" height="19" forecolor="#006699" backcolor="#E6E6E6" uuid="21811949-9cc4-418f-a2ed-6f1a19db7770"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL DO DIA]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -117,21 +112,22 @@ group by f.nome, rp.id_funcionario;]]>
 		<band height="21">
 			<textField>
 				<reportElement x="0" y="0" width="258" height="20" uuid="1b883e77-8e62-4214-95e7-48abddbb6820"/>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="258" y="0" width="105" height="20" uuid="147db072-a1fc-42d3-a5c6-e296769bf102"/>
-				<textElement textAlignment="Center"/>
+				<reportElement x="258" y="0" width="85" height="20" uuid="147db072-a1fc-42d3-a5c6-e296769bf102"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{horas_trabalhadas}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="363" y="0" width="89" height="20" uuid="d3d2b8de-b526-43bc-9537-723e7afdebdc"/>
-				<textElement textAlignment="Center"/>
+				<reportElement x="343" y="0" width="109" height="20" uuid="d3d2b8de-b526-43bc-9537-723e7afdebdc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{horas_extras}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="452" y="0" width="103" height="20" uuid="cd303b59-d3a1-4a47-89b8-c480449089bb"/>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{total_do_dia}]]></textFieldExpression>
 			</textField>
 		</band>

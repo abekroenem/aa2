@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Relatorio_Principal" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="18618a7c-349d-40d2-be6c-bab1ed72d524">
-	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Relatorio_Principal" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="18618a7c-349d-40d2-be6c-bab1ed72d524">
+	<property name="ireport.zoom" value="2.357947691000003"/>
+	<property name="ireport.x" value="458"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
 		<![CDATA[select
@@ -54,16 +54,16 @@ order by rp.dia]]>
 	<title>
 		<band height="72">
 			<frame>
-				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="45b087ca-2087-433d-9078-6cc77771b9a7"/>
+				<reportElement mode="Opaque" x="-20" y="-20" width="843" height="92" backcolor="#006699" uuid="45b087ca-2087-433d-9078-6cc77771b9a7"/>
 				<staticText>
 					<reportElement x="20" y="20" width="515" height="43" forecolor="#FFFFFF" uuid="53b348e4-b596-4196-bcb3-6013542371ac"/>
 					<textElement>
 						<font size="34" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Relatorio de Comissão]]></text>
+					<text><![CDATA[Relatorio de Horas Extras]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="239" y="63" width="336" height="20" forecolor="#FFFFFF" uuid="bb327d75-1436-46bd-96af-e40655fbb815"/>
+					<reportElement x="486" y="63" width="336" height="20" forecolor="#FFFFFF" uuid="bb327d75-1436-46bd-96af-e40655fbb815"/>
 					<textElement textAlignment="Right">
 						<font size="14" isBold="false"/>
 					</textElement>
@@ -78,93 +78,133 @@ order by rp.dia]]>
 	<columnHeader>
 		<band height="21">
 			<line>
-				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="022f9bce-d5aa-45e7-8408-687e807c69a5"/>
+				<reportElement x="0" y="0" width="823" height="1" uuid="7c11cd7a-3086-453c-aa85-4c00c9e7b330"/>
+			</line>
+			<line>
+				<reportElement x="0" y="20" width="823" height="1" forecolor="#666666" uuid="022f9bce-d5aa-45e7-8408-687e807c69a5"/>
 			</line>
 			<staticText>
 				<reportElement x="0" y="0" width="55" height="20" uuid="1ea6082a-eba2-42a3-a0b9-18fc69c595bf"/>
-				<text><![CDATA[to_char]]></text>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="55" y="0" width="55" height="20" uuid="2e39ff4c-13ca-4729-af41-2222f5ba273f"/>
-				<text><![CDATA[nome]]></text>
+				<reportElement x="55" y="0" width="84" height="20" uuid="2e39ff4c-13ca-4729-af41-2222f5ba273f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOME]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="110" y="0" width="55" height="20" uuid="248b15e5-4ed7-4197-a196-75d379cce456"/>
-				<text><![CDATA[salario]]></text>
+				<reportElement x="139" y="1" width="55" height="20" uuid="248b15e5-4ed7-4197-a196-75d379cce456"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SALARIO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="165" y="0" width="55" height="20" uuid="b104c65a-0159-4e2f-93e9-78170333a59a"/>
-				<text><![CDATA[hora_dia]]></text>
+				<reportElement x="194" y="0" width="55" height="20" uuid="b104c65a-0159-4e2f-93e9-78170333a59a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[H/DIA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="220" y="0" width="55" height="20" uuid="b3405580-123b-4e38-a5fa-7a61129b3e22"/>
-				<text><![CDATA[valor_hora]]></text>
+				<reportElement x="249" y="0" width="77" height="20" uuid="b3405580-123b-4e38-a5fa-7a61129b3e22"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALOR/HORA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="275" y="0" width="55" height="20" uuid="fbd63c1b-15a1-4a49-ba7e-23a81e762c7e"/>
-				<text><![CDATA[horas_trabalhadas]]></text>
+				<reportElement x="326" y="0" width="140" height="20" uuid="fbd63c1b-15a1-4a49-ba7e-23a81e762c7e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HORAS/TRABALHADAS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="330" y="0" width="55" height="20" uuid="f5169c22-d914-42ac-b7b3-abf6f3d95a27"/>
-				<text><![CDATA[percent_aplicado]]></text>
+				<reportElement x="467" y="0" width="31" height="20" uuid="f5169c22-d914-42ac-b7b3-abf6f3d95a27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="385" y="0" width="55" height="20" uuid="0f85194a-8e8e-44ce-9e2d-85304541b85c"/>
-				<text><![CDATA[horas_extras]]></text>
+				<reportElement x="498" y="1" width="87" height="20" uuid="0f85194a-8e8e-44ce-9e2d-85304541b85c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HORAS/EXTRA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="440" y="0" width="55" height="20" uuid="4d107803-b636-403b-846c-48511362bbff"/>
-				<text><![CDATA[valor_extra]]></text>
+				<reportElement x="600" y="0" width="104" height="20" uuid="4d107803-b636-403b-846c-48511362bbff"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALOR/EXTRA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="495" y="0" width="55" height="20" uuid="c0affe13-9493-4d96-9bae-6bf6428be1ab"/>
-				<text><![CDATA[total_recebido]]></text>
+				<reportElement x="704" y="0" width="98" height="20" uuid="c0affe13-9493-4d96-9bae-6bf6428be1ab"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL/RECEBIDO]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="20">
-			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="82d34aef-92cf-4485-84b2-b6e2c620594c"/>
-			</line>
+		<band height="25">
 			<textField>
-				<reportElement x="0" y="0" width="55" height="20" uuid="fcb105ef-bff0-4c78-8bfa-effa5b12e252"/>
+				<reportElement x="0" y="4" width="55" height="20" uuid="fcb105ef-bff0-4c78-8bfa-effa5b12e252"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{to_char}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="55" y="0" width="55" height="20" uuid="c7b6d87a-de7c-4a88-b436-b3508d7b9aea"/>
+				<reportElement x="55" y="4" width="84" height="20" uuid="c7b6d87a-de7c-4a88-b436-b3508d7b9aea"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="110" y="0" width="55" height="20" uuid="1dc90162-f805-43ce-8888-2e3067e230eb"/>
+				<reportElement x="139" y="4" width="55" height="20" uuid="1dc90162-f805-43ce-8888-2e3067e230eb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{salario}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="165" y="0" width="55" height="20" uuid="bec79f77-36d4-470b-93dc-64c3ba798808"/>
+				<reportElement x="194" y="4" width="55" height="20" uuid="bec79f77-36d4-470b-93dc-64c3ba798808"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{hora_dia}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="220" y="0" width="55" height="20" uuid="99dd3e77-57ef-4f89-bc6d-b8f6ecf22885"/>
+				<reportElement x="249" y="4" width="77" height="20" uuid="99dd3e77-57ef-4f89-bc6d-b8f6ecf22885"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{valor_hora}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="275" y="0" width="55" height="20" uuid="c8771878-0d84-467a-81b8-c4a2132949e1"/>
+				<reportElement x="326" y="4" width="140" height="20" uuid="c8771878-0d84-467a-81b8-c4a2132949e1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{horas_trabalhadas}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="330" y="0" width="55" height="20" uuid="063bfadc-6d50-4c88-8a28-aaf98e3dc891"/>
+				<reportElement x="467" y="4" width="31" height="20" uuid="063bfadc-6d50-4c88-8a28-aaf98e3dc891"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{percent_aplicado}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="385" y="0" width="55" height="20" uuid="dfe6eb6f-add2-411c-970b-f2459e869394"/>
+				<reportElement x="498" y="5" width="87" height="20" uuid="dfe6eb6f-add2-411c-970b-f2459e869394"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{horas_extras}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="440" y="0" width="55" height="20" uuid="08c5c2d4-09a2-4d9b-bea3-2f8b3346bcfc"/>
+				<reportElement x="600" y="5" width="104" height="20" uuid="08c5c2d4-09a2-4d9b-bea3-2f8b3346bcfc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{valor_extra}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="495" y="0" width="55" height="20" uuid="fb3675be-ddd4-4786-bc61-63a01e3d1ec0"/>
+				<reportElement x="704" y="5" width="98" height="20" uuid="fb3675be-ddd4-4786-bc61-63a01e3d1ec0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{total_recebido}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -175,18 +215,21 @@ order by rp.dia]]>
 	<pageFooter>
 		<band height="17">
 			<textField>
-				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="b88df027-1e2d-426d-9c72-9fc96b6b7a33"/>
+				<reportElement mode="Opaque" x="0" y="4" width="762" height="13" backcolor="#E6E6E6" uuid="b88df027-1e2d-426d-9c72-9fc96b6b7a33"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="5f4019a6-f222-4778-93b7-a5155951c334"/>
+				<reportElement mode="Opaque" x="762" y="4" width="61" height="13" backcolor="#E6E6E6" uuid="5f4019a6-f222-4778-93b7-a5155951c334"/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField pattern="EEEEE dd MMMMM yyyy">
 				<reportElement x="0" y="4" width="100" height="13" uuid="4d90b5a8-647e-4a36-b030-8af5359f5cd4"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="802" height="1" uuid="82d34aef-92cf-4485-84b2-b6e2c620594c"/>
+			</line>
 		</band>
 	</pageFooter>
 	<summary>

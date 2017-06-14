@@ -79,10 +79,12 @@ select to_char(rp.dia,'dd/MM/yyyy') as dia, f.nome,
 fn_min_to_hr(rp.entrada_a) as entrada_a,
 fn_min_to_hr(rp.saida_a) as saida_a,
 fn_min_to_hr(rp.entrada_b) as entrada_b,
-fn_min_to_hr(rp.saida_b) as saida_b
+fn_min_to_hr(rp.saida_b) as saida_b,
+fn_min_to_hr((rp.saida_b-rp.entrada_a)-(rp.entrada_b-rp.saida_a)) as Horas_Trabalhadas,
+fn_min_to_hr(((rp.saida_b-rp.entrada_a)-(rp.entrada_b-rp.saida_a)) - f.hora_dia*60) as Horas_Extras
 from registro_ponto rp
 join funcionario f on f.id = rp.id_funcionario 
-where rp.id_funcionario = 0
+where rp.id_funcionario = $P{idfun}
 order by  rp.dia;
 
 -- Total recebido por funcionario 
@@ -93,6 +95,8 @@ sum(rp.total_recebido) as total_do_dia
 from registro_ponto rp
 join funcionario f on f.id = rp.id_funcionario
 group by f.nome, rp.id_funcionario;
+
+select * from registro_ponto
 
 
 

@@ -23,7 +23,10 @@ import models.Funcionario;
 public class infrmConsFunc extends javax.swing.JInternalFrame {
 
     private infrmPonto out_Ponto;
+    private frmPrincipal out_Principal;
+    public int m_codFunc;
     private FuncionarioController m_FuncC;
+    private int Id_Func = 0;
 
     public void Traduz() {
         ResourceBundle rbl = null;
@@ -58,11 +61,21 @@ public class infrmConsFunc extends javax.swing.JInternalFrame {
         }
     }
 
-    public infrmConsFunc(infrmPonto out_frmPonto) {
+    private void runApp() {
         initComponents();
-        this.out_Ponto = out_frmPonto;
         Traduz();
         loadTable();
+
+    }
+
+    public infrmConsFunc(infrmPonto out_frmPonto) {
+        this.out_Ponto = out_frmPonto;
+        runApp();
+    }
+
+    public infrmConsFunc(frmPrincipal out_frmPrincipal) {
+        this.out_Principal = out_frmPrincipal;
+        runApp();
     }
 
     /**
@@ -162,8 +175,13 @@ public class infrmConsFunc extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             if (evt.getClickCount() > 1) {
-                this.out_Ponto.m_objFunc = new FuncionarioController().getByID(((Integer) tbFunc.getModel().getValueAt(tbFunc.getSelectedRow(), 0)));
-                this.out_Ponto.setFuncionario(this.out_Ponto.m_objFunc.getNome());
+                if ((this.out_Ponto != null) && (this.out_Principal == null)) {
+                    this.out_Ponto.m_objFunc = new FuncionarioController().getByID(((Integer) tbFunc.getModel().getValueAt(tbFunc.getSelectedRow(), 0)));
+                    this.out_Ponto.setFuncionario(this.out_Ponto.m_objFunc.getNome());
+                } else if ((this.out_Ponto == null) && (this.out_Principal != null)) {
+                    this.out_Principal.relFolhaPonto(((Integer) tbFunc.getModel().getValueAt(tbFunc.getSelectedRow(), 0)));
+                }
+
                 this.dispose();
             }
         } catch (SQLException ex) {

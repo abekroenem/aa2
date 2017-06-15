@@ -669,16 +669,16 @@ public class infrmPonto extends javax.swing.JInternalFrame {
             if (txtData.getText().replaceAll("/", "").length() == 8) {
                 java.sql.Date dt = Formats.Data.Unformat(txtData.getText());
                 lblPerc.setVisible(true);
-                lblEA.setText(lblEA.getText().replaceAll("*", "") + "*");
+                lblEA.setText(lblEA.getText().replaceAll("\*", "") + "*");
                 lblEA.setForeground(Color.red);
-                lblSA.setText(lblSA.getText().replaceAll("*", "") + "*");
+                lblSA.setText(lblSA.getText().replaceAll("\*", "") + "*");
                 lblSA.setForeground(Color.red);
 
                 if (Checks.Date.isWeekDay(dt)) {
                     lblPerc.setText(wk_day);
-                    lblEB.setText(lblEB.getText().replaceAll("*", "") + "*");
+                    lblEB.setText(lblEB.getText().replaceAll("\*", "") + "*");
                     lblEB.setForeground(Color.red);
-                    lblSB.setText(lblSB.getText().replaceAll("*", "") + "*");
+                    lblSB.setText(lblSB.getText().replaceAll("\*", "") + "*");
                     lblSB.setForeground(Color.red);
 
                 } else if (Checks.Date.isSaturday(dt)) {

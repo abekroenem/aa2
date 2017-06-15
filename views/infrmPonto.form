@@ -413,7 +413,7 @@
     </Container>
     <Component class="javax.swing.JLabel" name="lblPerc">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Dom: 100% sobre hora trabalhada"/>
+        <Property name="text" type="java.lang.String" value="&lt;info horas trabalhadas&gt;"/>
       </Properties>
     </Component>
   </SubComponents>

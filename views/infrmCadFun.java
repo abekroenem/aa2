@@ -23,7 +23,7 @@ import models.Funcionario;
 public class infrmCadFun extends javax.swing.JInternalFrame {
 
     private FuncionarioController m_FuncC = null;
-    private String DELETAR_FUNC, CPF_CADASTRADO, FUNCIONARIO_INSERIDO_SUCESS, FUNCINOARIO_EDITADO_SUCESS, BTN_NOVO, BTN_SALVAR, DIA, SEMANA, SELEC;
+    private String DELETAR_FUNC, CPF_CADASTRADO, FUNCIONARIO_INSERIDO_SUCESS, FUNCINOARIO_EDITADO_SUCESS, BTN_NOVO, BTN_SALVAR, DIA, MES, SELEC;
     private Funcionario m_objFunc = null;
     private final boolean ersHora = false;
     private int hora_base = 0;
@@ -55,7 +55,7 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
         tbFunc.getColumnModel().getColumn(4).setHeaderValue(rbl.getString("v_hora"));
 
         DIA = rbl.getString("dia");
-        SEMANA = rbl.getString("semana");
+        MES = rbl.getString("mes");
         SELEC = rbl.getString("selecione");
 
     }
@@ -64,11 +64,11 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
 
         String[] jornadas = {
             SELEC,
-            "8h/" + DIA + " - " + "220h/" + SEMANA,
-            "7h/" + DIA + " - " + "210h/" + SEMANA,
-            "6h/" + DIA + " - " + "180h/" + SEMANA,
-            "5h/" + DIA + " - " + "150h/" + SEMANA,
-            "4h/" + DIA + " - " + "120h/" + SEMANA};
+            "8h/" + DIA + " - " + "220h/" + MES,
+            "7h/" + DIA + " - " + "210h/" + MES,
+            "6h/" + DIA + " - " + "180h/" + MES,
+            "5h/" + DIA + " - " + "150h/" + MES,
+            "4h/" + DIA + " - " + "120h/" + MES};
 
         cbJornada.removeAllItems();
         for (String obj : jornadas) {
@@ -434,6 +434,7 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
                 txtCPF.setText(m_objFunc.getCPF());
                 txtSalario.setText(String.valueOf(m_objFunc.getSalario()));
                 hora_base = m_objFunc.gethora_dia();
+                cbJornada.setSelectedIndex(9 - hora_base);
                 lblValorHoraT.setText(Formats.Valor.Format(m_objFunc.getValor_hora()));
                 txtNome.selectAll();
                 txtNome.requestFocus();
@@ -453,8 +454,7 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
         // TODO add your handling code here:
-        int x = Dialogs.showConfirm(DELETAR_FUNC);
-        if (x == 0) {
+        if (Dialogs.showConfirm(DELETAR_FUNC)) {
             if (m_objFunc != null) {
                 try {
                     m_FuncC.Delete(m_objFunc.getId(), m_objFunc.getNome());
@@ -472,9 +472,6 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
             hora_base = getHoraCombo(cbJornada.getSelectedIndex());
             double salario = Double.parseDouble((txtSalario.getText().isEmpty()) ? "0" : txtSalario.getText());
             salario = Formats.Decimal.Format((salario / Env.Constants.getJornada(hora_base)));
-            System.out.println(String.valueOf(hora_base));
-            System.out.println(String.valueOf(Env.Constants.getJornada(hora_base)));
-            System.out.println(String.valueOf(salario));
             if ((salario > 0) && (salario != Global.Infinity)) {
                 lblValorHoraT.setText(String.format("%.2f R$/h", salario));
             } else {

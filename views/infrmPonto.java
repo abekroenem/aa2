@@ -38,9 +38,9 @@ public class infrmPonto extends javax.swing.JInternalFrame {
         ResourceBundle rbl = null;
         rbl = Config.getResources();
 
-        PONTO_JA_CADASTRADO = "Ponto ja cadastrado para o funcionario";
-        PONTO_REGISTRADO = "Ponto inserido com Sucesso!";
-        PONTO_EDITADO = "Ponto editado com Sucesso!";
+        PONTO_JA_CADASTRADO = rbl.getString("ponto_ja_registrado");
+        PONTO_REGISTRADO = rbl.getString("ponto_sucess");
+        PONTO_EDITADO = rbl.getString("ponto_edit");
         DELETAR_PNT = rbl.getString("deletar_pnt");
 
         BTN_NOVO = rbl.getString("btnNovo");
@@ -457,7 +457,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
                 .addGap(0, 10, Short.MAX_VALUE))
         );
 
-        lblPerc.setText("Dom: 100% sobre hora trabalhada");
+        lblPerc.setText("<info horas trabalhadas>");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -625,7 +625,7 @@ public class infrmPonto extends javax.swing.JInternalFrame {
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
         // TODO add your handling code here:
 
-        if (Dialogs.showConfirm(DELETAR_PNT) == 0) {
+        if (Dialogs.showConfirm(DELETAR_PNT)) {
             if (m_objPonto != null) {
                 try {
                     m_PontoC.Delete(m_objPonto.getId(), m_objPonto.getData(), m_objPonto.getId_funcionario());
@@ -669,16 +669,12 @@ public class infrmPonto extends javax.swing.JInternalFrame {
             if (txtData.getText().replaceAll("/", "").length() == 8) {
                 java.sql.Date dt = Formats.Data.Unformat(txtData.getText());
                 lblPerc.setVisible(true);
-                lblEA.setText(lblEA.getText().replaceAll("\*", "") + "*");
                 lblEA.setForeground(Color.red);
-                lblSA.setText(lblSA.getText().replaceAll("\*", "") + "*");
                 lblSA.setForeground(Color.red);
 
                 if (Checks.Date.isWeekDay(dt)) {
                     lblPerc.setText(wk_day);
-                    lblEB.setText(lblEB.getText().replaceAll("\*", "") + "*");
                     lblEB.setForeground(Color.red);
-                    lblSB.setText(lblSB.getText().replaceAll("\*", "") + "*");
                     lblSB.setForeground(Color.red);
 
                 } else if (Checks.Date.isSaturday(dt)) {

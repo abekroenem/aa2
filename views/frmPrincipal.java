@@ -28,7 +28,7 @@ import net.sf.jasperreports.swing.JRViewer;
  */
 public class frmPrincipal extends javax.swing.JFrame {
 
-    private String user_adm, select_func, rel_funcCaps, rel_userCap, rel_pagsCap, rel_folhaCaps, rel_usersCaps, rel_overCaps;
+    private String user_adm, select_func, rel_funcCaps, rel_userCap, rel_pagsCap, rel_folhaCaps, rel_usersCaps, rel_overCaps, msg_sair;
 
     public frmPrincipal(String UserName) throws Exception {
         initComponents();
@@ -703,6 +703,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         rel_userCap = props.getString("cadUser") + "s " + props.getString("abaRelatorio");
 
         select_func = props.getString("selecione_func");
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

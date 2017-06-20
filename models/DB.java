@@ -11,7 +11,7 @@ public class DB {
 
     public static String hostname = "localhost:5432";
     //public static String database = "aa2";
-    public static String database = "LTPA";  
+    public static String database = "LTPA";
 
     public static Connection Connect() throws SQLException {
 
@@ -19,10 +19,10 @@ public class DB {
 
             String url = "jdbc:postgresql://" + hostname + "/" + database;
             Properties props = new Properties();
-           // props.setProperty("user", "abe");
+            // props.setProperty("user", "abe");
             //props.setProperty("password", "1234");
-             props.setProperty("user", "vini");
-             props.setProperty("password", "123");            
+            props.setProperty("user", "vini");
+            props.setProperty("password", "123");
             Conn = DriverManager.getConnection(url, props);
         }
         return Conn;

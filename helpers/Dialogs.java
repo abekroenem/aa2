@@ -40,9 +40,9 @@ public class Dialogs {
         JOptionPane.showMessageDialog(null, msg, ERRO, JOptionPane.ERROR_MESSAGE);
     }
 
-    public static int showConfirm(String msg) {
+    public static boolean showConfirm(String msg) {
         Traduz();
-        return JOptionPane.showOptionDialog(null, msg, CONFIRMAR, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoes, opcoes[0]);
+        return (JOptionPane.showOptionDialog(null, msg, CONFIRMAR, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoes, opcoes[0]) == 0);
 
     }
 

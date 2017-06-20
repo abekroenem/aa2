@@ -27,6 +27,7 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
     private Funcionario m_objFunc = null;
     private final boolean ersHora = false;
     private int hora_base = 0;
+    private boolean allowDot = false;
 
     public void Traduz() {
 
@@ -388,7 +389,9 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtCPFKeyTyped
 
     private void txtSalarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSalarioKeyTyped
-        Forms.OnlyNumbers(evt);
+        if (!allowDot) {
+            Forms.OnlyNumbers(evt);
+        }
     }//GEN-LAST:event_txtSalarioKeyTyped
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
@@ -420,6 +423,7 @@ public class infrmCadFun extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtCPFKeyPressed
 
     private void txtSalarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSalarioKeyPressed
+        allowDot = (evt.getKeyChar() == '.');
         Forms.goNextField(evt.getKeyCode(), cbJornada);
 
     }//GEN-LAST:event_txtSalarioKeyPressed

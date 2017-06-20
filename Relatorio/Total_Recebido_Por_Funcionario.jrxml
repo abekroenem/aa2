@@ -104,7 +104,7 @@ group by f.nome, rp.id_funcionario;]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[TOTAL DO DIA]]></text>
+				<text><![CDATA[TOTAL]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
